@@ -101,6 +101,23 @@ void EUSART_Write(uint8_t txData)
 
     TX1REG = txData;    // Write the data byte to the USART.
 }
+
+void SendUartCmd(char *cmd)
+{
+  for(int i=0;cmd[i] !=  '\0' ;i++)
+    EUSART_Write(cmd[i]);
+}
+
+void ReadUartCmd(char *Output, unsigned int length)
+{
+    Output[0] = UART_Read();
+    for(int i=1;i<length;i++)
+    {
+        Output[i] = UART_Read();
+        if(Output[i-1]=='O' && Output[i]=='K')
+            break;
+    }
+}
 /**
   End of File
 */

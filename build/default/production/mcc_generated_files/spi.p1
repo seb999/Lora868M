@@ -1,7 +1,31 @@
 Version 3.2 HI-TECH Software Intermediate Code
-[p mainexit ]
-"69 mcc_generated_files/mcc.h
-[v _SYSTEM_Initialize `(v ~T0 @X0 0 ef ]
+"4904 C:\Program Files (x86)\Microchip\xc8\v1.43\include\pic16f1709.h
+[v _SSP1STAT `Vuc ~T0 @X0 0 e@532 ]
+"5026
+[v _SSP1CON1 `Vuc ~T0 @X0 0 e@533 ]
+"4396
+[v _SSP1ADD `Vuc ~T0 @X0 0 e@530 ]
+"5045
+[s S246 :4 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S246 . SSPM CKP SSPEN SSPOV WCOL ]
+"5052
+[s S247 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S247 . SSPM0 SSPM1 SSPM2 SSPM3 ]
+"5044
+[u S245 `S246 1 `S247 1 ]
+[n S245 . . . ]
+"5059
+[v _SSP1CON1bits `VS245 ~T0 @X0 0 e@533 ]
+"4147
+[v _SSPBUF `Vuc ~T0 @X0 0 e@529 ]
+"4915
+[s S242 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S242 . BF UA R_nW S P D_nA CKE SMP ]
+"4914
+[u S241 `S242 1 ]
+[n S241 . . ]
+"4926
+[v _SSP1STATbits `VS241 ~T0 @X0 0 e@532 ]
 [; ;htc.h: 26: extern const char __xc8_OPTIM_SPEED;
 [; ;htc.h: 28: extern double __fpnormalize(double);
 [; ;xc8debug.h: 14: extern void __builtin_software_breakpoint(void);
@@ -4943,8 +4967,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;pic.h: 192: extern unsigned char __resetbits;
 [; ;pic.h: 193: extern __bit __powerdown;
 [; ;pic.h: 194: extern __bit __timeout;
-[; ;pin_manager.h: 154: void PIN_MANAGER_Initialize (void);
-[; ;pin_manager.h: 166: void PIN_MANAGER_IOC(void);
+[; ;stdbool.h: 12: typedef unsigned char bool;
+[; ;__size_t.h: 4: typedef unsigned size_t;
+[; ;stddef.h: 6: typedef int ptrdiff_t;
 [; ;stdint.h: 13: typedef signed char int8_t;
 [; ;stdint.h: 20: typedef signed int int16_t;
 [; ;stdint.h: 28: typedef signed short long int int24_t;
@@ -4973,47 +4998,244 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;stdint.h: 205: typedef uint32_t uintmax_t;
 [; ;stdint.h: 210: typedef int16_t intptr_t;
 [; ;stdint.h: 215: typedef uint16_t uintptr_t;
-[; ;stdbool.h: 12: typedef unsigned char bool;
-[; ;__size_t.h: 4: typedef unsigned size_t;
-[; ;stddef.h: 6: typedef int ptrdiff_t;
 [; ;spi.h: 116: void SPI_Initialize(void);
 [; ;spi.h: 151: uint8_t SPI_Exchange8bit(uint8_t data);
 [; ;spi.h: 191: uint8_t SPI_Exchange8bitBuffer(uint8_t *dataIn, uint8_t bufLen, uint8_t *dataOut);
 [; ;spi.h: 214: bool SPI_IsBufferFull(void);
 [; ;spi.h: 239: bool SPI_HasWriteCollisionOccured(void);
 [; ;spi.h: 263: void SPI_ClearWriteCollisionStatus(void);
-[; ;eusart.h: 94: void EUSART_Initialize(void);
-[; ;eusart.h: 114: uint8_t EUSART_Read(void);
-[; ;eusart.h: 134: void EUSART_Write(uint8_t txData);
-[; ;mcc.h: 69: void SYSTEM_Initialize(void);
-[; ;mcc.h: 82: void OSCILLATOR_Initialize(void);
-[; ;mcc.h: 95: void WDT_Initialize(void);
-[v $root$_main `(v ~T0 @X0 0 e ]
-"6 main.c
-[v _main `(v ~T0 @X0 1 ef ]
-"7
+"63 mcc_generated_files/spi.c
+[v _SPI_Initialize `(v ~T0 @X0 1 ef ]
+"64
 {
-[; ;main.c: 6: void main(void)
-[; ;main.c: 7: {
-[e :U _main ]
+[; ;spi.c: 63: void SPI_Initialize(void)
+[; ;spi.c: 64: {
+[e :U _SPI_Initialize ]
 [f ]
-[; ;main.c: 9: SYSTEM_Initialize();
-"9
-[e ( _SYSTEM_Initialize ..  ]
-[; ;main.c: 26: while (1)
-"26
-[e :U 622 ]
-[; ;main.c: 27: {
-"27
-{
-"29
+[; ;spi.c: 68: SSP1STAT = 0x40;
+"68
+[e = _SSP1STAT -> -> 64 `i `uc ]
+[; ;spi.c: 71: SSP1CON1 = 0x30;
+"71
+[e = _SSP1CON1 -> -> 48 `i `uc ]
+[; ;spi.c: 74: SSP1ADD = 0x00;
+"74
+[e = _SSP1ADD -> -> 0 `i `uc ]
+[; ;spi.c: 75: }
+"75
+[e :UE 620 ]
 }
-[e :U 621 ]
-"26
+"77
+[v _SPI_Exchange8bit `(uc ~T0 @X0 1 ef1`uc ]
+"78
+{
+[; ;spi.c: 77: uint8_t SPI_Exchange8bit(uint8_t data)
+[; ;spi.c: 78: {
+[e :U _SPI_Exchange8bit ]
+"77
+[v _data `uc ~T0 @X0 1 r1 ]
+"78
+[f ]
+[; ;spi.c: 80: SSP1CON1bits.WCOL = 0;
+"80
+[e = . . _SSP1CON1bits 0 4 -> -> 0 `i `uc ]
+[; ;spi.c: 82: SSPBUF = data;
+"82
+[e = _SSPBUF _data ]
+[; ;spi.c: 84: while(SSP1STATbits.BF == 0x0)
+"84
 [e $U 622  ]
 [e :U 623 ]
-[; ;main.c: 29: }
-[; ;main.c: 30: }
-"30
-[e :UE 620 ]
+[; ;spi.c: 85: {
+"85
+{
+"86
+}
+[e :U 622 ]
+"84
+[e $ == -> . . _SSP1STATbits 0 0 `i -> 0 `i 623  ]
+[e :U 624 ]
+[; ;spi.c: 86: }
+[; ;spi.c: 88: return (SSPBUF);
+"88
+[e ) _SSPBUF ]
+[e $UE 621  ]
+[; ;spi.c: 89: }
+"89
+[e :UE 621 ]
+}
+"91
+[v _SPI_Exchange8bitBuffer `(uc ~T0 @X0 1 ef3`*uc`uc`*uc ]
+"92
+{
+[; ;spi.c: 91: uint8_t SPI_Exchange8bitBuffer(uint8_t *dataIn, uint8_t bufLen, uint8_t *dataOut)
+[; ;spi.c: 92: {
+[e :U _SPI_Exchange8bitBuffer ]
+"91
+[v _dataIn `*uc ~T0 @X0 1 r1 ]
+[v _bufLen `uc ~T0 @X0 1 r2 ]
+[v _dataOut `*uc ~T0 @X0 1 r3 ]
+"92
+[f ]
+"93
+[v _bytesWritten `uc ~T0 @X0 1 a ]
+[; ;spi.c: 93: uint8_t bytesWritten = 0;
+[e = _bytesWritten -> -> 0 `i `uc ]
+[; ;spi.c: 95: if(bufLen != 0)
+"95
+[e $ ! != -> _bufLen `i -> 0 `i 626  ]
+[; ;spi.c: 96: {
+"96
+{
+[; ;spi.c: 97: if(dataIn != (0))
+"97
+[e $ ! != _dataIn -> -> 0 `i `*uc 627  ]
+[; ;spi.c: 98: {
+"98
+{
+[; ;spi.c: 99: while(bytesWritten < bufLen)
+"99
+[e $U 628  ]
+[e :U 629 ]
+[; ;spi.c: 100: {
+"100
+{
+[; ;spi.c: 101: if(dataOut == (0))
+"101
+[e $ ! == _dataOut -> -> 0 `i `*uc 631  ]
+[; ;spi.c: 102: {
+"102
+{
+[; ;spi.c: 103: SPI_Exchange8bit(dataIn[bytesWritten]);
+"103
+[e ( _SPI_Exchange8bit (1 *U + _dataIn * -> _bytesWritten `ux -> -> # *U _dataIn `ui `ux ]
+"104
+}
+[; ;spi.c: 104: }
+[e $U 632  ]
+"105
+[e :U 631 ]
+[; ;spi.c: 105: else
+[; ;spi.c: 106: {
+"106
+{
+[; ;spi.c: 107: dataOut[bytesWritten] = SPI_Exchange8bit(dataIn[bytesWritten]);
+"107
+[e = *U + _dataOut * -> _bytesWritten `ux -> -> # *U _dataOut `ui `ux ( _SPI_Exchange8bit (1 *U + _dataIn * -> _bytesWritten `ux -> -> # *U _dataIn `ui `ux ]
+"108
+}
+[e :U 632 ]
+[; ;spi.c: 108: }
+[; ;spi.c: 110: bytesWritten++;
+"110
+[e ++ _bytesWritten -> -> 1 `i `uc ]
+"111
+}
+[e :U 628 ]
+"99
+[e $ < -> _bytesWritten `i -> _bufLen `i 629  ]
+[e :U 630 ]
+"112
+}
+[; ;spi.c: 111: }
+[; ;spi.c: 112: }
+[e $U 633  ]
+"113
+[e :U 627 ]
+[; ;spi.c: 113: else
+[; ;spi.c: 114: {
+"114
+{
+[; ;spi.c: 115: if(dataOut != (0))
+"115
+[e $ ! != _dataOut -> -> 0 `i `*uc 634  ]
+[; ;spi.c: 116: {
+"116
+{
+[; ;spi.c: 117: while(bytesWritten < bufLen )
+"117
+[e $U 635  ]
+[e :U 636 ]
+[; ;spi.c: 118: {
+"118
+{
+[; ;spi.c: 119: dataOut[bytesWritten] = SPI_Exchange8bit(0x0);
+"119
+[e = *U + _dataOut * -> _bytesWritten `ux -> -> # *U _dataOut `ui `ux ( _SPI_Exchange8bit (1 -> -> 0 `i `uc ]
+[; ;spi.c: 121: bytesWritten++;
+"121
+[e ++ _bytesWritten -> -> 1 `i `uc ]
+"122
+}
+[e :U 635 ]
+"117
+[e $ < -> _bytesWritten `i -> _bufLen `i 636  ]
+[e :U 637 ]
+"123
+}
+[e :U 634 ]
+"124
+}
+[e :U 633 ]
+"125
+}
+[e :U 626 ]
+[; ;spi.c: 122: }
+[; ;spi.c: 123: }
+[; ;spi.c: 124: }
+[; ;spi.c: 125: }
+[; ;spi.c: 127: return bytesWritten;
+"127
+[e ) _bytesWritten ]
+[e $UE 625  ]
+[; ;spi.c: 128: }
+"128
+[e :UE 625 ]
+}
+"130
+[v _SPI_IsBufferFull `(uc ~T0 @X0 1 ef ]
+"131
+{
+[; ;spi.c: 130: bool SPI_IsBufferFull(void)
+[; ;spi.c: 131: {
+[e :U _SPI_IsBufferFull ]
+[f ]
+[; ;spi.c: 132: return (SSP1STATbits.BF);
+"132
+[e ) . . _SSP1STATbits 0 0 ]
+[e $UE 638  ]
+[; ;spi.c: 133: }
+"133
+[e :UE 638 ]
+}
+"135
+[v _SPI_HasWriteCollisionOccured `(uc ~T0 @X0 1 ef ]
+"136
+{
+[; ;spi.c: 135: bool SPI_HasWriteCollisionOccured(void)
+[; ;spi.c: 136: {
+[e :U _SPI_HasWriteCollisionOccured ]
+[f ]
+[; ;spi.c: 137: return (SSP1CON1bits.WCOL);
+"137
+[e ) . . _SSP1CON1bits 0 4 ]
+[e $UE 639  ]
+[; ;spi.c: 138: }
+"138
+[e :UE 639 ]
+}
+"140
+[v _SPI_ClearWriteCollisionStatus `(v ~T0 @X0 1 ef ]
+"141
+{
+[; ;spi.c: 140: void SPI_ClearWriteCollisionStatus(void)
+[; ;spi.c: 141: {
+[e :U _SPI_ClearWriteCollisionStatus ]
+[f ]
+[; ;spi.c: 142: SSP1CON1bits.WCOL = 0;
+"142
+[e = . . _SSP1CON1bits 0 4 -> -> 0 `i `uc ]
+[; ;spi.c: 143: }
+"143
+[e :UE 640 ]
 }

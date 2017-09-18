@@ -6707,7 +6707,7 @@ uint8_t EUSART_Read(void);
 # 134
 void EUSART_Write(uint8_t txData);
 
-# 7 "mcc_generated_files/eusart.c"
+# 55 "mcc_generated_files/eusart.c"
 void EUSART_Initialize(void)
 {
 
@@ -6722,10 +6722,10 @@ RC1STA = 0x90;
 TX1STA = 0x04;
 
 
-SP1BRGL = 0xA0;
+SP1BRGL = 0x44;
 
 
-SP1BRGH = 0x01;
+SP1BRGH = 0x00;
 
 }
 
@@ -6756,5 +6756,22 @@ while(0 == PIR1bits.TXIF)
 }
 
 TX1REG = txData;
+}
+
+void SendUartCmd(char *cmd)
+{
+for(int i=0;cmd[i] != '\0' ;i++)
+EUSART_Write(cmd[i]);
+}
+
+void ReadUartCmd(char *Output, unsigned int length)
+{
+Output[0] = UART_Read();
+for(int i=1;i<length;i++)
+{
+Output[i] = UART_Read();
+if(Output[i-1]=='O' && Output[i]=='K')
+break;
+}
 }
 

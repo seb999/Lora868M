@@ -32,6 +32,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _RC1REG `Vuc ~T0 @X0 0 e@409 ]
 "3200
 [v _TX1REG `Vuc ~T0 @X0 0 e@410 ]
+"113 mcc_generated_files/eusart.c
+[v _UART_Read `(i ~T0 @X0 0 ef ]
 [; ;htc.h: 26: extern const char __xc8_OPTIM_SPEED;
 [; ;htc.h: 28: extern double __fpnormalize(double);
 [; ;xc8debug.h: 14: extern void __builtin_software_breakpoint(void);
@@ -5005,108 +5007,189 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;eusart.h: 94: void EUSART_Initialize(void);
 [; ;eusart.h: 114: uint8_t EUSART_Read(void);
 [; ;eusart.h: 134: void EUSART_Write(uint8_t txData);
-"7 mcc_generated_files/eusart.c
+"55 mcc_generated_files/eusart.c
 [v _EUSART_Initialize `(v ~T0 @X0 1 ef ]
-"8
+"56
 {
-[; ;eusart.c: 7: void EUSART_Initialize(void)
-[; ;eusart.c: 8: {
+[; ;eusart.c: 55: void EUSART_Initialize(void)
+[; ;eusart.c: 56: {
 [e :U _EUSART_Initialize ]
 [f ]
-[; ;eusart.c: 12: BAUD1CON = 0x08;
-"12
+[; ;eusart.c: 60: BAUD1CON = 0x08;
+"60
 [e = _BAUD1CON -> -> 8 `i `uc ]
-[; ;eusart.c: 15: RC1STA = 0x90;
-"15
+[; ;eusart.c: 63: RC1STA = 0x90;
+"63
 [e = _RC1STA -> -> 144 `i `uc ]
-[; ;eusart.c: 18: TX1STA = 0x04;
-"18
+[; ;eusart.c: 66: TX1STA = 0x04;
+"66
 [e = _TX1STA -> -> 4 `i `uc ]
-[; ;eusart.c: 21: SP1BRGL = 0xA0;
-"21
-[e = _SP1BRGL -> -> 160 `i `uc ]
-[; ;eusart.c: 24: SP1BRGH = 0x01;
-"24
-[e = _SP1BRGH -> -> 1 `i `uc ]
-[; ;eusart.c: 26: }
-"26
+[; ;eusart.c: 69: SP1BRGL = 0x44;
+"69
+[e = _SP1BRGL -> -> 68 `i `uc ]
+[; ;eusart.c: 72: SP1BRGH = 0x00;
+"72
+[e = _SP1BRGH -> -> 0 `i `uc ]
+[; ;eusart.c: 74: }
+"74
 [e :UE 620 ]
 }
-"29
+"77
 [v _EUSART_Read `(uc ~T0 @X0 1 ef ]
-"30
+"78
 {
-[; ;eusart.c: 29: uint8_t EUSART_Read(void)
-[; ;eusart.c: 30: {
+[; ;eusart.c: 77: uint8_t EUSART_Read(void)
+[; ;eusart.c: 78: {
 [e :U _EUSART_Read ]
 [f ]
-[; ;eusart.c: 32: while(!PIR1bits.RCIF)
-"32
+[; ;eusart.c: 80: while(!PIR1bits.RCIF)
+"80
 [e $U 622  ]
 [e :U 623 ]
-[; ;eusart.c: 33: {
-"33
+[; ;eusart.c: 81: {
+"81
 {
-"34
+"82
 }
 [e :U 622 ]
-"32
+"80
 [e $ ! != -> . . _PIR1bits 0 5 `i -> -> -> 0 `i `Vuc `i 623  ]
 [e :U 624 ]
-[; ;eusart.c: 34: }
-[; ;eusart.c: 37: if(1 == RC1STAbits.OERR)
-"37
+[; ;eusart.c: 82: }
+[; ;eusart.c: 85: if(1 == RC1STAbits.OERR)
+"85
 [e $ ! == -> 1 `i -> . . _RC1STAbits 0 1 `i 625  ]
-[; ;eusart.c: 38: {
-"38
+[; ;eusart.c: 86: {
+"86
 {
-[; ;eusart.c: 41: RC1STAbits.SPEN = 0;
-"41
+[; ;eusart.c: 89: RC1STAbits.SPEN = 0;
+"89
 [e = . . _RC1STAbits 0 7 -> -> 0 `i `uc ]
-[; ;eusart.c: 42: RC1STAbits.SPEN = 1;
-"42
+[; ;eusart.c: 90: RC1STAbits.SPEN = 1;
+"90
 [e = . . _RC1STAbits 0 7 -> -> 1 `i `uc ]
-"43
+"91
 }
 [e :U 625 ]
-[; ;eusart.c: 43: }
-[; ;eusart.c: 45: return RC1REG;
-"45
+[; ;eusart.c: 91: }
+[; ;eusart.c: 93: return RC1REG;
+"93
 [e ) _RC1REG ]
 [e $UE 621  ]
-[; ;eusart.c: 46: }
-"46
+[; ;eusart.c: 94: }
+"94
 [e :UE 621 ]
 }
-"48
+"96
 [v _EUSART_Write `(v ~T0 @X0 1 ef1`uc ]
-"49
+"97
 {
-[; ;eusart.c: 48: void EUSART_Write(uint8_t txData)
-[; ;eusart.c: 49: {
+[; ;eusart.c: 96: void EUSART_Write(uint8_t txData)
+[; ;eusart.c: 97: {
 [e :U _EUSART_Write ]
-"48
+"96
 [v _txData `uc ~T0 @X0 1 r1 ]
-"49
+"97
 [f ]
-[; ;eusart.c: 50: while(0 == PIR1bits.TXIF)
-"50
+[; ;eusart.c: 98: while(0 == PIR1bits.TXIF)
+"98
 [e $U 627  ]
 [e :U 628 ]
-[; ;eusart.c: 51: {
-"51
+[; ;eusart.c: 99: {
+"99
 {
-"52
+"100
 }
 [e :U 627 ]
-"50
+"98
 [e $ == -> 0 `i -> . . _PIR1bits 0 4 `i 628  ]
 [e :U 629 ]
-[; ;eusart.c: 52: }
-[; ;eusart.c: 54: TX1REG = txData;
-"54
+[; ;eusart.c: 100: }
+[; ;eusart.c: 102: TX1REG = txData;
+"102
 [e = _TX1REG _txData ]
-[; ;eusart.c: 55: }
-"55
+[; ;eusart.c: 103: }
+"103
 [e :UE 626 ]
+}
+"105
+[v _SendUartCmd `(v ~T0 @X0 1 ef1`*uc ]
+"106
+{
+[; ;eusart.c: 105: void SendUartCmd(char *cmd)
+[; ;eusart.c: 106: {
+[e :U _SendUartCmd ]
+"105
+[v _cmd `*uc ~T0 @X0 1 r1 ]
+"106
+[f ]
+[; ;eusart.c: 107: for(int i=0;cmd[i] != '\0' ;i++)
+"107
+{
+[v _i `i ~T0 @X0 1 a ]
+[e = _i -> 0 `i ]
+[e $U 634  ]
+"108
+[e :U 631 ]
+[; ;eusart.c: 108: EUSART_Write(cmd[i]);
+[e ( _EUSART_Write (1 *U + _cmd * -> _i `x -> -> # *U _cmd `i `x ]
+"107
+[e ++ _i -> 1 `i ]
+[e :U 634 ]
+[e $ != -> *U + _cmd * -> _i `x -> -> # *U _cmd `i `x `ui -> 0 `ui 631  ]
+[e :U 632 ]
+"108
+}
+[; ;eusart.c: 109: }
+"109
+[e :UE 630 ]
+}
+"111
+[v _ReadUartCmd `(v ~T0 @X0 1 ef2`*uc`ui ]
+"112
+{
+[; ;eusart.c: 111: void ReadUartCmd(char *Output, unsigned int length)
+[; ;eusart.c: 112: {
+[e :U _ReadUartCmd ]
+"111
+[v _Output `*uc ~T0 @X0 1 r1 ]
+[v _length `ui ~T0 @X0 1 r2 ]
+"112
+[f ]
+[; ;eusart.c: 113: Output[0] = UART_Read();
+"113
+[e = *U + _Output * -> -> 0 `i `x -> -> # *U _Output `i `x -> ( _UART_Read ..  `uc ]
+[; ;eusart.c: 114: for(int i=1;i<length;i++)
+"114
+{
+[v _i `i ~T0 @X0 1 a ]
+[e = _i -> 1 `i ]
+[e $U 639  ]
+"115
+[e :U 636 ]
+[; ;eusart.c: 115: {
+{
+[; ;eusart.c: 116: Output[i] = UART_Read();
+"116
+[e = *U + _Output * -> _i `x -> -> # *U _Output `i `x -> ( _UART_Read ..  `uc ]
+[; ;eusart.c: 117: if(Output[i-1]=='O' && Output[i]=='K')
+"117
+[e $ ! && == -> *U + _Output * -> - _i -> 1 `i `x -> -> # *U _Output `i `x `ui -> 79 `ui == -> *U + _Output * -> _i `x -> -> # *U _Output `i `x `ui -> 75 `ui 640  ]
+[; ;eusart.c: 118: break;
+"118
+[e $U 637  ]
+[e :U 640 ]
+"119
+}
+"114
+[e ++ _i -> 1 `i ]
+[e :U 639 ]
+[e $ < -> _i `ui _length 636  ]
+[e :U 637 ]
+"119
+}
+[; ;eusart.c: 119: }
+[; ;eusart.c: 120: }
+"120
+[e :UE 635 ]
 }

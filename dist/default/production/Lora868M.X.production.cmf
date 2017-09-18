@@ -11,19 +11,20 @@
 # All addresses and the length are given in unqualified hexadecimal
 # in delta units.  Any other numeric values are decimal.
 %PSECTS
-$dist/default/production\Lora868M.X.production.obj
-cinit CODE 0 7FD 7FD 3 2
-text1 CODE 0 7B2 7B2 C 2
-text2 CODE 0 798 798 4 2
-text3 CODE 0 7BE 7BE 3F 2
-text4 CODE 0 7A0 7A0 6 2
-text5 CODE 0 7A6 7A6 C 2
-maintext CODE 0 79C 79C 4 2
-cstackCOMMON COMMON 1 70 70 1 1
-$C:\Users\sdubos\AppData\Local\Temp\2\s82c.obj
+$C:\Users\sdubos\AppData\Local\Temp\2\s65g.obj
 reset_vec CODE 0 0 0 2 2
 end_init CODE 0 2 2 2 2
 config CONFIG 0 8007 8007 2 2
+$dist/default/production\Lora868M.X.production.obj
+cinit CODE 0 7FD 7FD 3 2
+text1 CODE 0 7A2 7A2 F 2
+text2 CODE 0 782 782 4 2
+text3 CODE 0 790 790 7 2
+text4 CODE 0 7B1 7B1 4C 2
+text5 CODE 0 78A 78A 6 2
+text6 CODE 0 797 797 B 2
+maintext CODE 0 786 786 4 2
+cstackCOMMON COMMON 1 70 70 1 1
 # %UNUSED Section
 # This section enumerates the unused ranges of each CLASS. Each entry
 # is described on a single line as follows:
@@ -53,9 +54,9 @@ BANK6 320-36F 1
 BANK7 3A0-3EF 1
 BANK8 420-46F 1
 BANK9 4A0-4EF 1
-CONST 4-797 2
+CONST 4-781 2
 CONST 800-1FFF 2
-ENTRY 4-797 2
+ENTRY 4-781 2
 ENTRY 800-1FFF 2
 IDLOC 8000-8003 2
 SFR10 500-51F 1
@@ -81,7 +82,7 @@ SFR29 E80-EEF 1
 SFR30 F00-F6F 1
 SFR31 F80-FEF 1
 STACK 2000-23EF 1
-CODE 4-797 2
+CODE 4-781 2
 CODE 800-1FFF 2
 SFR0 0-1F 1
 SFR1 80-9F 1
@@ -98,9 +99,9 @@ BANK11 5A0-5EF 1
 BANK12 620-64F 1
 BIGRAM 2000-23EF 1
 COMMON 71-7D 1
-STRCODE 4-797 2
+STRCODE 4-781 2
 STRCODE 800-1FFF 2
-STRING 4-797 2
+STRING 4-781 2
 STRING 800-1FFF 2
 # %LINETAB Section
 # This section enumerates the file/line to address mappings.
@@ -116,64 +117,73 @@ STRING 800-1FFF 2
 # All other numeric values are in decimal.
 %LINETAB
 $dist/default/production\Lora868M.X.production.obj
-7FD cinit CODE >2152:C:\Users\sdubos\AppData\Local\Temp\2\s82c.
-7FD cinit CODE >2155:C:\Users\sdubos\AppData\Local\Temp\2\s82c.
-7FD cinit CODE >2161:C:\Users\sdubos\AppData\Local\Temp\2\s82c.
-7FD cinit CODE >2163:C:\Users\sdubos\AppData\Local\Temp\2\s82c.
-7FE cinit CODE >2164:C:\Users\sdubos\AppData\Local\Temp\2\s82c.
-7A6 text5 CODE >7:C:\Users\sdubos\MPLABXProjects\Lora868M.X\mcc_generated_files/eusart.c
-7A6 text5 CODE >12:C:\Users\sdubos\MPLABXProjects\Lora868M.X\mcc_generated_files/eusart.c
-7A9 text5 CODE >15:C:\Users\sdubos\MPLABXProjects\Lora868M.X\mcc_generated_files/eusart.c
-7AB text5 CODE >18:C:\Users\sdubos\MPLABXProjects\Lora868M.X\mcc_generated_files/eusart.c
-7AD text5 CODE >21:C:\Users\sdubos\MPLABXProjects\Lora868M.X\mcc_generated_files/eusart.c
-7AF text5 CODE >24:C:\Users\sdubos\MPLABXProjects\Lora868M.X\mcc_generated_files/eusart.c
-7B1 text5 CODE >26:C:\Users\sdubos\MPLABXProjects\Lora868M.X\mcc_generated_files/eusart.c
-7A0 text4 CODE >34:C:\Users\sdubos\MPLABXProjects\Lora868M.X\mcc_generated_files/mcc.c
-7A0 text4 CODE >37:C:\Users\sdubos\MPLABXProjects\Lora868M.X\mcc_generated_files/mcc.c
-7A3 text4 CODE >39:C:\Users\sdubos\MPLABXProjects\Lora868M.X\mcc_generated_files/mcc.c
-7A4 text4 CODE >41:C:\Users\sdubos\MPLABXProjects\Lora868M.X\mcc_generated_files/mcc.c
-7A5 text4 CODE >42:C:\Users\sdubos\MPLABXProjects\Lora868M.X\mcc_generated_files/mcc.c
-7BE text3 CODE >52:C:\Users\sdubos\MPLABXProjects\Lora868M.X\mcc_generated_files/pin_manager.c
-7BE text3 CODE >57:C:\Users\sdubos\MPLABXProjects\Lora868M.X\mcc_generated_files/pin_manager.c
-7C0 text3 CODE >58:C:\Users\sdubos\MPLABXProjects\Lora868M.X\mcc_generated_files/pin_manager.c
-7C1 text3 CODE >59:C:\Users\sdubos\MPLABXProjects\Lora868M.X\mcc_generated_files/pin_manager.c
-7C2 text3 CODE >64:C:\Users\sdubos\MPLABXProjects\Lora868M.X\mcc_generated_files/pin_manager.c
-7C5 text3 CODE >65:C:\Users\sdubos\MPLABXProjects\Lora868M.X\mcc_generated_files/pin_manager.c
-7C7 text3 CODE >66:C:\Users\sdubos\MPLABXProjects\Lora868M.X\mcc_generated_files/pin_manager.c
-7C9 text3 CODE >71:C:\Users\sdubos\MPLABXProjects\Lora868M.X\mcc_generated_files/pin_manager.c
-7CC text3 CODE >72:C:\Users\sdubos\MPLABXProjects\Lora868M.X\mcc_generated_files/pin_manager.c
-7CE text3 CODE >73:C:\Users\sdubos\MPLABXProjects\Lora868M.X\mcc_generated_files/pin_manager.c
-7D0 text3 CODE >78:C:\Users\sdubos\MPLABXProjects\Lora868M.X\mcc_generated_files/pin_manager.c
-7D3 text3 CODE >79:C:\Users\sdubos\MPLABXProjects\Lora868M.X\mcc_generated_files/pin_manager.c
-7D5 text3 CODE >80:C:\Users\sdubos\MPLABXProjects\Lora868M.X\mcc_generated_files/pin_manager.c
-7D7 text3 CODE >81:C:\Users\sdubos\MPLABXProjects\Lora868M.X\mcc_generated_files/pin_manager.c
-7D9 text3 CODE >86:C:\Users\sdubos\MPLABXProjects\Lora868M.X\mcc_generated_files/pin_manager.c
-7DB text3 CODE >87:C:\Users\sdubos\MPLABXProjects\Lora868M.X\mcc_generated_files/pin_manager.c
-7DC text3 CODE >88:C:\Users\sdubos\MPLABXProjects\Lora868M.X\mcc_generated_files/pin_manager.c
-7DD text3 CODE >95:C:\Users\sdubos\MPLABXProjects\Lora868M.X\mcc_generated_files/pin_manager.c
-7E1 text3 CODE >96:C:\Users\sdubos\MPLABXProjects\Lora868M.X\mcc_generated_files/pin_manager.c
-7E2 text3 CODE >97:C:\Users\sdubos\MPLABXProjects\Lora868M.X\mcc_generated_files/pin_manager.c
-7E5 text3 CODE >98:C:\Users\sdubos\MPLABXProjects\Lora868M.X\mcc_generated_files/pin_manager.c
-7E7 text3 CODE >99:C:\Users\sdubos\MPLABXProjects\Lora868M.X\mcc_generated_files/pin_manager.c
-7E8 text3 CODE >101:C:\Users\sdubos\MPLABXProjects\Lora868M.X\mcc_generated_files/pin_manager.c
-7EC text3 CODE >102:C:\Users\sdubos\MPLABXProjects\Lora868M.X\mcc_generated_files/pin_manager.c
-7F1 text3 CODE >104:C:\Users\sdubos\MPLABXProjects\Lora868M.X\mcc_generated_files/pin_manager.c
-7F4 text3 CODE >105:C:\Users\sdubos\MPLABXProjects\Lora868M.X\mcc_generated_files/pin_manager.c
-7F6 text3 CODE >106:C:\Users\sdubos\MPLABXProjects\Lora868M.X\mcc_generated_files/pin_manager.c
-7F7 text3 CODE >108:C:\Users\sdubos\MPLABXProjects\Lora868M.X\mcc_generated_files/pin_manager.c
-7FC text3 CODE >109:C:\Users\sdubos\MPLABXProjects\Lora868M.X\mcc_generated_files/pin_manager.c
-798 text2 CODE >44:C:\Users\sdubos\MPLABXProjects\Lora868M.X\mcc_generated_files/mcc.c
-798 text2 CODE >47:C:\Users\sdubos\MPLABXProjects\Lora868M.X\mcc_generated_files/mcc.c
-79B text2 CODE >48:C:\Users\sdubos\MPLABXProjects\Lora868M.X\mcc_generated_files/mcc.c
-7B2 text1 CODE >25:C:\Users\sdubos\MPLABXProjects\Lora868M.X\mcc_generated_files/mcc.c
-7B2 text1 CODE >28:C:\Users\sdubos\MPLABXProjects\Lora868M.X\mcc_generated_files/mcc.c
-7B5 text1 CODE >29:C:\Users\sdubos\MPLABXProjects\Lora868M.X\mcc_generated_files/mcc.c
-7B8 text1 CODE >30:C:\Users\sdubos\MPLABXProjects\Lora868M.X\mcc_generated_files/mcc.c
-7BB text1 CODE >31:C:\Users\sdubos\MPLABXProjects\Lora868M.X\mcc_generated_files/mcc.c
-7BD text1 CODE >32:C:\Users\sdubos\MPLABXProjects\Lora868M.X\mcc_generated_files/mcc.c
-79C maintext CODE >6:C:\Users\sdubos\MPLABXProjects\Lora868M.X\main.c
-79C maintext CODE >9:C:\Users\sdubos\MPLABXProjects\Lora868M.X\main.c
-79F maintext CODE >26:C:\Users\sdubos\MPLABXProjects\Lora868M.X\main.c
+7FD cinit CODE >2673:C:\Users\sdubos\AppData\Local\Temp\2\s65g.
+7FD cinit CODE >2676:C:\Users\sdubos\AppData\Local\Temp\2\s65g.
+7FD cinit CODE >2682:C:\Users\sdubos\AppData\Local\Temp\2\s65g.
+7FD cinit CODE >2684:C:\Users\sdubos\AppData\Local\Temp\2\s65g.
+7FE cinit CODE >2685:C:\Users\sdubos\AppData\Local\Temp\2\s65g.
+797 text6 CODE >55:C:\Users\sdubos\MPLABXProjects\Lora868M.X\mcc_generated_files/eusart.c
+797 text6 CODE >60:C:\Users\sdubos\MPLABXProjects\Lora868M.X\mcc_generated_files/eusart.c
+79A text6 CODE >63:C:\Users\sdubos\MPLABXProjects\Lora868M.X\mcc_generated_files/eusart.c
+79C text6 CODE >66:C:\Users\sdubos\MPLABXProjects\Lora868M.X\mcc_generated_files/eusart.c
+79E text6 CODE >69:C:\Users\sdubos\MPLABXProjects\Lora868M.X\mcc_generated_files/eusart.c
+7A0 text6 CODE >72:C:\Users\sdubos\MPLABXProjects\Lora868M.X\mcc_generated_files/eusart.c
+7A1 text6 CODE >74:C:\Users\sdubos\MPLABXProjects\Lora868M.X\mcc_generated_files/eusart.c
+78A text5 CODE >81:C:\Users\sdubos\MPLABXProjects\Lora868M.X\mcc_generated_files/mcc.c
+78A text5 CODE >84:C:\Users\sdubos\MPLABXProjects\Lora868M.X\mcc_generated_files/mcc.c
+78D text5 CODE >86:C:\Users\sdubos\MPLABXProjects\Lora868M.X\mcc_generated_files/mcc.c
+78E text5 CODE >88:C:\Users\sdubos\MPLABXProjects\Lora868M.X\mcc_generated_files/mcc.c
+78F text5 CODE >89:C:\Users\sdubos\MPLABXProjects\Lora868M.X\mcc_generated_files/mcc.c
+7B1 text4 CODE >52:C:\Users\sdubos\MPLABXProjects\Lora868M.X\mcc_generated_files/pin_manager.c
+7B1 text4 CODE >57:C:\Users\sdubos\MPLABXProjects\Lora868M.X\mcc_generated_files/pin_manager.c
+7B3 text4 CODE >58:C:\Users\sdubos\MPLABXProjects\Lora868M.X\mcc_generated_files/pin_manager.c
+7B4 text4 CODE >59:C:\Users\sdubos\MPLABXProjects\Lora868M.X\mcc_generated_files/pin_manager.c
+7B5 text4 CODE >64:C:\Users\sdubos\MPLABXProjects\Lora868M.X\mcc_generated_files/pin_manager.c
+7B8 text4 CODE >65:C:\Users\sdubos\MPLABXProjects\Lora868M.X\mcc_generated_files/pin_manager.c
+7BA text4 CODE >66:C:\Users\sdubos\MPLABXProjects\Lora868M.X\mcc_generated_files/pin_manager.c
+7BC text4 CODE >71:C:\Users\sdubos\MPLABXProjects\Lora868M.X\mcc_generated_files/pin_manager.c
+7BF text4 CODE >72:C:\Users\sdubos\MPLABXProjects\Lora868M.X\mcc_generated_files/pin_manager.c
+7C0 text4 CODE >73:C:\Users\sdubos\MPLABXProjects\Lora868M.X\mcc_generated_files/pin_manager.c
+7C2 text4 CODE >78:C:\Users\sdubos\MPLABXProjects\Lora868M.X\mcc_generated_files/pin_manager.c
+7C5 text4 CODE >79:C:\Users\sdubos\MPLABXProjects\Lora868M.X\mcc_generated_files/pin_manager.c
+7C7 text4 CODE >80:C:\Users\sdubos\MPLABXProjects\Lora868M.X\mcc_generated_files/pin_manager.c
+7C9 text4 CODE >81:C:\Users\sdubos\MPLABXProjects\Lora868M.X\mcc_generated_files/pin_manager.c
+7CB text4 CODE >86:C:\Users\sdubos\MPLABXProjects\Lora868M.X\mcc_generated_files/pin_manager.c
+7CD text4 CODE >87:C:\Users\sdubos\MPLABXProjects\Lora868M.X\mcc_generated_files/pin_manager.c
+7CE text4 CODE >88:C:\Users\sdubos\MPLABXProjects\Lora868M.X\mcc_generated_files/pin_manager.c
+7CF text4 CODE >95:C:\Users\sdubos\MPLABXProjects\Lora868M.X\mcc_generated_files/pin_manager.c
+7D3 text4 CODE >96:C:\Users\sdubos\MPLABXProjects\Lora868M.X\mcc_generated_files/pin_manager.c
+7D4 text4 CODE >97:C:\Users\sdubos\MPLABXProjects\Lora868M.X\mcc_generated_files/pin_manager.c
+7D7 text4 CODE >98:C:\Users\sdubos\MPLABXProjects\Lora868M.X\mcc_generated_files/pin_manager.c
+7D9 text4 CODE >99:C:\Users\sdubos\MPLABXProjects\Lora868M.X\mcc_generated_files/pin_manager.c
+7DA text4 CODE >101:C:\Users\sdubos\MPLABXProjects\Lora868M.X\mcc_generated_files/pin_manager.c
+7DF text4 CODE >102:C:\Users\sdubos\MPLABXProjects\Lora868M.X\mcc_generated_files/pin_manager.c
+7E4 text4 CODE >103:C:\Users\sdubos\MPLABXProjects\Lora868M.X\mcc_generated_files/pin_manager.c
+7E9 text4 CODE >104:C:\Users\sdubos\MPLABXProjects\Lora868M.X\mcc_generated_files/pin_manager.c
+7EE text4 CODE >105:C:\Users\sdubos\MPLABXProjects\Lora868M.X\mcc_generated_files/pin_manager.c
+7F2 text4 CODE >107:C:\Users\sdubos\MPLABXProjects\Lora868M.X\mcc_generated_files/pin_manager.c
+7F4 text4 CODE >108:C:\Users\sdubos\MPLABXProjects\Lora868M.X\mcc_generated_files/pin_manager.c
+7F6 text4 CODE >109:C:\Users\sdubos\MPLABXProjects\Lora868M.X\mcc_generated_files/pin_manager.c
+7F7 text4 CODE >111:C:\Users\sdubos\MPLABXProjects\Lora868M.X\mcc_generated_files/pin_manager.c
+7FC text4 CODE >112:C:\Users\sdubos\MPLABXProjects\Lora868M.X\mcc_generated_files/pin_manager.c
+790 text3 CODE >63:C:\Users\sdubos\MPLABXProjects\Lora868M.X\mcc_generated_files/spi.c
+790 text3 CODE >68:C:\Users\sdubos\MPLABXProjects\Lora868M.X\mcc_generated_files/spi.c
+793 text3 CODE >71:C:\Users\sdubos\MPLABXProjects\Lora868M.X\mcc_generated_files/spi.c
+795 text3 CODE >74:C:\Users\sdubos\MPLABXProjects\Lora868M.X\mcc_generated_files/spi.c
+796 text3 CODE >75:C:\Users\sdubos\MPLABXProjects\Lora868M.X\mcc_generated_files/spi.c
+782 text2 CODE >91:C:\Users\sdubos\MPLABXProjects\Lora868M.X\mcc_generated_files/mcc.c
+782 text2 CODE >94:C:\Users\sdubos\MPLABXProjects\Lora868M.X\mcc_generated_files/mcc.c
+785 text2 CODE >95:C:\Users\sdubos\MPLABXProjects\Lora868M.X\mcc_generated_files/mcc.c
+7A2 text1 CODE >71:C:\Users\sdubos\MPLABXProjects\Lora868M.X\mcc_generated_files/mcc.c
+7A2 text1 CODE >74:C:\Users\sdubos\MPLABXProjects\Lora868M.X\mcc_generated_files/mcc.c
+7A5 text1 CODE >75:C:\Users\sdubos\MPLABXProjects\Lora868M.X\mcc_generated_files/mcc.c
+7A8 text1 CODE >76:C:\Users\sdubos\MPLABXProjects\Lora868M.X\mcc_generated_files/mcc.c
+7AB text1 CODE >77:C:\Users\sdubos\MPLABXProjects\Lora868M.X\mcc_generated_files/mcc.c
+7AE text1 CODE >78:C:\Users\sdubos\MPLABXProjects\Lora868M.X\mcc_generated_files/mcc.c
+7B0 text1 CODE >79:C:\Users\sdubos\MPLABXProjects\Lora868M.X\mcc_generated_files/mcc.c
+786 maintext CODE >6:C:\Users\sdubos\MPLABXProjects\Lora868M.X\main.c
+786 maintext CODE >9:C:\Users\sdubos\MPLABXProjects\Lora868M.X\main.c
+789 maintext CODE >26:C:\Users\sdubos\MPLABXProjects\Lora868M.X\main.c
 # %SYMTAB Section
 # An enumeration of all symbols in the program.
 # The beginning of the section is indicated by %SYMTAB.
@@ -191,10 +201,11 @@ __Hspace_0 8009 0 ABS 0 - -
 __Hspace_1 71 0 ABS 0 - -
 __Hspace_2 0 0 ABS 0 - -
 __Hspace_3 0 0 ABS 0 - -
+_SSP1STATbits 214 0 ABS 0 - dist/default/production\Lora868M.X.production.obj
 __Heeprom_data 0 0 EEDATA 3 eeprom_data -
 __CFG_MCLRE$ON 0 0 ABS 0 - dist/default/production\Lora868M.X.production.obj
 _RXPPSbits E24 0 ABS 0 - dist/default/production\Lora868M.X.production.obj
-__end_of_WDT_Initialize F38 0 CODE 0 text2 dist/default/production\Lora868M.X.production.obj
+__end_of_WDT_Initialize F0C 0 CODE 0 text2 dist/default/production\Lora868M.X.production.obj
 __Hstrings 0 0 ABS 0 strings -
 _LATA 10C 0 ABS 0 - dist/default/production\Lora868M.X.production.obj
 _LATB 10D 0 ABS 0 - dist/default/production\Lora868M.X.production.obj
@@ -202,32 +213,36 @@ _LATC 10E 0 ABS 0 - dist/default/production\Lora868M.X.production.obj
 _WPUA 20C 0 ABS 0 - dist/default/production\Lora868M.X.production.obj
 _WPUB 20D 0 ABS 0 - dist/default/production\Lora868M.X.production.obj
 _WPUC 20E 0 ABS 0 - dist/default/production\Lora868M.X.production.obj
-___sp 0 0 STACK 2 stack C:\Users\sdubos\AppData\Local\Temp\2\s82c.obj
-_main F38 0 CODE 0 maintext dist/default/production\Lora868M.X.production.obj
+___sp 0 0 STACK 2 stack C:\Users\sdubos\AppData\Local\Temp\2\s65g.obj
+_main F0C 0 CODE 0 maintext dist/default/production\Lora868M.X.production.obj
 btemp 7E 0 ABS 0 - dist/default/production\Lora868M.X.production.obj
-start 4 0 CODE 0 init C:\Users\sdubos\AppData\Local\Temp\2\s82c.obj
+start 4 0 CODE 0 init C:\Users\sdubos\AppData\Local\Temp\2\s65g.obj
 __size_of_main 0 0 ABS 0 - dist/default/production\Lora868M.X.production.obj
 _OPTION_REGbits 95 0 ABS 0 - dist/default/production\Lora868M.X.production.obj
-__end_of_EUSART_Initialize F64 0 CODE 0 text5 dist/default/production\Lora868M.X.production.obj
+__end_of_EUSART_Initialize F44 0 CODE 0 text6 dist/default/production\Lora868M.X.production.obj
 __Hpowerup 0 0 CODE 0 powerup -
 __size_of_SYSTEM_Initialize 0 0 ABS 0 - dist/default/production\Lora868M.X.production.obj
-intlevel0 0 0 ENTRY 0 functab C:\Users\sdubos\AppData\Local\Temp\2\s82c.obj
-intlevel1 0 0 ENTRY 0 functab C:\Users\sdubos\AppData\Local\Temp\2\s82c.obj
-intlevel2 0 0 ENTRY 0 functab C:\Users\sdubos\AppData\Local\Temp\2\s82c.obj
-intlevel3 0 0 ENTRY 0 functab C:\Users\sdubos\AppData\Local\Temp\2\s82c.obj
-intlevel4 0 0 ENTRY 0 functab C:\Users\sdubos\AppData\Local\Temp\2\s82c.obj
-intlevel5 0 0 ENTRY 0 functab C:\Users\sdubos\AppData\Local\Temp\2\s82c.obj
+intlevel0 0 0 ENTRY 0 functab C:\Users\sdubos\AppData\Local\Temp\2\s65g.obj
+intlevel1 0 0 ENTRY 0 functab C:\Users\sdubos\AppData\Local\Temp\2\s65g.obj
+intlevel2 0 0 ENTRY 0 functab C:\Users\sdubos\AppData\Local\Temp\2\s65g.obj
+intlevel3 0 0 ENTRY 0 functab C:\Users\sdubos\AppData\Local\Temp\2\s65g.obj
+intlevel4 0 0 ENTRY 0 functab C:\Users\sdubos\AppData\Local\Temp\2\s65g.obj
+intlevel5 0 0 ENTRY 0 functab C:\Users\sdubos\AppData\Local\Temp\2\s65g.obj
+_RC2PPSbits EA2 0 ABS 0 - dist/default/production\Lora868M.X.production.obj
 wtemp0 7E 0 ABS 0 - dist/default/production\Lora868M.X.production.obj
 __Hfunctab 0 0 ENTRY 0 functab -
 _RC1STAbits 19D 0 ABS 0 - dist/default/production\Lora868M.X.production.obj
 __Hclrtext 0 0 ABS 0 clrtext -
+__size_of_SPI_Initialize 0 0 ABS 0 - dist/default/production\Lora868M.X.production.obj
 _ANSELA 18C 0 ABS 0 - dist/default/production\Lora868M.X.production.obj
 _ANSELB 18D 0 ABS 0 - dist/default/production\Lora868M.X.production.obj
 _ANSELC 18E 0 ABS 0 - dist/default/production\Lora868M.X.production.obj
+_RC1PPSbits EA1 0 ABS 0 - dist/default/production\Lora868M.X.production.obj
 __Lmaintext 0 0 ABS 0 maintext -
 PIN_MANAGER_Initialize@state 70 0 COMMON 1 cstackCOMMON dist/default/production\Lora868M.X.production.obj
-_EUSART_Initialize F4C 0 CODE 0 text5 dist/default/production\Lora868M.X.production.obj
-_PIN_MANAGER_Initialize F7C 0 CODE 0 text3 dist/default/production\Lora868M.X.production.obj
+_EUSART_Initialize F2E 0 CODE 0 text6 dist/default/production\Lora868M.X.production.obj
+_SSPDATPPSbits E21 0 ABS 0 - dist/default/production\Lora868M.X.production.obj
+_PIN_MANAGER_Initialize F62 0 CODE 0 text4 dist/default/production\Lora868M.X.production.obj
 start_initialization FFA 0 CODE 0 cinit dist/default/production\Lora868M.X.production.obj
 _ODCONA 28C 0 ABS 0 - dist/default/production\Lora868M.X.production.obj
 _ODCONB 28D 0 ABS 0 - dist/default/production\Lora868M.X.production.obj
@@ -235,11 +250,12 @@ _ODCONC 28E 0 ABS 0 - dist/default/production\Lora868M.X.production.obj
 _OSCCON 99 0 ABS 0 - dist/default/production\Lora868M.X.production.obj
 _RC1REG 199 0 ABS 0 - dist/default/production\Lora868M.X.production.obj
 _RC1STA 19D 0 ABS 0 - dist/default/production\Lora868M.X.production.obj
-__end_of_SYSTEM_Initialize F7C 0 CODE 0 text1 dist/default/production\Lora868M.X.production.obj
+__end_of_SYSTEM_Initialize F62 0 CODE 0 text1 dist/default/production\Lora868M.X.production.obj
+_SSPBUF 211 0 ABS 0 - dist/default/production\Lora868M.X.production.obj
 _TX1REG 19A 0 ABS 0 - dist/default/production\Lora868M.X.production.obj
 _TX1STA 19E 0 ABS 0 - dist/default/production\Lora868M.X.production.obj
 _WDTCON 97 0 ABS 0 - dist/default/production\Lora868M.X.production.obj
-___int_sp 0 0 STACK 2 stack C:\Users\sdubos\AppData\Local\Temp\2\s82c.obj
+___int_sp 0 0 STACK 2 stack C:\Users\sdubos\AppData\Local\Temp\2\s65g.obj
 __Hbank0 0 0 ABS 0 bank0 -
 __Hbank1 0 0 ABS 0 bank1 -
 __Hbank2 0 0 ABS 0 bank2 -
@@ -367,6 +383,8 @@ __Lsfr7 0 0 ABS 0 sfr7 -
 __Lsfr8 0 0 ABS 0 sfr8 -
 __Lsfr9 0 0 ABS 0 sfr9 -
 __Ltext 0 0 ABS 0 text -
+_SSP1CON1 215 0 ABS 0 - dist/default/production\Lora868M.X.production.obj
+_SSP1STAT 214 0 ABS 0 - dist/default/production\Lora868M.X.production.obj
 __HcstackCOMMON 0 0 ABS 0 cstackCOMMON -
 __size_of_WDT_Initialize 0 0 ABS 0 - dist/default/production\Lora868M.X.production.obj
 _GIE 5F 0 ABS 0 - dist/default/production\Lora868M.X.production.obj
@@ -374,13 +392,12 @@ __S0 8009 0 ABS 0 - -
 __S1 71 0 ABS 0 - -
 __S2 0 0 ABS 0 - -
 __CFG_PLLEN$ON 0 0 ABS 0 - dist/default/production\Lora868M.X.production.obj
-_RB4PPSbits E9C 0 ABS 0 - dist/default/production\Lora868M.X.production.obj
-_SYSTEM_Initialize F64 0 CODE 0 text1 dist/default/production\Lora868M.X.production.obj
+_SYSTEM_Initialize F44 0 CODE 0 text1 dist/default/production\Lora868M.X.production.obj
 __CFG_BOREN$ON 0 0 ABS 0 - dist/default/production\Lora868M.X.production.obj
 __Lintentry 4 0 CODE 0 intentry -
-reset_vec 0 0 CODE 0 reset_vec C:\Users\sdubos\AppData\Local\Temp\2\s82c.obj
+reset_vec 0 0 CODE 0 reset_vec C:\Users\sdubos\AppData\Local\Temp\2\s65g.obj
 __CFG_FCMEN$ON 0 0 ABS 0 - dist/default/production\Lora868M.X.production.obj
-__end_of_PIN_MANAGER_Initialize FFA 0 CODE 0 text3 dist/default/production\Lora868M.X.production.obj
+__end_of_PIN_MANAGER_Initialize FFA 0 CODE 0 text4 dist/default/production\Lora868M.X.production.obj
 __Lbank10 0 0 ABS 0 bank10 -
 __Lbank11 0 0 ABS 0 bank11 -
 __Lbank12 0 0 ABS 0 bank12 -
@@ -403,15 +420,16 @@ __Lbank28 0 0 BANK28 1 bank28 -
 __Lbank29 0 0 BANK29 1 bank29 -
 __Lbank30 0 0 BANK30 1 bank30 -
 __Lbank31 0 0 BANK31 1 bank31 -
-__pmaintext F38 0 CODE 0 maintext dist/default/production\Lora868M.X.production.obj
+__pmaintext F0C 0 CODE 0 maintext dist/default/production\Lora868M.X.production.obj
 __Lbigram 0 0 ABS 0 bigram -
 __CFG_BORV$LO 0 0 ABS 0 - dist/default/production\Lora868M.X.production.obj
+_SPI_Initialize F20 0 CODE 0 text3 dist/default/production\Lora868M.X.production.obj
 __Lcommon 0 0 ABS 0 common -
 __Lconfig 1000E 0 CONFIG 0 config -
 __CFG_CP$OFF 0 0 ABS 0 - dist/default/production\Lora868M.X.production.obj
 __CFG_IESO$ON 0 0 ABS 0 - dist/default/production\Lora868M.X.production.obj
-stackhi 23EF 0 ABS 0 - C:\Users\sdubos\AppData\Local\Temp\2\s82c.obj
-stacklo 2000 0 ABS 0 - C:\Users\sdubos\AppData\Local\Temp\2\s82c.obj
+stackhi 23EF 0 ABS 0 - C:\Users\sdubos\AppData\Local\Temp\2\s65g.obj
+stacklo 2000 0 ABS 0 - C:\Users\sdubos\AppData\Local\Temp\2\s65g.obj
 _OSCSTAT 9A 0 ABS 0 - dist/default/production\Lora868M.X.production.obj
 _OSCTUNE 98 0 ABS 0 - dist/default/production\Lora868M.X.production.obj
 __CFG_ZCDDIS$ON 0 0 ABS 0 - dist/default/production\Lora868M.X.production.obj
@@ -426,14 +444,16 @@ __LcstackCOMMON 0 0 ABS 0 cstackCOMMON -
 end_of_initialization FFA 0 CODE 0 cinit dist/default/production\Lora868M.X.production.obj
 __Hintentry 4 0 CODE 0 intentry -
 __CFG_STVREN$ON 0 0 ABS 0 - dist/default/production\Lora868M.X.production.obj
+__end_of_SPI_Initialize F2E 0 CODE 0 text3 dist/default/production\Lora868M.X.production.obj
 _PPSLOCKbits E0F 0 ABS 0 - dist/default/production\Lora868M.X.production.obj
 __Lstrings 0 0 ABS 0 strings -
 __Hreset_vec 4 0 CODE 0 reset_vec -
-__ptext1 F64 0 CODE 0 text1 dist/default/production\Lora868M.X.production.obj
-__ptext2 F30 0 CODE 0 text2 dist/default/production\Lora868M.X.production.obj
-__ptext3 F7C 0 CODE 0 text3 dist/default/production\Lora868M.X.production.obj
-__ptext4 F40 0 CODE 0 text4 dist/default/production\Lora868M.X.production.obj
-__ptext5 F4C 0 CODE 0 text5 dist/default/production\Lora868M.X.production.obj
+__ptext1 F44 0 CODE 0 text1 dist/default/production\Lora868M.X.production.obj
+__ptext2 F04 0 CODE 0 text2 dist/default/production\Lora868M.X.production.obj
+__ptext3 F20 0 CODE 0 text3 dist/default/production\Lora868M.X.production.obj
+__ptext4 F62 0 CODE 0 text4 dist/default/production\Lora868M.X.production.obj
+__ptext5 F14 0 CODE 0 text5 dist/default/production\Lora868M.X.production.obj
+__ptext6 F2E 0 CODE 0 text6 dist/default/production\Lora868M.X.production.obj
 __Lpowerup 0 0 CODE 0 powerup -
 __Leeprom_data 0 0 EEDATA 3 eeprom_data -
 __Lreset_vec 0 0 CODE 0 reset_vec -
@@ -445,24 +465,27 @@ __Lfunctab 0 0 ENTRY 0 functab -
 _SP1BRGH 19C 0 ABS 0 - dist/default/production\Lora868M.X.production.obj
 _SP1BRGL 19B 0 ABS 0 - dist/default/production\Lora868M.X.production.obj
 __Lclrtext 0 0 ABS 0 clrtext -
+_SSP1CON1bits 215 0 ABS 0 - dist/default/production\Lora868M.X.production.obj
 __size_of_EUSART_Initialize 0 0 ABS 0 - dist/default/production\Lora868M.X.production.obj
 __pcstackCOMMON 70 0 COMMON 1 cstackCOMMON dist/default/production\Lora868M.X.production.obj
+_SSP1ADD 212 0 ABS 0 - dist/default/production\Lora868M.X.production.obj
 __Hend_init 8 0 CODE 0 end_init -
-__end_of_main F40 0 CODE 0 maintext dist/default/production\Lora868M.X.production.obj
+__end_of_main F14 0 CODE 0 maintext dist/default/production\Lora868M.X.production.obj
 _TRISA 8C 0 ABS 0 - dist/default/production\Lora868M.X.production.obj
 _TRISB 8D 0 ABS 0 - dist/default/production\Lora868M.X.production.obj
 _TRISC 8E 0 ABS 0 - dist/default/production\Lora868M.X.production.obj
 __Hram 0 0 ABS 0 ram -
 __Lram 0 0 ABS 0 ram -
 __size_of_PIN_MANAGER_Initialize 0 0 ABS 0 - dist/default/production\Lora868M.X.production.obj
-_WDT_Initialize F30 0 CODE 0 text2 dist/default/production\Lora868M.X.production.obj
-__end_of_OSCILLATOR_Initialize F4C 0 CODE 0 text4 dist/default/production\Lora868M.X.production.obj
+_WDT_Initialize F04 0 CODE 0 text2 dist/default/production\Lora868M.X.production.obj
+__end_of_OSCILLATOR_Initialize F20 0 CODE 0 text5 dist/default/production\Lora868M.X.production.obj
 __CFG_PPS1WAY$ON 0 0 ABS 0 - dist/default/production\Lora868M.X.production.obj
 __initialization FFA 0 CODE 0 cinit dist/default/production\Lora868M.X.production.obj
 __CFG_PWRTE$OFF 0 0 ABS 0 - dist/default/production\Lora868M.X.production.obj
 _PPSLOCK E0F 0 ABS 0 - dist/default/production\Lora868M.X.production.obj
 __CFG_WRT$OFF 0 0 ABS 0 - dist/default/production\Lora868M.X.production.obj
-_OSCILLATOR_Initialize F40 0 CODE 0 text4 dist/default/production\Lora868M.X.production.obj
+_SSPCLKPPSbits E20 0 ABS 0 - dist/default/production\Lora868M.X.production.obj
+_OSCILLATOR_Initialize F14 0 CODE 0 text5 dist/default/production\Lora868M.X.production.obj
 # %SPLITSTAB Section
 # This section enumerates all the psect splits performed by the assembler.
 # The beginning of the section is indicated by %SPLITSTAB.
@@ -489,12 +512,13 @@ _OSCILLATOR_Initialize F40 0 CODE 0 text4 dist/default/production\Lora868M.X.pro
 # All other numeric quantities are in decimal.
 %SEGMENTS
 cinit 0 7FD FFA 3 2
-text1 0 7B2 F64 C 2
-text2 0 798 F30 4 2
-text3 0 7BE F7C 3F 2
-text4 0 7A0 F40 6 2
-text5 0 7A6 F4C C 2
-maintext 0 79C F38 4 2
+text1 0 7A2 F44 F 2
+text2 0 782 F04 4 2
+text3 0 790 F20 7 2
+text4 0 7B1 F62 4C 2
+text5 0 78A F14 6 2
+text6 0 797 F2E B 2
+maintext 0 786 F0C 4 2
 cstackCOMMON 1 70 70 1 1
 reset_vec 0 0 0 4 2
 config 0 8007 1000E 2 2
