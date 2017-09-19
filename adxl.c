@@ -1,6 +1,10 @@
 #include "adxl.h"
-#include "mcc_generated_files/spi.h"
-#include "mcc_generated_files/mcc.h"
+#include "mcc_generated_files/mcc.h"  //we need _XTAL_FREQ
+
+//#include <xc.h>
+//#include "pin_manager.h"
+//#include <stdint.h>
+//#include <stdbool.h>
 
 
 //Read SPI bus

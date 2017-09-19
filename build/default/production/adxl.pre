@@ -1,27 +1,5 @@
 
-# 1 "mcc_generated_files/mcc.c"
-
-
-# 49
-#pragma config FOSC = INTOSC
-#pragma config WDTE = ON
-#pragma config PWRTE = OFF
-#pragma config MCLRE = ON
-#pragma config CP = OFF
-#pragma config BOREN = ON
-#pragma config CLKOUTEN = OFF
-#pragma config IESO = ON
-#pragma config FCMEN = ON
-
-
-#pragma config WRT = OFF
-#pragma config PPS1WAY = ON
-#pragma config ZCDDIS = ON
-#pragma config PLLEN = ON
-#pragma config STVREN = ON
-#pragma config BORV = LO
-#pragma config LPBOR = OFF
-#pragma config LVP = ON
+# 1 "adxl.c"
 
 # 26 "C:\Program Files (x86)\Microchip\xc8\v1.43\include\htc.h"
 extern const char __xc8_OPTIM_SPEED;
@@ -6627,6 +6605,15 @@ extern unsigned char __resetbits;
 extern __bit __powerdown;
 extern __bit __timeout;
 
+# 19 "adxl.h"
+void ADXL_Init(void);
+
+
+void ADXL_WriteReg( char reg, char cmd );
+
+
+char ADXL_ReadReg( char reg );
+
 # 177 "mcc_generated_files/pin_manager.h"
 void PIN_MANAGER_Initialize (void);
 
@@ -6796,47 +6783,59 @@ void Bip(int n, int t);
 
 void __delay_sec(int n);
 
-# 71 "mcc_generated_files/mcc.c"
-void SYSTEM_Initialize(void)
+# 11 "adxl.c"
+char ADLX_ReadReg( char reg )
 {
-
-PIN_MANAGER_Initialize();
-OSCILLATOR_Initialize();
-WDT_Initialize();
-SPI_Initialize();
-EUSART_Initialize();
+PORTAbits.RA2 = 0;
+SPI_Exchange8bit(0x0B);
+SPI_Exchange8bit(reg);
+CKP=0;
+char val = SPI_Exchange8bit(0x00);
+PORTAbits.RA2 = 1;
+_delay((unsigned long)((100)*(16000000/4000.0)));
+return (val);
 }
 
-void OSCILLATOR_Initialize(void)
+
+void ADLX_WriteReg( char reg, char cmd )
 {
-
-OSCCON = 0x7A;
-
-OSCSTAT = 0x00;
-
-OSCTUNE = 0x00;
+PORTAbits.RA2 = 0;
+SPI_Exchange8bit(0x0A);
+SPI_Exchange8bit(reg);
+SPI_Exchange8bit(cmd);
+PORTAbits.RA2 = 1;
+_delay((unsigned long)((100)*(16000000/4000.0)));
 }
 
-void WDT_Initialize(void)
+void ADLX_Init()
 {
+PORTAbits.RA2=1;
+char reg;
 
-WDTCON = 0x16;
-}
 
-void __delay_sec(int n){
-while(n--) _delay((unsigned long)((1000)*(16000000/4000.0)));
-}
+ADXL_WriteReg(0x1f, 0x52);
 
-void Bip(int n, int t){
-for(int i=0;i<n;i++){
-for (int j=0;j<t;j++){
-PORTCbits.RC0 = 1;
-_delay((unsigned long)((130)*(16000000/4000000.0)));
-PORTCbits.RC0 = 0;
-_delay((unsigned long)((130)*(16000000/4000000.0)));
-}
-_delay((unsigned long)((20)*(16000000/4000.0)));
-}
-PORTCbits.RC0 = 1;
-}
 
+reg = ADXL_ReadReg(0x0b);
+reg = ADXL_ReadReg(0x00);
+reg = ADXL_ReadReg(0x2c);
+
+
+ADXL_WriteReg(0x20,0xFA);
+ADXL_WriteReg(0x21,0x0);
+ADXL_WriteReg(0x22,0xA);
+
+
+ADXL_WriteReg(0x23,0x96);
+ADXL_WriteReg(0x24,0x0);
+ADXL_WriteReg(0x25,0x1);
+
+
+ADXL_WriteReg(0x27,0x3F);
+
+
+ADXL_WriteReg(0x2B,0x40);
+
+
+ADXL_WriteReg(0x2d,0x0A);
+}

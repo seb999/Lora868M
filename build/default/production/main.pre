@@ -6605,11 +6605,35 @@ extern unsigned char __resetbits;
 extern __bit __powerdown;
 extern __bit __timeout;
 
-# 154 "mcc_generated_files/pin_manager.h"
+# 177 "mcc_generated_files/pin_manager.h"
 void PIN_MANAGER_Initialize (void);
 
-# 166
+# 189
 void PIN_MANAGER_IOC(void);
+
+# 202
+void IOCBF6_ISR(void);
+
+# 225
+void IOCBF6_SetInterruptHandler(void* InterruptHandler);
+
+# 249
+extern void (*IOCBF6_InterruptHandler)(void);
+
+# 273
+void IOCBF6_DefaultInterruptHandler(void);
+
+# 286
+void IOCBF7_ISR(void);
+
+# 309
+void IOCBF7_SetInterruptHandler(void* InterruptHandler);
+
+# 333
+extern void (*IOCBF7_InterruptHandler)(void);
+
+# 357
+void IOCBF7_DefaultInterruptHandler(void);
 
 # 13 "C:\Program Files (x86)\Microchip\xc8\v1.43\include\stdint.h"
 typedef signed char int8_t;
@@ -6704,6 +6728,15 @@ typedef uint16_t uintptr_t;
 # 12 "C:\Program Files (x86)\Microchip\xc8\v1.43\include\stdbool.h"
 typedef unsigned char bool;
 
+# 94 "mcc_generated_files/eusart.h"
+void EUSART_Initialize(void);
+
+# 114
+uint8_t EUSART_Read(void);
+
+# 134
+void EUSART_Write(uint8_t txData);
+
 # 4 "C:\Program Files (x86)\Microchip\xc8\v1.43\include\__size_t.h"
 typedef unsigned size_t;
 
@@ -6728,15 +6761,6 @@ bool SPI_HasWriteCollisionOccured(void);
 # 263
 void SPI_ClearWriteCollisionStatus(void);
 
-# 94 "mcc_generated_files/eusart.h"
-void EUSART_Initialize(void);
-
-# 114
-uint8_t EUSART_Read(void);
-
-# 134
-void EUSART_Write(uint8_t txData);
-
 # 69 "mcc_generated_files/mcc.h"
 void SYSTEM_Initialize(void);
 
@@ -6746,16 +6770,27 @@ void OSCILLATOR_Initialize(void);
 # 95
 void WDT_Initialize(void);
 
+void Bip(int n, int t);
+
+void __delay_sec(int n);
+
 # 6 "main.c"
 void main(void)
 {
 
 SYSTEM_Initialize();
 
-# 26
+# 16
+GIE = 1;
+
+
+
+IOCIE = 1;
+
+# 28
 while (1)
 {
-
+asm("clrwdt");
 }
 }
 

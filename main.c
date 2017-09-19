@@ -13,9 +13,11 @@ void main(void)
 
     // Enable the Global Interrupts
     //INTERRUPT_GlobalInterruptEnable();
+    GIE = 1;
 
     // Enable the Peripheral Interrupts
     //INTERRUPT_PeripheralInterruptEnable();
+    IOCIE = 1;
 
     // Disable the Global Interrupts
     //INTERRUPT_GlobalInterruptDisable();
@@ -25,7 +27,7 @@ void main(void)
 
     while (1)
     {
-        // Add your application code
+        CLRWDT(); 
     }
 }
 /**

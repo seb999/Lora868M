@@ -12,6 +12,9 @@
         <itemPath>mcc_generated_files/eusart.h</itemPath>
         <itemPath>mcc_generated_files/spi.h</itemPath>
       </logicalFolder>
+      <itemPath>adxl.h</itemPath>
+      <itemPath>oled.h</itemPath>
+      <itemPath>font.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -29,6 +32,8 @@
         <itemPath>mcc_generated_files/spi.c</itemPath>
       </logicalFolder>
       <itemPath>main.c</itemPath>
+      <itemPath>adxl.c</itemPath>
+      <itemPath>oled.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
