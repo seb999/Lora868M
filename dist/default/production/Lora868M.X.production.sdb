@@ -15,27 +15,29 @@
 [v _main main `(v  1 e 1 0 ]
 "55 C:\Users\sdubos\MPLABXProjects\Lora868M.X\mcc_generated_files/eusart.c
 [v _EUSART_Initialize EUSART_Initialize `(v  1 e 1 0 ]
+"77
+[v _EUSART_Read EUSART_Read `(uc  1 e 1 0 ]
 "96
 [v _EUSART_Write EUSART_Write `(v  1 e 1 0 ]
 "71 C:\Users\sdubos\MPLABXProjects\Lora868M.X\mcc_generated_files/mcc.c
 [v _SYSTEM_Initialize SYSTEM_Initialize `(v  1 e 1 0 ]
 "81
 [v _OSCILLATOR_Initialize OSCILLATOR_Initialize `(v  1 e 1 0 ]
-"91
+"95
 [v _WDT_Initialize WDT_Initialize `(v  1 e 1 0 ]
 "55 C:\Users\sdubos\MPLABXProjects\Lora868M.X\mcc_generated_files/pin_manager.c
 [v _PIN_MANAGER_Initialize PIN_MANAGER_Initialize `(v  1 e 1 0 ]
-"150
+"154
 [v _IOCBF6_ISR IOCBF6_ISR `(v  1 e 1 0 ]
-"165
+"169
 [v _IOCBF6_SetInterruptHandler IOCBF6_SetInterruptHandler `(v  1 e 1 0 ]
-"172
+"176
 [v _IOCBF6_DefaultInterruptHandler IOCBF6_DefaultInterruptHandler `(v  1 e 1 0 ]
-"180
+"184
 [v _IOCBF7_ISR IOCBF7_ISR `(v  1 e 1 0 ]
-"196
+"199
 [v _IOCBF7_SetInterruptHandler IOCBF7_SetInterruptHandler `(v  1 e 1 0 ]
-"203
+"206
 [v _IOCBF7_DefaultInterruptHandler IOCBF7_DefaultInterruptHandler `(v  1 e 1 0 ]
 "63 C:\Users\sdubos\MPLABXProjects\Lora868M.X\mcc_generated_files/spi.c
 [v _SPI_Initialize SPI_Initialize `(v  1 e 1 0 ]
@@ -57,7 +59,7 @@
 [v _Deactivate_Scroll Deactivate_Scroll `(v  1 e 1 0 ]
 "173
 [v _Activate_Scroll Activate_Scroll `(v  1 e 1 0 ]
-[s S482 . 1 `uc 1 RA0 1 0 :1:0 
+[s S470 . 1 `uc 1 RA0 1 0 :1:0 
 `uc 1 RA1 1 0 :1:1 
 `uc 1 RA2 1 0 :1:2 
 `uc 1 RA3 1 0 :1:3 
@@ -65,9 +67,9 @@
 `uc 1 RA5 1 0 :1:5 
 ]
 "442 C:\Program Files (x86)\Microchip\xc8\v1.43\include\pic16f1709.h
-[u S489 . 1 `S482 1 . 1 0 ]
-[v _PORTAbits PORTAbits `VES489  1 e 1 @12 ]
-[s S183 . 1 `uc 1 RC0 1 0 :1:0 
+[u S477 . 1 `S470 1 . 1 0 ]
+[v _PORTAbits PORTAbits `VES477  1 e 1 @12 ]
+[s S429 . 1 `uc 1 RC0 1 0 :1:0 
 `uc 1 RC1 1 0 :1:1 
 `uc 1 RC2 1 0 :1:2 
 `uc 1 RC3 1 0 :1:3 
@@ -77,9 +79,9 @@
 `uc 1 RC7 1 0 :1:7 
 ]
 "533
-[u S192 . 1 `S183 1 . 1 0 ]
-[v _PORTCbits PORTCbits `VES192  1 e 1 @14 ]
-[s S313 . 1 `uc 1 TMR1IF 1 0 :1:0 
+[u S438 . 1 `S429 1 . 1 0 ]
+[v _PORTCbits PORTCbits `VES438  1 e 1 @14 ]
+[s S276 . 1 `uc 1 TMR1IF 1 0 :1:0 
 `uc 1 TMR2IF 1 0 :1:1 
 `uc 1 CCP1IF 1 0 :1:2 
 `uc 1 SSP1IF 1 0 :1:3 
@@ -89,11 +91,11 @@
 `uc 1 TMR1GIF 1 0 :1:7 
 ]
 "599
-[s S322 . 1 `uc 1 . 1 0 :2:0 
+[s S285 . 1 `uc 1 . 1 0 :2:0 
 `uc 1 CCPIF 1 0 :1:2 
 ]
-[u S325 . 1 `S313 1 . 1 0 `S322 1 . 1 0 ]
-[v _PIR1bits PIR1bits `VES325  1 e 1 @17 ]
+[u S288 . 1 `S276 1 . 1 0 `S285 1 . 1 0 ]
+[v _PIR1bits PIR1bits `VES288  1 e 1 @17 ]
 "1071
 [v _TRISA TRISA `VEuc  1 e 1 @140 ]
 "1116
@@ -147,7 +149,7 @@
 [v _SP1BRGH SP1BRGH `VEuc  1 e 1 @412 ]
 "3385
 [v _RC1STA RC1STA `VEuc  1 e 1 @413 ]
-[s S341 . 1 `uc 1 RX9D 1 0 :1:0 
+[s S304 . 1 `uc 1 RX9D 1 0 :1:0 
 `uc 1 OERR 1 0 :1:1 
 `uc 1 FERR 1 0 :1:2 
 `uc 1 ADDEN 1 0 :1:3 
@@ -157,8 +159,8 @@
 `uc 1 SPEN 1 0 :1:7 
 ]
 "3411
-[u S350 . 1 `S341 1 . 1 0 ]
-[v _RC1STAbits RC1STAbits `VES350  1 e 1 @413 ]
+[u S313 . 1 `S304 1 . 1 0 ]
+[v _RC1STAbits RC1STAbits `VES313  1 e 1 @413 ]
 "3565
 [v _TX1STA TX1STA `VEuc  1 e 1 @414 ]
 "3745
@@ -175,7 +177,7 @@
 [v _SSP1ADD SSP1ADD `VEuc  1 e 1 @530 ]
 "4904
 [v _SSP1STAT SSP1STAT `VEuc  1 e 1 @532 ]
-[s S426 . 1 `uc 1 BF 1 0 :1:0 
+[s S377 . 1 `uc 1 BF 1 0 :1:0 
 `uc 1 UA 1 0 :1:1 
 `uc 1 R_nW 1 0 :1:2 
 `uc 1 S 1 0 :1:3 
@@ -185,24 +187,24 @@
 `uc 1 SMP 1 0 :1:7 
 ]
 "4926
-[u S435 . 1 `S426 1 . 1 0 ]
-[v _SSP1STATbits SSP1STATbits `VES435  1 e 1 @532 ]
+[u S386 . 1 `S377 1 . 1 0 ]
+[v _SSP1STATbits SSP1STATbits `VES386  1 e 1 @532 ]
 "5026
 [v _SSP1CON1 SSP1CON1 `VEuc  1 e 1 @533 ]
-[s S399 . 1 `uc 1 SSPM 1 0 :4:0 
+[s S350 . 1 `uc 1 SSPM 1 0 :4:0 
 `uc 1 CKP 1 0 :1:4 
 `uc 1 SSPEN 1 0 :1:5 
 `uc 1 SSPOV 1 0 :1:6 
 `uc 1 WCOL 1 0 :1:7 
 ]
 "5059
-[s S405 . 1 `uc 1 SSPM0 1 0 :1:0 
+[s S356 . 1 `uc 1 SSPM0 1 0 :1:0 
 `uc 1 SSPM1 1 0 :1:1 
 `uc 1 SSPM2 1 0 :1:2 
 `uc 1 SSPM3 1 0 :1:3 
 ]
-[u S410 . 1 `S399 1 . 1 0 `S405 1 . 1 0 ]
-[v _SSP1CON1bits SSP1CON1bits `VES410  1 e 1 @533 ]
+[u S361 . 1 `S350 1 . 1 0 `S356 1 . 1 0 ]
+[v _SSP1CON1bits SSP1CON1bits `VES361  1 e 1 @533 ]
 "5540
 [v _ODCONA ODCONA `VEuc  1 e 1 @652 ]
 "5585
@@ -253,27 +255,43 @@
 "8654
 [u S163 . 1 `S161 1 . 1 0 ]
 [v _SSPDATPPSbits SSPDATPPSbits `VES163  1 e 1 @3617 ]
-[s S147 . 1 `uc 1 RXPPS 1 0 :5:0 
+[s S140 . 1 `uc 1 RXPPS 1 0 :5:0 
 ]
 "8694
-[u S149 . 1 `S147 1 . 1 0 ]
-[v _RXPPSbits RXPPSbits `VES149  1 e 1 @3620 ]
-[s S140 . 1 `uc 1 RC1PPS 1 0 :5:0 
-]
-"9014
 [u S142 . 1 `S140 1 . 1 0 ]
-[v _RC1PPSbits RC1PPSbits `VES142  1 e 1 @3745 ]
-[s S154 . 1 `uc 1 RC2PPS 1 0 :5:0 
+[v _RXPPSbits RXPPSbits `VES142  1 e 1 @3620 ]
+[s S147 . 1 `uc 1 RA4PPS 1 0 :5:0 
 ]
-"9034
+"8874
+[u S149 . 1 `S147 1 . 1 0 ]
+[v _RA4PPSbits RA4PPSbits `VES149  1 e 1 @3732 ]
+[s S154 . 1 `uc 1 RB4PPS 1 0 :5:0 
+]
+"8914
 [u S156 . 1 `S154 1 . 1 0 ]
-[v _RC2PPSbits RC2PPSbits `VES156  1 e 1 @3746 ]
+[v _RB4PPSbits RB4PPSbits `VES156  1 e 1 @3740 ]
+[s S175 . 1 `uc 1 RB5PPS 1 0 :5:0 
+]
+"8934
+[u S177 . 1 `S175 1 . 1 0 ]
+[v _RB5PPSbits RB5PPSbits `VES177  1 e 1 @3741 ]
+[s S182 . 1 `uc 1 RC5PPS 1 0 :5:0 
+]
+"9094
+[u S184 . 1 `S182 1 . 1 0 ]
+[v _RC5PPSbits RC5PPSbits `VES184  1 e 1 @3749 ]
 "12771
 [v _CKP CKP `VEb  1 e 0 @4268 ]
 "13067
 [v _GIE GIE `VEb  1 e 0 @95 ]
+"13163
+[v _IOCBF7 IOCBF7 `VEb  1 e 0 @7351 ]
 "13229
 [v _IOCIE IOCIE `VEb  1 e 0 @91 ]
+"13767
+[v _PLLR PLLR `VEb  1 e 0 @1238 ]
+"14015
+[v _SWDTEN SWDTEN `VEb  1 e 0 @1208 ]
 "51 C:\Users\sdubos\MPLABXProjects\Lora868M.X\mcc_generated_files/pin_manager.c
 [v _IOCBF6_InterruptHandler IOCBF6_InterruptHandler `*.37(v  1 e 2 0 ]
 "52
@@ -289,17 +307,17 @@
 "6 C:\Users\sdubos\MPLABXProjects\Lora868M.X\main.c
 [v _main main `(v  1 e 1 0 ]
 {
-"32
+"40
 } 0
 "71 C:\Users\sdubos\MPLABXProjects\Lora868M.X\mcc_generated_files/mcc.c
 [v _SYSTEM_Initialize SYSTEM_Initialize `(v  1 e 1 0 ]
 {
 "79
 } 0
-"91
+"95
 [v _WDT_Initialize WDT_Initialize `(v  1 e 1 0 ]
 {
-"95
+"99
 } 0
 "63 C:\Users\sdubos\MPLABXProjects\Lora868M.X\mcc_generated_files/spi.c
 [v _SPI_Initialize SPI_Initialize `(v  1 e 1 0 ]
@@ -311,24 +329,24 @@
 {
 "113
 [v PIN_MANAGER_Initialize@state state `uc  1 a 1 2 ]
-"130
+"132
 } 0
-"196
+"199
 [v _IOCBF7_SetInterruptHandler IOCBF7_SetInterruptHandler `(v  1 e 1 0 ]
 {
 [v IOCBF7_SetInterruptHandler@InterruptHandler InterruptHandler `*.37v  1 p 2 0 ]
-"198
+"201
 } 0
-"165
+"169
 [v _IOCBF6_SetInterruptHandler IOCBF6_SetInterruptHandler `(v  1 e 1 0 ]
 {
 [v IOCBF6_SetInterruptHandler@InterruptHandler InterruptHandler `*.37v  1 p 2 0 ]
-"167
+"171
 } 0
 "81 C:\Users\sdubos\MPLABXProjects\Lora868M.X\mcc_generated_files/mcc.c
 [v _OSCILLATOR_Initialize OSCILLATOR_Initialize `(v  1 e 1 0 ]
 {
-"89
+"93
 } 0
 "55 C:\Users\sdubos\MPLABXProjects\Lora868M.X\mcc_generated_files/eusart.c
 [v _EUSART_Initialize EUSART_Initialize `(v  1 e 1 0 ]

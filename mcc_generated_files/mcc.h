@@ -52,7 +52,7 @@
 #include "eusart.h"
 #include "spi.h"
 
-#define _XTAL_FREQ  16000000
+#define _XTAL_FREQ  32000000
 
 
 /**
@@ -94,9 +94,6 @@ void OSCILLATOR_Initialize(void);
  */
 void WDT_Initialize(void);
 
-void Bip(int n, int t);
-
-void __delay_sec(int n);
 
 #endif	/* MCC_H */
 /**

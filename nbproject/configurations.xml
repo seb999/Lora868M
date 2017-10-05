@@ -15,6 +15,10 @@
       <itemPath>adxl.h</itemPath>
       <itemPath>oled.h</itemPath>
       <itemPath>font.h</itemPath>
+      <itemPath>eusartCore.h</itemPath>
+      <itemPath>misc.h</itemPath>
+      <itemPath>spiCore.h</itemPath>
+      <itemPath>roadmap.txt</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -34,6 +38,9 @@
       <itemPath>main.c</itemPath>
       <itemPath>adxl.c</itemPath>
       <itemPath>oled.c</itemPath>
+      <itemPath>eusartCore.c</itemPath>
+      <itemPath>misc.c</itemPath>
+      <itemPath>spiCore.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"

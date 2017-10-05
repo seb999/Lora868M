@@ -27,7 +27,15 @@ void main(void)
 
     while (1)
     {
+        SWDTEN = 1;
         CLRWDT(); 
+        
+        if(IOCBF7){ 
+            LED_GREEN_PORT  = 1;
+            __delay_ms(500);
+            LED_GREEN_PORT  = 0;
+            IOCBF7=0; 
+        }
     }
 }
 /**

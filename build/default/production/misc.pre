@@ -1,0 +1,24 @@
+
+# 1 "misc.c"
+
+# 4 "misc.h"
+void Bip(int n, int t);
+void __delay_sec(int n);
+
+# 3 "misc.c"
+void __delay_sec(int n){
+while(n--) __delay_ms(1000);
+}
+
+void Bip(int n, int t){
+for(int i=0;i<n;i++){
+for (int j=0;j<t;j++){
+
+__delay_us(130);
+
+__delay_us(130);
+}
+__delay_ms(20);
+}
+
+}

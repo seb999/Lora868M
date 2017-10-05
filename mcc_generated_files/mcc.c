@@ -47,7 +47,7 @@
 
 // CONFIG1
 #pragma config FOSC = INTOSC    // Oscillator Selection Bits->INTOSC oscillator: I/O function on CLKIN pin
-#pragma config WDTE = ON    // Watchdog Timer Enable->WDT enabled
+#pragma config WDTE = SWDTEN    // Watchdog Timer Enable->WDT controlled by the SWDTEN bit in the WDTCON register
 #pragma config PWRTE = OFF    // Power-up Timer Enable->PWRT disabled
 #pragma config MCLRE = ON    // MCLR Pin Function Select->MCLR/VPP pin function is MCLR
 #pragma config CP = OFF    // Flash Program Memory Code Protection->Program memory code protection is disabled
@@ -80,35 +80,22 @@ void SYSTEM_Initialize(void)
 
 void OSCILLATOR_Initialize(void)
 {
-    // SCS INTOSC; SPLLEN disabled; IRCF 16MHz_HF; 
-    OSCCON = 0x7A;
+    // SCS FOSC; SPLLEN disabled; IRCF 8MHz_HF; 
+    OSCCON = 0x70;
     // SOSCR disabled; 
     OSCSTAT = 0x00;
     // TUN 0; 
     OSCTUNE = 0x00;
+    // Wait for PLL to stabilize
+    while(PLLR == 0)
+    {
+    }
 }
 
 void WDT_Initialize(void)
 {
     // WDTPS 1:65536; SWDTEN OFF; 
     WDTCON = 0x16;
-}
-
-void __delay_sec(int n){
-    while(n--) __delay_ms(1000); 
-}
-
-void Bip(int n, int t){
-    for(int i=0;i<n;i++){
-        for (int j=0;j<t;j++){
-                BUZZER = 1;
-                __delay_us(130);
-                BUZZER = 0;
-                __delay_us(130);
-        }
-        __delay_ms(20);
-    }
-    BUZZER = 1;
 }
 
 /**

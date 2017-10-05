@@ -64,15 +64,15 @@ void PIN_MANAGER_Initialize(void)
     /**
     TRISx registers
     */    
-    TRISA = 0x37;
-    TRISB = 0xF0;
-    TRISC = 0xE9;
+    TRISA = 0x27;
+    TRISB = 0xC0;
+    TRISC = 0x1F;
 
     /**
     ANSELx registers
     */   
-    ANSELC = 0xCB;
-    ANSELB = 0x00;
+    ANSELC = 0xCF;
+    ANSELB = 0x30;
     ANSELA = 0x17;
 
     /**
@@ -107,7 +107,7 @@ void PIN_MANAGER_Initialize(void)
     // register default IOC callback functions at runtime; use these methods to register a custom function
     IOCBF6_SetInterruptHandler(IOCBF6_DefaultInterruptHandler);
     IOCBF7_SetInterruptHandler(IOCBF7_DefaultInterruptHandler);
-    
+   
     
     
     bool state = (unsigned char)GIE;
@@ -116,11 +116,13 @@ void PIN_MANAGER_Initialize(void)
     PPSLOCK = 0xAA;
     PPSLOCKbits.PPSLOCKED = 0x00; // unlock PPS
 
-    RC1PPSbits.RC1PPS = 0x12;   //RC1->MSSP:SDO;
-    RXPPSbits.RXPPS = 0x0D;   //RB5->EUSART:RX;
-    RC2PPSbits.RC2PPS = 0x10;   //RC2->MSSP:SCK;
-    SSPDATPPSbits.SSPDATPPS = 0x0C;   //RB4->MSSP:SDI;
-    SSPCLKPPSbits.SSPCLKPPS = 0x12;   //RC2->MSSP:SCK;
+    RXPPSbits.RXPPS = 0x0E;   //RB6->EUSART:RX;
+    RA4PPSbits.RA4PPS = 0x12;   //RA4->MSSP:SDO;
+    RB4PPSbits.RB4PPS = 0x14;   //RB4->EUSART:TX;
+    SSPDATPPSbits.SSPDATPPS = 0x05;   //RA5->MSSP:SDI;
+    SSPCLKPPSbits.SSPCLKPPS = 0x15;   //RC5->MSSP:SCK;
+    RB5PPSbits.RB5PPS = 0x14;   //RB5->EUSART:TX;
+    RC5PPSbits.RC5PPS = 0x10;   //RC5->MSSP:SCK;
 
     PPSLOCK = 0x55;
     PPSLOCK = 0xAA;
@@ -142,6 +144,8 @@ void PIN_MANAGER_IOC(void)
     {
         IOCBF7_ISR();  
     }                          
+
+
 }
 
 /**
@@ -149,7 +153,7 @@ void PIN_MANAGER_IOC(void)
 */
 void IOCBF6_ISR(void) {
 
-    LED=1;
+    // Add custom IOCBF6 code
 
     // Call the interrupt handler for the callback registered at runtime
     if(IOCBF6_InterruptHandler)
@@ -180,7 +184,6 @@ void IOCBF6_DefaultInterruptHandler(void){
 void IOCBF7_ISR(void) {
 
     // Add custom IOCBF7 code
-    LED=1;
 
     // Call the interrupt handler for the callback registered at runtime
     if(IOCBF7_InterruptHandler)
@@ -204,8 +207,6 @@ void IOCBF7_DefaultInterruptHandler(void){
     // add your IOCBF7 interrupt custom code
     // or set custom function using IOCBF7_SetInterruptHandler()
 }
-
-
 
 /**
  End of File

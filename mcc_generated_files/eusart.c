@@ -65,8 +65,8 @@ void EUSART_Initialize(void)
     // TX9 8-bit; TX9D 0; SENDB sync_break_complete; TXEN disabled; SYNC asynchronous; BRGH hi_speed; CSRC slave; 
     TX1STA = 0x04;
 
-    // Baud Rate = 57600; SP1BRGL 68; 
-    SP1BRGL = 0x44;
+    // Baud Rate = 57600; SP1BRGL 138; 
+    SP1BRGL = 0x8A;
 
     // Baud Rate = 57600; SP1BRGH 0; 
     SP1BRGH = 0x00;
@@ -100,23 +100,6 @@ void EUSART_Write(uint8_t txData)
     }
 
     TX1REG = txData;    // Write the data byte to the USART.
-}
-
-void SendUartCmd(char *cmd)
-{
-  for(int i=0;cmd[i] !=  '\0' ;i++)
-    EUSART_Write(cmd[i]);
-}
-
-void ReadUartCmd(char *Output, unsigned int length)
-{
-    Output[0] = UART_Read();
-    for(int i=1;i<length;i++)
-    {
-        Output[i] = UART_Read();
-        if(Output[i-1]=='O' && Output[i]=='K')
-            break;
-    }
 }
 /**
   End of File

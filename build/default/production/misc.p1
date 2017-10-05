@@ -1,0 +1,83 @@
+Version 3.2 HI-TECH Software Intermediate Code
+"4 misc.c
+[v ___delay_ms `(i ~T0 @X0 0 ef ]
+"11
+[v ___delay_us `(i ~T0 @X0 0 ef ]
+[; ;misc.h: 4: void Bip(int n, int t);
+[; ;misc.h: 5: void __delay_sec(int n);
+"3 misc.c
+[v ___delay_sec `(v ~T0 @X0 1 ef1`i ]
+{
+[; ;misc.c: 3: void __delay_sec(int n){
+[e :U ___delay_sec ]
+[v _n `i ~T0 @X0 1 r1 ]
+[f ]
+[; ;misc.c: 4: while(n--) __delay_ms(1000);
+"4
+[e $U 2  ]
+[e :U 3 ]
+[e ( ___delay_ms -> 1000 `i ]
+[e :U 2 ]
+[e $ != -- _n -> 1 `i -> 0 `i 3  ]
+[e :U 4 ]
+[; ;misc.c: 5: }
+"5
+[e :UE 1 ]
+}
+"7
+[v _Bip `(v ~T0 @X0 1 ef2`i`i ]
+{
+[; ;misc.c: 7: void Bip(int n, int t){
+[e :U _Bip ]
+[v _n `i ~T0 @X0 1 r1 ]
+[v _t `i ~T0 @X0 1 r2 ]
+[f ]
+[; ;misc.c: 8: for(int i=0;i<n;i++){
+"8
+{
+[v _i `i ~T0 @X0 1 a ]
+[e = _i -> 0 `i ]
+[e $U 9  ]
+[e :U 6 ]
+{
+[; ;misc.c: 9: for (int j=0;j<t;j++){
+"9
+{
+[v _j `i ~T0 @X0 1 a ]
+[e = _j -> 0 `i ]
+[e $U 13  ]
+[e :U 10 ]
+{
+[; ;misc.c: 11: __delay_us(130);
+"11
+[e ( ___delay_us -> 130 `i ]
+[; ;misc.c: 13: __delay_us(130);
+"13
+[e ( ___delay_us -> 130 `i ]
+"14
+}
+"9
+[e ++ _j -> 1 `i ]
+[e :U 13 ]
+[e $ < _j _t 10  ]
+[e :U 11 ]
+"14
+}
+[; ;misc.c: 14: }
+[; ;misc.c: 15: __delay_ms(20);
+"15
+[e ( ___delay_ms -> 20 `i ]
+"16
+}
+"8
+[e ++ _i -> 1 `i ]
+[e :U 9 ]
+[e $ < _i _n 6  ]
+[e :U 7 ]
+"16
+}
+[; ;misc.c: 16: }
+[; ;misc.c: 18: }
+"18
+[e :UE 5 ]
+}
