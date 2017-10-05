@@ -49,7 +49,6 @@
 
 
 void (*IOCBF6_InterruptHandler)(void);
-void (*IOCBF7_InterruptHandler)(void);
 
 
 void PIN_MANAGER_Initialize(void)
@@ -64,23 +63,23 @@ void PIN_MANAGER_Initialize(void)
     /**
     TRISx registers
     */    
-    TRISA = 0x27;
-    TRISB = 0xC0;
-    TRISC = 0x1F;
+    TRISA = 0x17;
+    TRISB = 0x50;
+    TRISC = 0x7F;
 
     /**
     ANSELx registers
     */   
-    ANSELC = 0xCF;
-    ANSELB = 0x30;
-    ANSELA = 0x17;
+    ANSELC = 0x4F;
+    ANSELB = 0x00;
+    ANSELA = 0x06;
 
     /**
     WPUx registers
     */ 
-    WPUB = 0xF0;
-    WPUA = 0x3F;
-    WPUC = 0xEF;
+    WPUB = 0x40;
+    WPUA = 0x0B;
+    WPUC = 0x4F;
     OPTION_REGbits.nWPUEN = 0;
 
     /**
@@ -96,18 +95,16 @@ void PIN_MANAGER_Initialize(void)
     */
     // interrupt on change for group IOCBF - flag
     IOCBFbits.IOCBF6 = 0;
-    IOCBFbits.IOCBF7 = 0;
     // interrupt on change for group IOCBN - negative
     IOCBNbits.IOCBN6 = 0;
-    IOCBNbits.IOCBN7 = 0;
     // interrupt on change for group IOCBP - positive
     IOCBPbits.IOCBP6 = 0;
-    IOCBPbits.IOCBP7 = 0;
 
     // register default IOC callback functions at runtime; use these methods to register a custom function
     IOCBF6_SetInterruptHandler(IOCBF6_DefaultInterruptHandler);
-    IOCBF7_SetInterruptHandler(IOCBF7_DefaultInterruptHandler);
    
+    // Enable IOCI interrupt 
+    INTCONbits.IOCIE = 1; 
     
     
     bool state = (unsigned char)GIE;
@@ -116,13 +113,12 @@ void PIN_MANAGER_Initialize(void)
     PPSLOCK = 0xAA;
     PPSLOCKbits.PPSLOCKED = 0x00; // unlock PPS
 
-    RXPPSbits.RXPPS = 0x0E;   //RB6->EUSART:RX;
-    RA4PPSbits.RA4PPS = 0x12;   //RA4->MSSP:SDO;
-    RB4PPSbits.RB4PPS = 0x14;   //RB4->EUSART:TX;
-    SSPDATPPSbits.SSPDATPPS = 0x05;   //RA5->MSSP:SDI;
-    SSPCLKPPSbits.SSPCLKPPS = 0x15;   //RC5->MSSP:SCK;
+    RXPPSbits.RXPPS = 0x0C;   //RB4->EUSART:RX;
+    SSPDATPPSbits.SSPDATPPS = 0x04;   //RA4->MSSP:SDI;
+    T0CKIPPSbits.T0CKIPPS = 0x00;   //RA0->TMR0:T0CKI;
+    SSPCLKPPSbits.SSPCLKPPS = 0x05;   //RA5->MSSP:SCK;
+    RA5PPSbits.RA5PPS = 0x10;   //RA5->MSSP:SCK;
     RB5PPSbits.RB5PPS = 0x14;   //RB5->EUSART:TX;
-    RC5PPSbits.RC5PPS = 0x10;   //RC5->MSSP:SCK;
 
     PPSLOCK = 0x55;
     PPSLOCK = 0xAA;
@@ -137,12 +133,6 @@ void PIN_MANAGER_IOC(void)
     if(IOCBFbits.IOCBF6 == 1)
     {
         IOCBF6_ISR();  
-    }                          
-
-    // interrupt on change for pin IOCBF7
-    if(IOCBFbits.IOCBF7 == 1)
-    {
-        IOCBF7_ISR();  
     }                          
 
 
@@ -176,36 +166,6 @@ void IOCBF6_SetInterruptHandler(void* InterruptHandler){
 void IOCBF6_DefaultInterruptHandler(void){
     // add your IOCBF6 interrupt custom code
     // or set custom function using IOCBF6_SetInterruptHandler()
-}
-
-/**
-   IOCBF7 Interrupt Service Routine
-*/
-void IOCBF7_ISR(void) {
-
-    // Add custom IOCBF7 code
-
-    // Call the interrupt handler for the callback registered at runtime
-    if(IOCBF7_InterruptHandler)
-    {
-        IOCBF7_InterruptHandler();
-    }
-    IOCBFbits.IOCBF7 = 0;
-}
-
-/**
-  Allows selecting an interrupt handler for IOCBF7 at application runtime
-*/
-void IOCBF7_SetInterruptHandler(void* InterruptHandler){
-    IOCBF7_InterruptHandler = InterruptHandler;
-}
-
-/**
-  Default interrupt handler for IOCBF7
-*/
-void IOCBF7_DefaultInterruptHandler(void){
-    // add your IOCBF7 interrupt custom code
-    // or set custom function using IOCBF7_SetInterruptHandler()
 }
 
 /**

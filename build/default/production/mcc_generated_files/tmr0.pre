@@ -1,5 +1,5 @@
 
-# 1 "mcc_generated_files/spi.c"
+# 1 "mcc_generated_files/tmr0.c"
 
 # 26 "C:\Program Files (x86)\Microchip\xc8\v1.43\include\htc.h"
 extern const char __xc8_OPTIM_SPEED;
@@ -6605,15 +6605,6 @@ extern unsigned char __resetbits;
 extern __bit __powerdown;
 extern __bit __timeout;
 
-# 12 "C:\Program Files (x86)\Microchip\xc8\v1.43\include\stdbool.h"
-typedef unsigned char bool;
-
-# 4 "C:\Program Files (x86)\Microchip\xc8\v1.43\include\__size_t.h"
-typedef unsigned size_t;
-
-# 6 "C:\Program Files (x86)\Microchip\xc8\v1.43\include\stddef.h"
-typedef int ptrdiff_t;
-
 # 13 "C:\Program Files (x86)\Microchip\xc8\v1.43\include\stdint.h"
 typedef signed char int8_t;
 
@@ -6704,104 +6695,106 @@ typedef int16_t intptr_t;
 
 typedef uint16_t uintptr_t;
 
-# 116 "mcc_generated_files/spi.h"
-void SPI_Initialize(void);
+# 12 "C:\Program Files (x86)\Microchip\xc8\v1.43\include\stdbool.h"
+typedef unsigned char bool;
 
-# 151
-uint8_t SPI_Exchange8bit(uint8_t data);
+# 97 "mcc_generated_files/tmr0.h"
+void TMR0_Initialize(void);
 
-# 191
-uint8_t SPI_Exchange8bitBuffer(uint8_t *dataIn, uint8_t bufLen, uint8_t *dataOut);
+# 130
+uint8_t TMR0_ReadTimer(void);
 
-# 214
-bool SPI_IsBufferFull(void);
+# 169
+void TMR0_WriteTimer(uint8_t timerVal);
+
+# 205
+void TMR0_Reload(void);
+
+# 220
+void TMR0_ISR(void);
 
 # 239
-bool SPI_HasWriteCollisionOccured(void);
+void TMR0_SetInterruptHandler(void (* InterruptHandler)(void));
 
-# 263
-void SPI_ClearWriteCollisionStatus(void);
+# 257
+extern void (*TMR0_InterruptHandler)(void);
 
-# 63 "mcc_generated_files/spi.c"
-void SPI_Initialize(void)
+# 275
+void TMR0_DefaultInterruptHandler(void);
+
+# 57 "mcc_generated_files/tmr0.c"
+volatile uint8_t timer0ReloadVal;
+void (*TMR0_InterruptHandler)(void);
+
+# 63
+void TMR0_Initialize(void)
 {
 
 
 
-SSP1STAT = 0x00;
+OPTION_REG = (uint8_t)((OPTION_REG & 0xC0) | 0xFF & 0x3F);
 
 
-SSP1CON1 = 0x20;
+TMR0 = 0x00;
 
 
-SSP1ADD = 0x00;
+timer0ReloadVal= 0;
+
+
+INTCONbits.TMR0IF = 0;
+
+
+INTCONbits.TMR0IE = 1;
+
+
+TMR0_SetInterruptHandler(TMR0_DefaultInterruptHandler);
 }
 
-uint8_t SPI_Exchange8bit(uint8_t data)
+
+uint8_t TMR0_ReadTimer(void)
 {
+uint8_t readVal;
 
-SSP1CON1bits.WCOL = 0;
+readVal = TMR0;
 
-SSPBUF = data;
-
-while(SSP1STATbits.BF == 0x0)
-{
-}
-
-return (SSPBUF);
+return readVal;
 }
 
-uint8_t SPI_Exchange8bitBuffer(uint8_t *dataIn, uint8_t bufLen, uint8_t *dataOut)
+void TMR0_WriteTimer(uint8_t timerVal)
 {
-uint8_t bytesWritten = 0;
 
-if(bufLen != 0)
-{
-if(dataIn != (0))
-{
-while(bytesWritten < bufLen)
-{
-if(dataOut == (0))
-{
-SPI_Exchange8bit(dataIn[bytesWritten]);
-}
-else
-{
-dataOut[bytesWritten] = SPI_Exchange8bit(dataIn[bytesWritten]);
+TMR0 = timerVal;
 }
 
-bytesWritten++;
-}
-}
-else
+void TMR0_Reload(void)
 {
-if(dataOut != (0))
-{
-while(bytesWritten < bufLen )
-{
-dataOut[bytesWritten] = SPI_Exchange8bit(0x0);
 
-bytesWritten++;
-}
-}
-}
+TMR0 = timer0ReloadVal;
 }
 
-return bytesWritten;
+void TMR0_ISR(void)
+{
+
+
+INTCONbits.TMR0IF = 0;
+
+TMR0 = timer0ReloadVal;
+
+if(TMR0_InterruptHandler)
+{
+TMR0_InterruptHandler();
 }
 
-bool SPI_IsBufferFull(void)
-{
-return (SSP1STATbits.BF);
+
 }
 
-bool SPI_HasWriteCollisionOccured(void)
-{
-return (SSP1CON1bits.WCOL);
+
+void TMR0_SetInterruptHandler(void (* InterruptHandler)(void)){
+TMR0_InterruptHandler = InterruptHandler;
 }
 
-void SPI_ClearWriteCollisionStatus(void)
-{
-SSP1CON1bits.WCOL = 0;
+void TMR0_DefaultInterruptHandler(void){
+
+
 }
 

@@ -65,10 +65,10 @@ void SPI_Initialize(void)
     // Set the SPI module to the options selected in the User Interface
     
     // R_nW write_noTX; P stopbit_notdetected; S startbit_notdetected; BF RCinprocess_TXcomplete; SMP Middle; UA dontupdate; CKE Idle to Active; D_nA lastbyte_address; 
-    SSP1STAT = 0x40;
+    SSP1STAT = 0x00;
     
     // SSPEN enabled; WCOL no_collision; CKP Idle:Low, Active:High; SSPM FOSC/4; SSPOV no_overflow; 
-    SSP1CON1 = 0x30;
+    SSP1CON1 = 0x20;
     
     // SSP1ADD 0; 
     SSP1ADD = 0x00;

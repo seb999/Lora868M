@@ -1,5 +1,8 @@
 
-# 1 "mcc_generated_files/spi.c"
+# 1 "mcc_generated_files/interrupt_manager.c"
+
+# 110 "mcc_generated_files/interrupt_manager.h"
+void interrupt INTERRUPT_InterruptManager(void);
 
 # 26 "C:\Program Files (x86)\Microchip\xc8\v1.43\include\htc.h"
 extern const char __xc8_OPTIM_SPEED;
@@ -6605,14 +6608,23 @@ extern unsigned char __resetbits;
 extern __bit __powerdown;
 extern __bit __timeout;
 
-# 12 "C:\Program Files (x86)\Microchip\xc8\v1.43\include\stdbool.h"
-typedef unsigned char bool;
+# 184 "mcc_generated_files/pin_manager.h"
+void PIN_MANAGER_Initialize (void);
 
-# 4 "C:\Program Files (x86)\Microchip\xc8\v1.43\include\__size_t.h"
-typedef unsigned size_t;
+# 196
+void PIN_MANAGER_IOC(void);
 
-# 6 "C:\Program Files (x86)\Microchip\xc8\v1.43\include\stddef.h"
-typedef int ptrdiff_t;
+# 209
+void IOCBF6_ISR(void);
+
+# 232
+void IOCBF6_SetInterruptHandler(void* InterruptHandler);
+
+# 256
+extern void (*IOCBF6_InterruptHandler)(void);
+
+# 280
+void IOCBF6_DefaultInterruptHandler(void);
 
 # 13 "C:\Program Files (x86)\Microchip\xc8\v1.43\include\stdint.h"
 typedef signed char int8_t;
@@ -6704,6 +6716,48 @@ typedef int16_t intptr_t;
 
 typedef uint16_t uintptr_t;
 
+# 12 "C:\Program Files (x86)\Microchip\xc8\v1.43\include\stdbool.h"
+typedef unsigned char bool;
+
+# 97 "mcc_generated_files/tmr0.h"
+void TMR0_Initialize(void);
+
+# 130
+uint8_t TMR0_ReadTimer(void);
+
+# 169
+void TMR0_WriteTimer(uint8_t timerVal);
+
+# 205
+void TMR0_Reload(void);
+
+# 220
+void TMR0_ISR(void);
+
+# 239
+void TMR0_SetInterruptHandler(void (* InterruptHandler)(void));
+
+# 257
+extern void (*TMR0_InterruptHandler)(void);
+
+# 275
+void TMR0_DefaultInterruptHandler(void);
+
+# 94 "mcc_generated_files/eusart.h"
+void EUSART_Initialize(void);
+
+# 114
+uint8_t EUSART_Read(void);
+
+# 134
+void EUSART_Write(uint8_t txData);
+
+# 4 "C:\Program Files (x86)\Microchip\xc8\v1.43\include\__size_t.h"
+typedef unsigned size_t;
+
+# 6 "C:\Program Files (x86)\Microchip\xc8\v1.43\include\stddef.h"
+typedef int ptrdiff_t;
+
 # 116 "mcc_generated_files/spi.h"
 void SPI_Initialize(void);
 
@@ -6722,86 +6776,30 @@ bool SPI_HasWriteCollisionOccured(void);
 # 263
 void SPI_ClearWriteCollisionStatus(void);
 
-# 63 "mcc_generated_files/spi.c"
-void SPI_Initialize(void)
+# 71 "mcc_generated_files/mcc.h"
+void SYSTEM_Initialize(void);
+
+# 84
+void OSCILLATOR_Initialize(void);
+
+# 97
+void WDT_Initialize(void);
+
+# 51 "mcc_generated_files/interrupt_manager.c"
+void interrupt INTERRUPT_InterruptManager (void)
 {
 
-
-
-SSP1STAT = 0x00;
-
-
-SSP1CON1 = 0x20;
-
-
-SSP1ADD = 0x00;
+if(INTCONbits.TMR0IE == 1 && INTCONbits.TMR0IF == 1)
+{
+TMR0_ISR();
 }
-
-uint8_t SPI_Exchange8bit(uint8_t data)
+else if(INTCONbits.IOCIE == 1 && INTCONbits.IOCIF == 1)
 {
-
-SSP1CON1bits.WCOL = 0;
-
-SSPBUF = data;
-
-while(SSP1STATbits.BF == 0x0)
-{
-}
-
-return (SSPBUF);
-}
-
-uint8_t SPI_Exchange8bitBuffer(uint8_t *dataIn, uint8_t bufLen, uint8_t *dataOut)
-{
-uint8_t bytesWritten = 0;
-
-if(bufLen != 0)
-{
-if(dataIn != (0))
-{
-while(bytesWritten < bufLen)
-{
-if(dataOut == (0))
-{
-SPI_Exchange8bit(dataIn[bytesWritten]);
+PIN_MANAGER_IOC();
 }
 else
 {
-dataOut[bytesWritten] = SPI_Exchange8bit(dataIn[bytesWritten]);
-}
 
-bytesWritten++;
 }
-}
-else
-{
-if(dataOut != (0))
-{
-while(bytesWritten < bufLen )
-{
-dataOut[bytesWritten] = SPI_Exchange8bit(0x0);
-
-bytesWritten++;
-}
-}
-}
-}
-
-return bytesWritten;
-}
-
-bool SPI_IsBufferFull(void)
-{
-return (SSP1STATbits.BF);
-}
-
-bool SPI_HasWriteCollisionOccured(void)
-{
-return (SSP1CON1bits.WCOL);
-}
-
-void SPI_ClearWriteCollisionStatus(void)
-{
-SSP1CON1bits.WCOL = 0;
 }
 

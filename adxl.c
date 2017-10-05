@@ -8,28 +8,28 @@
 
 
 //Read SPI bus
-char ADLX_ReadReg( char reg )
-{
-    ADXL_CS = DOWN;
-    SPI_Exchange8bit(ADXL_RD_SPI);
-    SPI_Exchange8bit(reg);
-    CKP=0;
-    char val = SPI_Exchange8bit(0x00);
-    ADXL_CS = UP;
-    __delay_ms(100);
-    return (val);
-}
+//char ADLX_ReadReg( char reg )
+//{
+//    ADXL_CS = DOWN;
+//    SPI_Exchange8bit(ADXL_RD_SPI);
+//    SPI_Exchange8bit(reg);
+//    CKP=0;
+//    char val = SPI_Exchange8bit(0x00);
+//    ADXL_CS = UP;
+//    __delay_ms(100);
+//    return (val);
+//}
 
 //Write SPI bus
-void ADLX_WriteReg( char reg, char cmd )
-{
-    ADXL_CS = DOWN;
-    SPI_Exchange8bit(ADXL_WR_SPI);
-    SPI_Exchange8bit(reg);
-    SPI_Exchange8bit(cmd);
-    ADXL_CS = UP;
-    __delay_ms(100);
-}
+//void ADLX_WriteReg( char reg, char cmd )
+//{
+//    ADXL_CS = DOWN;
+//    SPI_Exchange8bit(ADXL_WR_SPI);
+//    SPI_Exchange8bit(reg);
+//    SPI_Exchange8bit(cmd);
+//    ADXL_CS = UP;
+//    __delay_ms(100);
+//}
 
 void ADLX_Init()
 {

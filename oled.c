@@ -1,19 +1,19 @@
 #include "oled.h"
 #include "mcc_generated_files/mcc.h" //we need _XTAL_FREQ
 
-void Oled_WriteCmd( uchar cmd ){
-    OLED_CS = DOWN;
-    OLED_DC = DOWN;
-    SPI_Exchange8bit(cmd);
-    OLED_CS = UP;
-}
-
-void Oled_WriteRam( uchar dat ){
-    OLED_CS = DOWN;
-    OLED_DC = UP;
-    SPI_Exchange8bit(dat);
-    OLED_CS = UP;
-}
+//void Oled_WriteCmd( uchar cmd ){
+//    OLED_CS = DOWN;
+//    OLED_DC = DOWN;
+//    SPI_Exchange8bit(cmd);
+//    OLED_CS = UP;
+//}
+//
+//void Oled_WriteRam( uchar dat ){
+//    OLED_CS = DOWN;
+//    OLED_DC = UP;
+//    SPI_Exchange8bit(dat);
+//    OLED_CS = UP;
+//}
 
 //------------------------------------------------------------------------------
 // Reset the OLED module.

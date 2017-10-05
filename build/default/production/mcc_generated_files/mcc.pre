@@ -6627,35 +6627,23 @@ extern unsigned char __resetbits;
 extern __bit __powerdown;
 extern __bit __timeout;
 
-# 195 "mcc_generated_files/pin_manager.h"
+# 184 "mcc_generated_files/pin_manager.h"
 void PIN_MANAGER_Initialize (void);
 
-# 207
+# 196
 void PIN_MANAGER_IOC(void);
 
-# 220
+# 209
 void IOCBF6_ISR(void);
 
-# 243
+# 232
 void IOCBF6_SetInterruptHandler(void* InterruptHandler);
 
-# 267
+# 256
 extern void (*IOCBF6_InterruptHandler)(void);
 
-# 291
+# 280
 void IOCBF6_DefaultInterruptHandler(void);
-
-# 304
-void IOCBF7_ISR(void);
-
-# 327
-void IOCBF7_SetInterruptHandler(void* InterruptHandler);
-
-# 351
-extern void (*IOCBF7_InterruptHandler)(void);
-
-# 375
-void IOCBF7_DefaultInterruptHandler(void);
 
 # 13 "C:\Program Files (x86)\Microchip\xc8\v1.43\include\stdint.h"
 typedef signed char int8_t;
@@ -6750,6 +6738,33 @@ typedef uint16_t uintptr_t;
 # 12 "C:\Program Files (x86)\Microchip\xc8\v1.43\include\stdbool.h"
 typedef unsigned char bool;
 
+# 110 "mcc_generated_files/interrupt_manager.h"
+void interrupt INTERRUPT_InterruptManager(void);
+
+# 97 "mcc_generated_files/tmr0.h"
+void TMR0_Initialize(void);
+
+# 130
+uint8_t TMR0_ReadTimer(void);
+
+# 169
+void TMR0_WriteTimer(uint8_t timerVal);
+
+# 205
+void TMR0_Reload(void);
+
+# 220
+void TMR0_ISR(void);
+
+# 239
+void TMR0_SetInterruptHandler(void (* InterruptHandler)(void));
+
+# 257
+extern void (*TMR0_InterruptHandler)(void);
+
+# 275
+void TMR0_DefaultInterruptHandler(void);
+
 # 94 "mcc_generated_files/eusart.h"
 void EUSART_Initialize(void);
 
@@ -6783,13 +6798,13 @@ bool SPI_HasWriteCollisionOccured(void);
 # 263
 void SPI_ClearWriteCollisionStatus(void);
 
-# 69 "mcc_generated_files/mcc.h"
+# 71 "mcc_generated_files/mcc.h"
 void SYSTEM_Initialize(void);
 
-# 82
+# 84
 void OSCILLATOR_Initialize(void);
 
-# 95
+# 97
 void WDT_Initialize(void);
 
 # 71 "mcc_generated_files/mcc.c"
@@ -6800,6 +6815,7 @@ PIN_MANAGER_Initialize();
 OSCILLATOR_Initialize();
 WDT_Initialize();
 SPI_Initialize();
+TMR0_Initialize();
 EUSART_Initialize();
 }
 

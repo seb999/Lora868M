@@ -1,21 +1,23 @@
 /**
-  EUSART Generated Driver File
+  Generated Interrupt Manager Source File
 
-  @Company
+  @Company:
     Microchip Technology Inc.
 
-  @File Name
-    eusart.c
+  @File Name:
+    interrupt_manager.c
 
-  @Summary
-    This is the generated driver implementation file for the EUSART driver using PIC10 / PIC12 / PIC16 / PIC18 MCUs 
+  @Summary:
+    This is the Interrupt Manager file generated using PIC10 / PIC12 / PIC16 / PIC18 MCUs 
 
-  @Description
-    This header file provides implementations for driver APIs for EUSART.
+  @Description:
+    This header file provides implementations for global interrupt handling.
+    For individual peripheral handlers please see the peripheral driver for
+    all modules selected in the GUI.
     Generation Information :
         Product Revision  :  PIC10 / PIC12 / PIC16 / PIC18 MCUs  - 1.45
         Device            :  PIC16F1709
-        Driver Version    :  2.00
+        Driver Version    :  1.02
     The generated drivers are tested against the following:
         Compiler          :  XC8 1.35
         MPLAB             :  MPLAB X 3.40
@@ -43,64 +45,25 @@
     TERMS.
 */
 
-/**
-  Section: Included Files
-*/
-#include "eusart.h"
+#include "interrupt_manager.h"
+#include "mcc.h"
 
-/**
-  Section: EUSART APIs
-*/
-
-void EUSART_Initialize(void)
+void interrupt INTERRUPT_InterruptManager (void)
 {
-    // Set the EUSART module to the options selected in the user interface.
-
-    // ABDOVF no_overflow; SCKP Non-Inverted; BRG16 16bit_generator; WUE disabled; ABDEN disabled; 
-    BAUD1CON = 0x08;
-
-    // SPEN enabled; RX9 8-bit; CREN enabled; ADDEN disabled; SREN disabled; 
-    RC1STA = 0x90;
-
-    // TX9 8-bit; TX9D 0; SENDB sync_break_complete; TXEN disabled; SYNC asynchronous; BRGH hi_speed; CSRC slave; 
-    TX1STA = 0x04;
-
-    // Baud Rate = 9600; SP1BRGL 64; 
-    SP1BRGL = 0x40;
-
-    // Baud Rate = 9600; SP1BRGH 3; 
-    SP1BRGH = 0x03;
-
-}
-
-
-uint8_t EUSART_Read(void)
-{
-
-    while(!PIR1bits.RCIF)
+    // interrupt handler
+    if(INTCONbits.TMR0IE == 1 && INTCONbits.TMR0IF == 1)
     {
+        TMR0_ISR();
     }
-
-    
-    if(1 == RC1STAbits.OERR)
+    else if(INTCONbits.IOCIE == 1 && INTCONbits.IOCIF == 1)
     {
-        // EUSART error - restart
-
-        RC1STAbits.SPEN = 0; 
-        RC1STAbits.SPEN = 1; 
+        PIN_MANAGER_IOC();
     }
-
-    return RC1REG;
-}
-
-void EUSART_Write(uint8_t txData)
-{
-    while(0 == PIR1bits.TXIF)
+    else
     {
+        //Unhandled Interrupt
     }
-
-    TX1REG = txData;    // Write the data byte to the USART.
 }
 /**
-  End of File
+ End of File
 */

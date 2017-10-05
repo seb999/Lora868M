@@ -6605,87 +6605,72 @@ extern unsigned char __resetbits;
 extern __bit __powerdown;
 extern __bit __timeout;
 
-# 195 "mcc_generated_files/pin_manager.h"
+# 184 "mcc_generated_files/pin_manager.h"
 void PIN_MANAGER_Initialize (void);
 
-# 207
+# 196
 void PIN_MANAGER_IOC(void);
 
-# 220
+# 209
 void IOCBF6_ISR(void);
 
-# 243
+# 232
 void IOCBF6_SetInterruptHandler(void* InterruptHandler);
 
-# 267
+# 256
 extern void (*IOCBF6_InterruptHandler)(void);
 
-# 291
+# 280
 void IOCBF6_DefaultInterruptHandler(void);
-
-# 304
-void IOCBF7_ISR(void);
-
-# 327
-void IOCBF7_SetInterruptHandler(void* InterruptHandler);
-
-# 351
-extern void (*IOCBF7_InterruptHandler)(void);
-
-# 375
-void IOCBF7_DefaultInterruptHandler(void);
 
 # 12 "C:\Program Files (x86)\Microchip\xc8\v1.43\include\stdbool.h"
 typedef unsigned char bool;
 
 # 51 "mcc_generated_files/pin_manager.c"
 void (*IOCBF6_InterruptHandler)(void);
-void (*IOCBF7_InterruptHandler)(void);
 
 
 void PIN_MANAGER_Initialize(void)
 {
 
-# 60
+# 59
 LATA = 0x00;
 LATB = 0x00;
 LATC = 0x00;
 
-# 67
-TRISA = 0x27;
-TRISB = 0xC0;
-TRISC = 0x1F;
+# 66
+TRISA = 0x17;
+TRISB = 0x50;
+TRISC = 0x7F;
 
-# 74
-ANSELC = 0xCF;
-ANSELB = 0x30;
-ANSELA = 0x17;
+# 73
+ANSELC = 0x4F;
+ANSELB = 0x00;
+ANSELA = 0x06;
 
-# 81
-WPUB = 0xF0;
-WPUA = 0x3F;
-WPUC = 0xEF;
+# 80
+WPUB = 0x40;
+WPUA = 0x0B;
+WPUC = 0x4F;
 OPTION_REGbits.nWPUEN = 0;
 
-# 89
+# 88
 ODCONA = 0x00;
 ODCONB = 0x00;
 ODCONC = 0x00;
 
-# 98
+# 97
 IOCBFbits.IOCBF6 = 0;
-IOCBFbits.IOCBF7 = 0;
 
 IOCBNbits.IOCBN6 = 0;
-IOCBNbits.IOCBN7 = 0;
 
 IOCBPbits.IOCBP6 = 0;
-IOCBPbits.IOCBP7 = 0;
 
 
 IOCBF6_SetInterruptHandler(IOCBF6_DefaultInterruptHandler);
-IOCBF7_SetInterruptHandler(IOCBF7_DefaultInterruptHandler);
 
+
+INTCONbits.IOCIE = 1;
 
 
 bool state = (unsigned char)GIE;
@@ -6694,13 +6679,12 @@ PPSLOCK = 0x55;
 PPSLOCK = 0xAA;
 PPSLOCKbits.PPSLOCKED = 0x00;
 
-RXPPSbits.RXPPS = 0x0E;
-RA4PPSbits.RA4PPS = 0x12;
-RB4PPSbits.RB4PPS = 0x14;
-SSPDATPPSbits.SSPDATPPS = 0x05;
-SSPCLKPPSbits.SSPCLKPPS = 0x15;
+RXPPSbits.RXPPS = 0x0C;
+SSPDATPPSbits.SSPDATPPS = 0x04;
+T0CKIPPSbits.T0CKIPPS = 0x00;
+SSPCLKPPSbits.SSPCLKPPS = 0x05;
+RA5PPSbits.RA5PPS = 0x10;
 RB5PPSbits.RB5PPS = 0x14;
-RC5PPSbits.RC5PPS = 0x10;
 
 PPSLOCK = 0x55;
 PPSLOCK = 0xAA;
@@ -6718,15 +6702,9 @@ IOCBF6_ISR();
 }
 
 
-if(IOCBFbits.IOCBF7 == 1)
-{
-IOCBF7_ISR();
 }
 
-
-}
-
-# 154
+# 144
 void IOCBF6_ISR(void) {
 
 
@@ -6739,37 +6717,13 @@ IOCBF6_InterruptHandler();
 IOCBFbits.IOCBF6 = 0;
 }
 
-# 169
+# 159
 void IOCBF6_SetInterruptHandler(void* InterruptHandler){
 IOCBF6_InterruptHandler = InterruptHandler;
 }
 
-# 176
+# 166
 void IOCBF6_DefaultInterruptHandler(void){
-
-
-}
-
-# 184
-void IOCBF7_ISR(void) {
-
-
-
-
-if(IOCBF7_InterruptHandler)
-{
-IOCBF7_InterruptHandler();
-}
-IOCBFbits.IOCBF7 = 0;
-}
-
-# 199
-void IOCBF7_SetInterruptHandler(void* InterruptHandler){
-IOCBF7_InterruptHandler = InterruptHandler;
-}
-
-# 206
-void IOCBF7_DefaultInterruptHandler(void){
 
 
 }

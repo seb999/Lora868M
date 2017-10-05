@@ -1,16 +1,20 @@
 Version 3.2 HI-TECH Software Intermediate Code
-"433 C:\Program Files (x86)\Microchip\xc8\v1.43\include\pic16f1709.h
-[s S29 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S29 . RA0 RA1 RA2 RA3 RA4 RA5 ]
-"432
-[u S28 `S29 1 ]
-[n S28 . . ]
-"442
-[v _PORTAbits `VS28 ~T0 @X0 0 e@12 ]
-"22 adxl.h
-[v _ADXL_WriteReg `(v ~T0 @X0 0 ef2`uc`uc ]
-"25
-[v _ADXL_ReadReg `(uc ~T0 @X0 0 ef1`uc ]
+"355 C:\Program Files (x86)\Microchip\xc8\v1.43\include\pic16f1709.h
+[s S26 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S26 . IOCIF INTF TMR0IF IOCIE INTE TMR0IE PEIE GIE ]
+"365
+[s S27 :2 `uc 1 :1 `uc 1 :2 `uc 1 :1 `uc 1 ]
+[n S27 . . T0IF . T0IE ]
+"354
+[u S25 `S26 1 `S27 1 ]
+[n S25 . . . ]
+"372
+[v _INTCONbits `VS25 ~T0 @X0 0 e@11 ]
+"220 mcc_generated_files/tmr0.h
+[v _TMR0_ISR `(v ~T0 @X0 0 ef ]
+"196 mcc_generated_files/pin_manager.h
+[v _PIN_MANAGER_IOC `(v ~T0 @X0 0 ef ]
+[; ;interrupt_manager.h: 110: void interrupt INTERRUPT_InterruptManager(void);
 [; ;htc.h: 26: extern const char __xc8_OPTIM_SPEED;
 [; ;htc.h: 28: extern double __fpnormalize(double);
 [; ;xc8debug.h: 14: extern void __builtin_software_breakpoint(void);
@@ -4952,9 +4956,6 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;pic.h: 192: extern unsigned char __resetbits;
 [; ;pic.h: 193: extern __bit __powerdown;
 [; ;pic.h: 194: extern __bit __timeout;
-[; ;adxl.h: 19: void ADXL_Init(void);
-[; ;adxl.h: 22: void ADXL_WriteReg( char reg, char cmd );
-[; ;adxl.h: 25: char ADXL_ReadReg( char reg );
 [; ;pin_manager.h: 184: void PIN_MANAGER_Initialize (void);
 [; ;pin_manager.h: 196: void PIN_MANAGER_IOC(void);
 [; ;pin_manager.h: 209: void IOCBF6_ISR(void);
@@ -4990,7 +4991,6 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;stdint.h: 210: typedef int16_t intptr_t;
 [; ;stdint.h: 215: typedef uint16_t uintptr_t;
 [; ;stdbool.h: 12: typedef unsigned char bool;
-[; ;interrupt_manager.h: 110: void interrupt INTERRUPT_InterruptManager(void);
 [; ;tmr0.h: 97: void TMR0_Initialize(void);
 [; ;tmr0.h: 130: uint8_t TMR0_ReadTimer(void);
 [; ;tmr0.h: 169: void TMR0_WriteTimer(uint8_t timerVal);
@@ -5013,60 +5013,55 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;mcc.h: 71: void SYSTEM_Initialize(void);
 [; ;mcc.h: 84: void OSCILLATOR_Initialize(void);
 [; ;mcc.h: 97: void WDT_Initialize(void);
-"34 adxl.c
-[v _ADLX_Init `(v ~T0 @X0 1 ef ]
-"35
+[v $root$_INTERRUPT_InterruptManager `(v ~T0 @X0 0 e ]
+[v F3 `(v ~T0 @X0 1 tf ]
+"51 mcc_generated_files/interrupt_manager.c
+[v _INTERRUPT_InterruptManager `IF3 ~T0 @X0 1 e ]
+"52
 {
-[; ;adxl.c: 34: void ADLX_Init()
-[; ;adxl.c: 35: {
-[e :U _ADLX_Init ]
+[; ;interrupt_manager.c: 51: void interrupt INTERRUPT_InterruptManager (void)
+[; ;interrupt_manager.c: 52: {
+[e :U _INTERRUPT_InterruptManager ]
 [f ]
-[; ;adxl.c: 36: PORTAbits.RA2=1;
-"36
-[e = . . _PORTAbits 0 2 -> -> 1 `i `uc ]
-"37
-[v _reg `uc ~T0 @X0 1 a ]
-[; ;adxl.c: 37: char reg;
-[; ;adxl.c: 40: ADXL_WriteReg(0x1f, 0x52);
-"40
-[e ( _ADXL_WriteReg (2 , -> -> 31 `i `uc -> -> 82 `i `uc ]
-[; ;adxl.c: 43: reg = ADXL_ReadReg(0x0b);
-"43
-[e = _reg ( _ADXL_ReadReg (1 -> -> 11 `i `uc ]
-[; ;adxl.c: 44: reg = ADXL_ReadReg(0x00);
-"44
-[e = _reg ( _ADXL_ReadReg (1 -> -> 0 `i `uc ]
-[; ;adxl.c: 45: reg = ADXL_ReadReg(0x2c);
-"45
-[e = _reg ( _ADXL_ReadReg (1 -> -> 44 `i `uc ]
-[; ;adxl.c: 48: ADXL_WriteReg(0x20,0xFA);
-"48
-[e ( _ADXL_WriteReg (2 , -> -> 32 `i `uc -> -> 250 `i `uc ]
-[; ;adxl.c: 49: ADXL_WriteReg(0x21,0x0);
-"49
-[e ( _ADXL_WriteReg (2 , -> -> 33 `i `uc -> -> 0 `i `uc ]
-[; ;adxl.c: 50: ADXL_WriteReg(0x22,0xA);
-"50
-[e ( _ADXL_WriteReg (2 , -> -> 34 `i `uc -> -> 10 `i `uc ]
-[; ;adxl.c: 53: ADXL_WriteReg(0x23,0x96);
-"53
-[e ( _ADXL_WriteReg (2 , -> -> 35 `i `uc -> -> 150 `i `uc ]
-[; ;adxl.c: 54: ADXL_WriteReg(0x24,0x0);
+[; ;interrupt_manager.c: 54: if(INTCONbits.TMR0IE == 1 && INTCONbits.TMR0IF == 1)
 "54
-[e ( _ADXL_WriteReg (2 , -> -> 36 `i `uc -> -> 0 `i `uc ]
-[; ;adxl.c: 55: ADXL_WriteReg(0x25,0x1);
+[e $ ! && == -> . . _INTCONbits 0 5 `i -> 1 `i == -> . . _INTCONbits 0 2 `i -> 1 `i 621  ]
+[; ;interrupt_manager.c: 55: {
 "55
-[e ( _ADXL_WriteReg (2 , -> -> 37 `i `uc -> -> 1 `i `uc ]
-[; ;adxl.c: 58: ADXL_WriteReg(0x27,0x3F);
+{
+[; ;interrupt_manager.c: 56: TMR0_ISR();
+"56
+[e ( _TMR0_ISR ..  ]
+"57
+}
+[; ;interrupt_manager.c: 57: }
+[e $U 622  ]
 "58
-[e ( _ADXL_WriteReg (2 , -> -> 39 `i `uc -> -> 63 `i `uc ]
-[; ;adxl.c: 61: ADXL_WriteReg(0x2B,0x40);
+[e :U 621 ]
+[; ;interrupt_manager.c: 58: else if(INTCONbits.IOCIE == 1 && INTCONbits.IOCIF == 1)
+[e $ ! && == -> . . _INTCONbits 0 3 `i -> 1 `i == -> . . _INTCONbits 0 0 `i -> 1 `i 623  ]
+[; ;interrupt_manager.c: 59: {
+"59
+{
+[; ;interrupt_manager.c: 60: PIN_MANAGER_IOC();
+"60
+[e ( _PIN_MANAGER_IOC ..  ]
 "61
-[e ( _ADXL_WriteReg (2 , -> -> 43 `i `uc -> -> 64 `i `uc ]
-[; ;adxl.c: 64: ADXL_WriteReg(0x2d,0x0A);
-"64
-[e ( _ADXL_WriteReg (2 , -> -> 45 `i `uc -> -> 10 `i `uc ]
-[; ;adxl.c: 65: }
+}
+[; ;interrupt_manager.c: 61: }
+[e $U 624  ]
+"62
+[e :U 623 ]
+[; ;interrupt_manager.c: 62: else
+[; ;interrupt_manager.c: 63: {
+"63
+{
 "65
+}
+[e :U 624 ]
+[e :U 622 ]
+[; ;interrupt_manager.c: 65: }
+[; ;interrupt_manager.c: 66: }
+"66
 [e :UE 620 ]
 }

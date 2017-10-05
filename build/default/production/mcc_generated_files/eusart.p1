@@ -5022,12 +5022,12 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;eusart.c: 66: TX1STA = 0x04;
 "66
 [e = _TX1STA -> -> 4 `i `uc ]
-[; ;eusart.c: 69: SP1BRGL = 0x8A;
+[; ;eusart.c: 69: SP1BRGL = 0x40;
 "69
-[e = _SP1BRGL -> -> 138 `i `uc ]
-[; ;eusart.c: 72: SP1BRGH = 0x00;
+[e = _SP1BRGL -> -> 64 `i `uc ]
+[; ;eusart.c: 72: SP1BRGH = 0x03;
 "72
-[e = _SP1BRGH -> -> 0 `i `uc ]
+[e = _SP1BRGH -> -> 3 `i `uc ]
 [; ;eusart.c: 74: }
 "74
 [e :UE 620 ]
