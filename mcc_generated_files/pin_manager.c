@@ -63,7 +63,7 @@ void PIN_MANAGER_Initialize(void)
     /**
     TRISx registers
     */    
-    TRISA = 0x17;
+    TRISA = 0x37;
     TRISB = 0x50;
     TRISC = 0x7F;
 
@@ -72,7 +72,7 @@ void PIN_MANAGER_Initialize(void)
     */   
     ANSELC = 0x4F;
     ANSELB = 0x00;
-    ANSELA = 0x06;
+    ANSELA = 0x07;
 
     /**
     WPUx registers
@@ -96,7 +96,7 @@ void PIN_MANAGER_Initialize(void)
     // interrupt on change for group IOCBF - flag
     IOCBFbits.IOCBF6 = 0;
     // interrupt on change for group IOCBN - negative
-    IOCBNbits.IOCBN6 = 0;
+    IOCBNbits.IOCBN6 = 1;
     // interrupt on change for group IOCBP - positive
     IOCBPbits.IOCBP6 = 0;
 
@@ -114,10 +114,6 @@ void PIN_MANAGER_Initialize(void)
     PPSLOCKbits.PPSLOCKED = 0x00; // unlock PPS
 
     RXPPSbits.RXPPS = 0x0C;   //RB4->EUSART:RX;
-    SSPDATPPSbits.SSPDATPPS = 0x04;   //RA4->MSSP:SDI;
-    T0CKIPPSbits.T0CKIPPS = 0x00;   //RA0->TMR0:T0CKI;
-    SSPCLKPPSbits.SSPCLKPPS = 0x05;   //RA5->MSSP:SCK;
-    RA5PPSbits.RA5PPS = 0x10;   //RA5->MSSP:SCK;
     RB5PPSbits.RB5PPS = 0x14;   //RB5->EUSART:TX;
 
     PPSLOCK = 0x55;
@@ -144,6 +140,7 @@ void PIN_MANAGER_IOC(void)
 void IOCBF6_ISR(void) {
 
     // Add custom IOCBF6 code
+    inter_sw1();
 
     // Call the interrupt handler for the callback registered at runtime
     if(IOCBF6_InterruptHandler)

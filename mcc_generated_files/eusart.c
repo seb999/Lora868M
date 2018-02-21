@@ -49,11 +49,35 @@
 #include "eusart.h"
 
 /**
+  Section: Macro Declarations
+*/
+#define EUSART_TX_BUFFER_SIZE 8
+#define EUSART_RX_BUFFER_SIZE 8
+
+/**
+  Section: Global Variables
+*/
+
+volatile uint8_t eusartTxHead = 0;
+volatile uint8_t eusartTxTail = 0;
+volatile uint8_t eusartTxBuffer[EUSART_TX_BUFFER_SIZE];
+volatile uint8_t eusartTxBufferRemaining;
+
+volatile uint8_t eusartRxHead = 0;
+volatile uint8_t eusartRxTail = 0;
+volatile uint8_t eusartRxBuffer[EUSART_RX_BUFFER_SIZE];
+volatile uint8_t eusartRxCount;
+
+/**
   Section: EUSART APIs
 */
 
 void EUSART_Initialize(void)
 {
+    // disable interrupts before changing states
+    PIE1bits.RCIE = 0;
+    PIE1bits.TXIE = 0;
+
     // Set the EUSART module to the options selected in the user interface.
 
     // ABDOVF no_overflow; SCKP Non-Inverted; BRG16 16bit_generator; WUE disabled; ABDEN disabled; 
@@ -62,44 +86,109 @@ void EUSART_Initialize(void)
     // SPEN enabled; RX9 8-bit; CREN enabled; ADDEN disabled; SREN disabled; 
     RC1STA = 0x90;
 
-    // TX9 8-bit; TX9D 0; SENDB sync_break_complete; TXEN disabled; SYNC asynchronous; BRGH hi_speed; CSRC slave; 
-    TX1STA = 0x04;
+    // TX9 8-bit; TX9D 0; SENDB sync_break_complete; TXEN enabled; SYNC asynchronous; BRGH hi_speed; CSRC master; 
+    TX1STA = 0xA4;
 
-    // Baud Rate = 9600; SP1BRGL 64; 
-    SP1BRGL = 0x40;
+    // Baud Rate = 57600; SP1BRGL 138; 
+    SP1BRGL = 0x8A;
 
-    // Baud Rate = 9600; SP1BRGH 3; 
-    SP1BRGH = 0x03;
+    // Baud Rate = 57600; SP1BRGH 0; 
+    SP1BRGH = 0x00;
 
+
+    // initializing the driver state
+    eusartTxHead = 0;
+    eusartTxTail = 0;
+    eusartTxBufferRemaining = sizeof(eusartTxBuffer);
+
+    eusartRxHead = 0;
+    eusartRxTail = 0;
+    eusartRxCount = 0;
+
+    // enable receive interrupt
+    PIE1bits.RCIE = 1;
 }
-
 
 uint8_t EUSART_Read(void)
 {
-
-    while(!PIR1bits.RCIF)
-    {
-    }
-
+    uint8_t readValue  = 0;
     
-    if(1 == RC1STAbits.OERR)
+    while(0 == eusartRxCount)
     {
-        // EUSART error - restart
-
-        RC1STAbits.SPEN = 0; 
-        RC1STAbits.SPEN = 1; 
     }
 
-    return RC1REG;
+    readValue = eusartRxBuffer[eusartRxTail++];
+    if(sizeof(eusartRxBuffer) <= eusartRxTail)
+    {
+        eusartRxTail = 0;
+    }
+    PIE1bits.RCIE = 0;
+    eusartRxCount--;
+    PIE1bits.RCIE = 1;
+
+    return readValue;
 }
 
 void EUSART_Write(uint8_t txData)
 {
-    while(0 == PIR1bits.TXIF)
+    while(0 == eusartTxBufferRemaining)
     {
     }
 
-    TX1REG = txData;    // Write the data byte to the USART.
+    if(0 == PIE1bits.TXIE)
+    {
+        TX1REG = txData;
+    }
+    else
+    {
+        PIE1bits.TXIE = 0;
+        eusartTxBuffer[eusartTxHead++] = txData;
+        if(sizeof(eusartTxBuffer) <= eusartTxHead)
+        {
+            eusartTxHead = 0;
+        }
+        eusartTxBufferRemaining--;
+    }
+    PIE1bits.TXIE = 1;
+}
+
+void EUSART_Transmit_ISR(void)
+{
+
+    // add your EUSART interrupt custom code
+    if(sizeof(eusartTxBuffer) > eusartTxBufferRemaining)
+    {
+        TX1REG = eusartTxBuffer[eusartTxTail++];
+        if(sizeof(eusartTxBuffer) <= eusartTxTail)
+        {
+            eusartTxTail = 0;
+        }
+        eusartTxBufferRemaining++;
+    }
+    else
+    {
+        PIE1bits.TXIE = 0;
+    }
+}
+
+void EUSART_Receive_ISR(void)
+{
+
+    if(1 == RC1STAbits.OERR)
+    {
+        // EUSART error - restart
+
+        RC1STAbits.CREN = 0;
+        RC1STAbits.CREN = 1;
+    }
+
+    // buffer overruns are ignored
+    eusartRxBuffer[eusartRxHead++] = RC1REG;
+    if(sizeof(eusartRxBuffer) <= eusartRxHead)
+    {
+        eusartRxHead = 0;
+    }
+    eusartRxCount++;
 }
 /**
   End of File
