@@ -55,14 +55,6 @@ void interrupt INTERRUPT_InterruptManager (void)
     {
         TMR0_ISR();
     }
-    else if(INTCONbits.PEIE == 1 && PIE1bits.TXIE == 1 && PIR1bits.TXIF == 1)
-    {
-        EUSART_Transmit_ISR();
-    }
-    else if(INTCONbits.PEIE == 1 && PIE1bits.RCIE == 1 && PIR1bits.RCIF == 1)
-    {
-        EUSART_Receive_ISR();
-    }
     else if(INTCONbits.IOCIE == 1 && INTCONbits.IOCIF == 1)
     {
         PIN_MANAGER_IOC();

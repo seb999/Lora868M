@@ -1,7 +1,7 @@
 Version 3.2 HI-TECH Software Intermediate Code
-[v F5119 `(v ~T0 @X0 1 tf1`ul ]
+[v F5124 `(v ~T0 @X0 1 tf1`ul ]
 "150 /Applications/microchip/xc8/v1.35/include/pic.h
-[v __delay `JF5119 ~T0 @X0 0 e ]
+[v __delay `JF5124 ~T0 @X0 0 e ]
 [p i __delay ]
 "12846 /Applications/microchip/xc8/v1.35/include/pic16f1709.h
 [v _GIE `Vb ~T0 @X0 0 e@95 ]
@@ -31,15 +31,28 @@ Version 3.2 HI-TECH Software Intermediate Code
 [n S453 . . ]
 "8766
 [v _RB5PPSbits `VS453 ~T0 @X0 0 e@3741 ]
-"154 mcc_generated_files/eusart.h
+"8857
+[s S464 :5 `uc 1 ]
+[n S464 . RC2PPS ]
+"8856
+[u S463 `S464 1 ]
+[n S463 . . ]
+"8861
+[v _RC2PPSbits `VS463 ~T0 @X0 0 e@3746 ]
+"3187
+[v _SP1BRGL `Vuc ~T0 @X0 0 e@411 ]
+"3256
+[v _SP1BRGH `Vuc ~T0 @X0 0 e@412 ]
+"114 mcc_generated_files/eusart.h
 [v _EUSART_Read `(uc ~T0 @X0 0 ef ]
-"77
-[v _eusartRxCount `Vuc ~T0 @X0 0 e ]
-"179
+"134
 [v _EUSART_Write `(v ~T0 @X0 0 ef1`uc ]
-[; ;misc.h: 4: void ReadUartCmd(char *Output, unsigned int length);
+[; ;misc.h: 4: void ReadUartCmd(char *Output);
 [; ;misc.h: 5: void SendUartCmd(char *cmd);
-[; ;misc.h: 7: void __delay_sec(int);
+[; ;misc.h: 6: void ReadUartCmdModified(char *Output);
+[; ;misc.h: 7: void EUART_LORA(void);
+[; ;misc.h: 8: void InitGPS(void);
+[; ;misc.h: 10: void __delay_sec(int);
 [; ;stdint.h: 13: typedef signed char int8_t;
 [; ;stdint.h: 20: typedef signed int int16_t;
 [; ;stdint.h: 28: typedef signed short long int int24_t;
@@ -5010,19 +5023,15 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;pic.h: 185: extern __bit __powerdown;
 [; ;pic.h: 186: extern __bit __timeout;
 [; ;stdbool.h: 12: typedef unsigned char bool;
-[; ;eusart.h: 76: extern volatile uint8_t eusartTxBufferRemaining;
-[; ;eusart.h: 77: extern volatile uint8_t eusartRxCount;
-[; ;eusart.h: 105: void EUSART_Initialize(void);
-[; ;eusart.h: 154: uint8_t EUSART_Read(void);
-[; ;eusart.h: 179: void EUSART_Write(uint8_t txData);
-[; ;eusart.h: 200: void EUSART_Transmit_ISR(void);
-[; ;eusart.h: 221: void EUSART_Receive_ISR(void);
-[; ;pin_manager.h: 150: void PIN_MANAGER_Initialize (void);
-[; ;pin_manager.h: 162: void PIN_MANAGER_IOC(void);
-[; ;pin_manager.h: 175: void IOCBF6_ISR(void);
-[; ;pin_manager.h: 198: void IOCBF6_SetInterruptHandler(void* InterruptHandler);
-[; ;pin_manager.h: 222: extern void (*IOCBF6_InterruptHandler)(void);
-[; ;pin_manager.h: 246: void IOCBF6_DefaultInterruptHandler(void);
+[; ;eusart.h: 94: void EUSART_Initialize(void);
+[; ;eusart.h: 114: uint8_t EUSART_Read(void);
+[; ;eusart.h: 134: void EUSART_Write(uint8_t txData);
+[; ;pin_manager.h: 162: void PIN_MANAGER_Initialize (void);
+[; ;pin_manager.h: 174: void PIN_MANAGER_IOC(void);
+[; ;pin_manager.h: 187: void IOCBF6_ISR(void);
+[; ;pin_manager.h: 210: void IOCBF6_SetInterruptHandler(void* InterruptHandler);
+[; ;pin_manager.h: 234: extern void (*IOCBF6_InterruptHandler)(void);
+[; ;pin_manager.h: 258: void IOCBF6_DefaultInterruptHandler(void);
 [; ;interrupt_manager.h: 110: void interrupt INTERRUPT_InterruptManager(void);
 [; ;tmr0.h: 97: void TMR0_Initialize(void);
 [; ;tmr0.h: 130: uint8_t TMR0_ReadTimer(void);
@@ -5055,155 +5064,234 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e :UE 621 ]
 }
 "15
-[v _PIN_MANAGER_GPS `(v ~T0 @X0 1 ef ]
+[v _EUART_GPS `(v ~T0 @X0 1 ef ]
 "16
 {
-[; ;misc.c: 15: void PIN_MANAGER_GPS(void)
+[; ;misc.c: 15: void EUART_GPS(void)
 [; ;misc.c: 16: {
-[e :U _PIN_MANAGER_GPS ]
+[e :U _EUART_GPS ]
 [f ]
-"17
-[v _state `uc ~T0 @X0 1 a ]
-[; ;misc.c: 17: bool state = (unsigned char)GIE;
-[e = _state -> -> _GIE `i `uc ]
-[; ;misc.c: 18: GIE = 0;
-"18
-[e = _GIE -> -> 0 `i `b ]
-[; ;misc.c: 19: PPSLOCK = 0x55;
 "19
-[e = _PPSLOCK -> -> 85 `i `uc ]
-[; ;misc.c: 20: PPSLOCK = 0xAA;
+[v _state `uc ~T0 @X0 1 a ]
+[; ;misc.c: 19: bool state = (unsigned char)GIE;
+[e = _state -> -> _GIE `i `uc ]
+[; ;misc.c: 20: GIE = 0;
 "20
-[e = _PPSLOCK -> -> 170 `i `uc ]
-[; ;misc.c: 21: PPSLOCKbits.PPSLOCKED = 0x00;
+[e = _GIE -> -> 0 `i `b ]
+[; ;misc.c: 21: PPSLOCK = 0x55;
 "21
-[e = . . _PPSLOCKbits 0 0 -> -> 0 `i `uc ]
-[; ;misc.c: 23: RXPPSbits.RXPPS = 0x0C;
-"23
-[e = . . _RXPPSbits 0 0 -> -> 12 `i `uc ]
-[; ;misc.c: 24: RB5PPSbits.RB5PPS = 0x14;
-"24
-[e = . . _RB5PPSbits 0 0 -> -> 20 `i `uc ]
-[; ;misc.c: 26: PPSLOCK = 0x55;
-"26
 [e = _PPSLOCK -> -> 85 `i `uc ]
-[; ;misc.c: 27: PPSLOCK = 0xAA;
-"27
+[; ;misc.c: 22: PPSLOCK = 0xAA;
+"22
 [e = _PPSLOCK -> -> 170 `i `uc ]
-[; ;misc.c: 28: PPSLOCKbits.PPSLOCKED = 0x01;
+[; ;misc.c: 23: PPSLOCKbits.PPSLOCKED = 0x00;
+"23
+[e = . . _PPSLOCKbits 0 0 -> -> 0 `i `uc ]
+[; ;misc.c: 27: RXPPSbits.RXPPS = 0x0C;
+"27
+[e = . . _RXPPSbits 0 0 -> -> 12 `i `uc ]
+[; ;misc.c: 28: RB5PPSbits.RB5PPS = 0x14;
 "28
-[e = . . _PPSLOCKbits 0 0 -> -> 1 `i `uc ]
-[; ;misc.c: 30: GIE = state;
-"30
-[e = _GIE -> _state `b ]
-[; ;misc.c: 31: }
+[e = . . _RB5PPSbits 0 0 -> -> 20 `i `uc ]
+[; ;misc.c: 29: RC2PPSbits.RC2PPS = 0x13;
+"29
+[e = . . _RC2PPSbits 0 0 -> -> 19 `i `uc ]
+[; ;misc.c: 31: PPSLOCK = 0x55;
 "31
+[e = _PPSLOCK -> -> 85 `i `uc ]
+[; ;misc.c: 32: PPSLOCK = 0xAA;
+"32
+[e = _PPSLOCK -> -> 170 `i `uc ]
+[; ;misc.c: 33: PPSLOCKbits.PPSLOCKED = 0x01;
+"33
+[e = . . _PPSLOCKbits 0 0 -> -> 1 `i `uc ]
+[; ;misc.c: 34: GIE = state;
+"34
+[e = _GIE -> _state `b ]
+[; ;misc.c: 36: SP1BRGL = 0x40;
+"36
+[e = _SP1BRGL -> -> 64 `i `uc ]
+[; ;misc.c: 37: SP1BRGH = 0x03;
+"37
+[e = _SP1BRGH -> -> 3 `i `uc ]
+[; ;misc.c: 38: _delay((unsigned long)((250)*(32000000/4000.0)));
+"38
+[e ( __delay (1 -> * -> -> 250 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
+[; ;misc.c: 39: }
+"39
 [e :UE 625 ]
 }
-"34
-[v _ReadUartCmd `(v ~T0 @X0 1 ef2`*uc`ui ]
-"35
+"41
+[v _EUART_LORA `(v ~T0 @X0 1 ef ]
+"42
 {
-[; ;misc.c: 34: void ReadUartCmd(char *Output, unsigned int length)
-[; ;misc.c: 35: {
-[e :U _ReadUartCmd ]
-"34
-[v _Output `*uc ~T0 @X0 1 r1 ]
-[v _length `ui ~T0 @X0 1 r2 ]
-"35
+[; ;misc.c: 41: void EUART_LORA(void)
+[; ;misc.c: 42: {
+[e :U _EUART_LORA ]
 [f ]
-[; ;misc.c: 36: Output[0] = EUSART_Read();
-"36
-[e = *U + _Output * -> -> 0 `i `x -> -> # *U _Output `i `x ( _EUSART_Read ..  ]
-[; ;misc.c: 37: for(int i=1;i<length;i++)
-"37
-{
-[v _i `i ~T0 @X0 1 a ]
-[e = _i -> 1 `i ]
-[e $U 630  ]
-"38
-[e :U 627 ]
-[; ;misc.c: 38: {
-{
-[; ;misc.c: 39: Output[i] = EUSART_Read();
-"39
-[e = *U + _Output * -> _i `x -> -> # *U _Output `i `x ( _EUSART_Read ..  ]
-"42
-}
-"37
-[e ++ _i -> 1 `i ]
-[e :U 630 ]
-[e $ < -> _i `ui _length 627  ]
-[e :U 628 ]
-"42
-}
-[; ;misc.c: 42: }
-[; ;misc.c: 43: }
-"43
+"45
+[v _state `uc ~T0 @X0 1 a ]
+[; ;misc.c: 45: bool state = (unsigned char)GIE;
+[e = _state -> -> _GIE `i `uc ]
+[; ;misc.c: 46: GIE = 0;
+"46
+[e = _GIE -> -> 0 `i `b ]
+[; ;misc.c: 47: PPSLOCK = 0x55;
+"47
+[e = _PPSLOCK -> -> 85 `i `uc ]
+[; ;misc.c: 48: PPSLOCK = 0xAA;
+"48
+[e = _PPSLOCK -> -> 170 `i `uc ]
+[; ;misc.c: 49: PPSLOCKbits.PPSLOCKED = 0x00;
+"49
+[e = . . _PPSLOCKbits 0 0 -> -> 0 `i `uc ]
+[; ;misc.c: 52: RXPPSbits.RXPPS = 0x0C;
+"52
+[e = . . _RXPPSbits 0 0 -> -> 12 `i `uc ]
+[; ;misc.c: 53: RC2PPSbits.RC2PPS = 0x14;
+"53
+[e = . . _RC2PPSbits 0 0 -> -> 20 `i `uc ]
+[; ;misc.c: 54: RB5PPSbits.RB5PPS = 0x13;
+"54
+[e = . . _RB5PPSbits 0 0 -> -> 19 `i `uc ]
+[; ;misc.c: 56: PPSLOCK = 0x55;
+"56
+[e = _PPSLOCK -> -> 85 `i `uc ]
+[; ;misc.c: 57: PPSLOCK = 0xAA;
+"57
+[e = _PPSLOCK -> -> 170 `i `uc ]
+[; ;misc.c: 58: PPSLOCKbits.PPSLOCKED = 0x01;
+"58
+[e = . . _PPSLOCKbits 0 0 -> -> 1 `i `uc ]
+[; ;misc.c: 59: GIE = state;
+"59
+[e = _GIE -> _state `b ]
+[; ;misc.c: 61: SP1BRGL = 0x40;
+"61
+[e = _SP1BRGL -> -> 64 `i `uc ]
+[; ;misc.c: 62: SP1BRGH = 0x03;
+"62
+[e = _SP1BRGH -> -> 3 `i `uc ]
+[; ;misc.c: 66: _delay((unsigned long)((250)*(32000000/4000.0)));
+"66
+[e ( __delay (1 -> * -> -> 250 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
+[; ;misc.c: 67: }
+"67
 [e :UE 626 ]
 }
-"45
-[v _ReadUartCmdModified `(v ~T0 @X0 1 ef1`*uc ]
-"46
+"70
+[v _ReadUartCmd `(v ~T0 @X0 1 ef1`*uc ]
+"71
 {
-[; ;misc.c: 45: void ReadUartCmdModified(char *Output)
-[; ;misc.c: 46: {
-[e :U _ReadUartCmdModified ]
-"45
-[v _Output `*uc ~T0 @X0 1 r1 ]
-"46
+[; ;misc.c: 70: void ReadUartCmd(char *output)
+[; ;misc.c: 71: {
+[e :U _ReadUartCmd ]
+"70
+[v _output `*uc ~T0 @X0 1 r1 ]
+"71
 [f ]
-[; ;misc.c: 47: while(eusartRxCount != 0){
-"47
-[e $U 632  ]
-[e :U 633 ]
+[; ;misc.c: 72: *output = "";
+"72
+[e = *U _output -> :s 1C `uc ]
+"73
+[v _i `i ~T0 @X0 1 a ]
+[; ;misc.c: 73: int i = 0;
+[e = _i -> 0 `i ]
+"74
+[v _token `uc ~T0 @X0 1 a ]
+[; ;misc.c: 74: char token;
+[; ;misc.c: 75: token = EUSART_Read();
+"75
+[e = _token ( _EUSART_Read ..  ]
+[; ;misc.c: 76: while(token!='\n'){
+"76
+[e $U 628  ]
+[e :U 629 ]
 {
-[; ;misc.c: 48: *Output = EUSART_Read();
-"48
-[e = *U _Output ( _EUSART_Read ..  ]
-[; ;misc.c: 49: Output++;
-"49
-[e ++ _Output * -> -> 1 `i `x -> -> # *U _Output `i `x ]
-"50
+[; ;misc.c: 77: output[i] = token;
+"77
+[e = *U + _output * -> _i `x -> -> # *U _output `i `x _token ]
+[; ;misc.c: 78: token = EUSART_Read();
+"78
+[e = _token ( _EUSART_Read ..  ]
+[; ;misc.c: 79: i++;
+"79
+[e ++ _i -> 1 `i ]
+"80
 }
-[e :U 632 ]
-"47
-[e $ != -> _eusartRxCount `i -> 0 `i 633  ]
-[e :U 634 ]
-[; ;misc.c: 50: }
-[; ;misc.c: 51: }
-"51
-[e :UE 631 ]
+[e :U 628 ]
+"76
+[e $ != -> _token `ui -> 10 `ui 629  ]
+[e :U 630 ]
+[; ;misc.c: 80: }
+[; ;misc.c: 81: }
+"81
+[e :UE 627 ]
 }
-"53
+"83
 [v _SendUartCmd `(v ~T0 @X0 1 ef1`*uc ]
-"54
+"84
 {
-[; ;misc.c: 53: void SendUartCmd(char *cmd)
-[; ;misc.c: 54: {
+[; ;misc.c: 83: void SendUartCmd(char *cmd)
+[; ;misc.c: 84: {
 [e :U _SendUartCmd ]
-"53
+"83
 [v _cmd `*uc ~T0 @X0 1 r1 ]
-"54
+"84
 [f ]
-[; ;misc.c: 55: for(int i=0;cmd[i] != '\0' ;i++)
-"55
+[; ;misc.c: 85: for(int i=0;cmd[i] != '\0' ;i++)
+"85
 {
 [v _i `i ~T0 @X0 1 a ]
 [e = _i -> 0 `i ]
-[e $U 639  ]
-"56
-[e :U 636 ]
-[; ;misc.c: 56: EUSART_Write(cmd[i]);
+[e $U 635  ]
+"86
+[e :U 632 ]
+[; ;misc.c: 86: EUSART_Write(cmd[i]);
 [e ( _EUSART_Write (1 *U + _cmd * -> _i `x -> -> # *U _cmd `i `x ]
-"55
+"85
 [e ++ _i -> 1 `i ]
-[e :U 639 ]
-[e $ != -> *U + _cmd * -> _i `x -> -> # *U _cmd `i `x `ui -> 0 `ui 636  ]
-[e :U 637 ]
-"56
+[e :U 635 ]
+[e $ != -> *U + _cmd * -> _i `x -> -> # *U _cmd `i `x `ui -> 0 `ui 632  ]
+[e :U 633 ]
+"86
 }
-[; ;misc.c: 57: }
-"57
-[e :UE 635 ]
+[; ;misc.c: 87: }
+"87
+[e :UE 631 ]
 }
+"90
+[v _InitGPS `(v ~T0 @X0 1 ef ]
+{
+[; ;misc.c: 90: void InitGPS(){
+[e :U _InitGPS ]
+[f ]
+[; ;misc.c: 91: SendUartCmd("$PUBX,40,GSA,0,0,0,0\r\n");
+"91
+[e ( _SendUartCmd (1 -> :s 2C `*uc ]
+[; ;misc.c: 92: SendUartCmd("$PUBX,40,GSV,0,0,0,0\r\n");
+"92
+[e ( _SendUartCmd (1 -> :s 3C `*uc ]
+[; ;misc.c: 93: SendUartCmd("$PUBX,40,RMC,0,0,0,0\r\n");
+"93
+[e ( _SendUartCmd (1 -> :s 4C `*uc ]
+[; ;misc.c: 94: SendUartCmd("$PUBX,40,VTG,0,0,0,0\r\n");
+"94
+[e ( _SendUartCmd (1 -> :s 5C `*uc ]
+[; ;misc.c: 95: SendUartCmd("$PUBX,40,GGA,0,0,0,0\r\n");
+"95
+[e ( _SendUartCmd (1 -> :s 6C `*uc ]
+[; ;misc.c: 96: SendUartCmd("$PUBX,40,GLL,1,0,0,0,0\r\n");
+"96
+[e ( _SendUartCmd (1 -> :s 7C `*uc ]
+[; ;misc.c: 97: }
+"97
+[e :UE 636 ]
+}
+[a 3C 36 80 85 66 88 44 52 48 44 71 83 86 44 48 44 48 44 48 44 48 13 10 0 ]
+[a 5C 36 80 85 66 88 44 52 48 44 86 84 71 44 48 44 48 44 48 44 48 13 10 0 ]
+[a 4C 36 80 85 66 88 44 52 48 44 82 77 67 44 48 44 48 44 48 44 48 13 10 0 ]
+[a 2C 36 80 85 66 88 44 52 48 44 71 83 65 44 48 44 48 44 48 44 48 13 10 0 ]
+[a 6C 36 80 85 66 88 44 52 48 44 71 71 65 44 48 44 48 44 48 44 48 13 10 0 ]
+[a 7C 36 80 85 66 88 44 52 48 44 71 76 76 44 49 44 48 44 48 44 48 44 48 13 10 0 ]
+[a 1C 0 ]

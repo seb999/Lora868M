@@ -58,7 +58,7 @@
 
 // CONFIG2
 #pragma config WRT = OFF    // Flash Memory Self-Write Protection->Write protection off
-#pragma config PPS1WAY = ON    // Peripheral Pin Select one-way control->The PPSLOCK bit cannot be cleared once it is set by software
+#pragma config PPS1WAY = OFF    // Peripheral Pin Select one-way control->The PPSLOCK bit can be set and cleared repeatedly by software
 #pragma config ZCDDIS = ON    // Zero-cross detect disable->Zero-cross detect circuit is disabled at POR
 #pragma config PLLEN = ON    // Phase Lock Loop enable->4x PLL is always enabled
 #pragma config STVREN = ON    // Stack Overflow/Underflow Reset Enable->Stack Overflow or Underflow will cause a Reset
@@ -94,8 +94,8 @@ void OSCILLATOR_Initialize(void)
 
 void WDT_Initialize(void)
 {
-    // WDTPS 1:65536; SWDTEN OFF; 
-    WDTCON = 0x16;
+    // WDTPS 1:131072; SWDTEN OFF; 
+    WDTCON = 0x18;
 }
 
 /**

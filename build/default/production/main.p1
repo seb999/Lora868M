@@ -1,7 +1,25 @@
 Version 3.2 HI-TECH Software Intermediate Code
 [p mainexit ]
+"13794 /Applications/microchip/xc8/v1.35/include/pic16f1709.h
+[v _SWDTEN `Vb ~T0 @X0 0 e@1208 ]
 "70 mcc_generated_files/mcc.h
 [v _SYSTEM_Initialize `(v ~T0 @X0 0 ef ]
+"469 /Applications/microchip/xc8/v1.35/include/pic16f1709.h
+[s S32 :4 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S32 . . RB4 RB5 RB6 RB7 ]
+"468
+[u S31 `S32 1 ]
+[n S31 . . ]
+"477
+[v _PORTBbits `VS31 ~T0 @X0 0 e@13 ]
+[v F5084 `(v ~T0 @X0 1 tf1`ul ]
+"150 /Applications/microchip/xc8/v1.35/include/pic.h
+[v __delay `JF5084 ~T0 @X0 0 e ]
+[p i __delay ]
+"14 main.c
+[v _EUART_GPS `(i ~T0 @X0 0 ef ]
+"8 misc.h
+[v _InitGPS `(v ~T0 @X0 0 ef ]
 "12846 /Applications/microchip/xc8/v1.35/include/pic16f1709.h
 [v _GIE `Vb ~T0 @X0 0 e@95 ]
 "13008
@@ -17,24 +35,20 @@ Version 3.2 HI-TECH Software Intermediate Code
 [n S26 . . . ]
 "360
 [v _INTCONbits `VS26 ~T0 @X0 0 e@11 ]
-"13794
-[v _SWDTEN `Vb ~T0 @X0 0 e@1208 ]
-"154 mcc_generated_files/eusart.h
-[v _EUSART_Read `(uc ~T0 @X0 0 ef ]
-[v F5084 `(v ~T0 @X0 1 tf1`ul ]
-"150 /Applications/microchip/xc8/v1.35/include/pic.h
-[v __delay `JF5084 ~T0 @X0 0 e ]
-[p i __delay ]
 "5 misc.h
 [v _SendUartCmd `(v ~T0 @X0 0 ef1`*uc ]
-"469 /Applications/microchip/xc8/v1.35/include/pic16f1709.h
-[s S32 :4 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S32 . . RB4 RB5 RB6 RB7 ]
-"468
-[u S31 `S32 1 ]
-[n S31 . . ]
-"477
-[v _PORTBbits `VS31 ~T0 @X0 0 e@13 ]
+"4
+[v _ReadUartCmd `(v ~T0 @X0 0 ef1`*uc ]
+"7
+[v _EUART_LORA `(v ~T0 @X0 0 ef ]
+"507 /Applications/microchip/xc8/v1.35/include/pic16f1709.h
+[s S34 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S34 . RC0 RC1 RC2 RC3 RC4 RC5 RC6 RC7 ]
+"506
+[u S33 `S34 1 ]
+[n S33 . . ]
+"518
+[v _PORTCbits `VS33 ~T0 @X0 0 e@14 ]
 "6599
 [s S322 :4 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
 [n S322 . . IOCBF4 IOCBF5 IOCBF6 IOCBF7 ]
@@ -4984,12 +4998,12 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;pic.h: 184: extern unsigned char __resetbits;
 [; ;pic.h: 185: extern __bit __powerdown;
 [; ;pic.h: 186: extern __bit __timeout;
-[; ;pin_manager.h: 150: void PIN_MANAGER_Initialize (void);
-[; ;pin_manager.h: 162: void PIN_MANAGER_IOC(void);
-[; ;pin_manager.h: 175: void IOCBF6_ISR(void);
-[; ;pin_manager.h: 198: void IOCBF6_SetInterruptHandler(void* InterruptHandler);
-[; ;pin_manager.h: 222: extern void (*IOCBF6_InterruptHandler)(void);
-[; ;pin_manager.h: 246: void IOCBF6_DefaultInterruptHandler(void);
+[; ;pin_manager.h: 162: void PIN_MANAGER_Initialize (void);
+[; ;pin_manager.h: 174: void PIN_MANAGER_IOC(void);
+[; ;pin_manager.h: 187: void IOCBF6_ISR(void);
+[; ;pin_manager.h: 210: void IOCBF6_SetInterruptHandler(void* InterruptHandler);
+[; ;pin_manager.h: 234: extern void (*IOCBF6_InterruptHandler)(void);
+[; ;pin_manager.h: 258: void IOCBF6_DefaultInterruptHandler(void);
 [; ;stdint.h: 13: typedef signed char int8_t;
 [; ;stdint.h: 20: typedef signed int int16_t;
 [; ;stdint.h: 28: typedef signed short long int int24_t;
@@ -5020,13 +5034,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;stdint.h: 215: typedef uint16_t uintptr_t;
 [; ;stdbool.h: 12: typedef unsigned char bool;
 [; ;interrupt_manager.h: 110: void interrupt INTERRUPT_InterruptManager(void);
-[; ;eusart.h: 76: extern volatile uint8_t eusartTxBufferRemaining;
-[; ;eusart.h: 77: extern volatile uint8_t eusartRxCount;
-[; ;eusart.h: 105: void EUSART_Initialize(void);
-[; ;eusart.h: 154: uint8_t EUSART_Read(void);
-[; ;eusart.h: 179: void EUSART_Write(uint8_t txData);
-[; ;eusart.h: 200: void EUSART_Transmit_ISR(void);
-[; ;eusart.h: 221: void EUSART_Receive_ISR(void);
+[; ;eusart.h: 94: void EUSART_Initialize(void);
+[; ;eusart.h: 114: uint8_t EUSART_Read(void);
+[; ;eusart.h: 134: void EUSART_Write(uint8_t txData);
 [; ;tmr0.h: 97: void TMR0_Initialize(void);
 [; ;tmr0.h: 130: uint8_t TMR0_ReadTimer(void);
 [; ;tmr0.h: 169: void TMR0_WriteTimer(uint8_t timerVal);
@@ -5038,187 +5048,224 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;mcc.h: 70: void SYSTEM_Initialize(void);
 [; ;mcc.h: 83: void OSCILLATOR_Initialize(void);
 [; ;mcc.h: 96: void WDT_Initialize(void);
-[; ;misc.h: 4: void ReadUartCmd(char *Output, unsigned int length);
+[; ;misc.h: 4: void ReadUartCmd(char *Output);
 [; ;misc.h: 5: void SendUartCmd(char *cmd);
-[; ;misc.h: 7: void __delay_sec(int);
-"8 main.c
+[; ;misc.h: 6: void ReadUartCmdModified(char *Output);
+[; ;misc.h: 7: void EUART_LORA(void);
+[; ;misc.h: 8: void InitGPS(void);
+[; ;misc.h: 10: void __delay_sec(int);
+"6 main.c
 [v _main `(v ~T0 @X0 1 ef ]
-"9
+"7
 {
-[; ;main.c: 8: void main(void)
-[; ;main.c: 9: {
+[; ;main.c: 6: void main(void)
+[; ;main.c: 7: {
 [e :U _main ]
 [f ]
-[; ;main.c: 11: SYSTEM_Initialize();
-"11
-[e ( _SYSTEM_Initialize ..  ]
-[; ;main.c: 12: GIE = 1;
-"12
-[e = _GIE -> -> 1 `i `b ]
-[; ;main.c: 13: IOCIE = 1;
-"13
-[e = _IOCIE -> -> 1 `i `b ]
-[; ;main.c: 18: INTCONbits.TMR0IE = 0;
-"18
-[e = . . _INTCONbits 0 5 -> -> 0 `i `uc ]
-[; ;main.c: 19: while (1)
-"19
-[e :U 623 ]
-[; ;main.c: 20: {
-"20
-{
-[; ;main.c: 21: SWDTEN = 1;
-"21
+[; ;main.c: 8: SWDTEN = 1;
+"8
 [e = _SWDTEN -> -> 1 `i `b ]
-[; ;main.c: 22: asm("clrwdt");
+[; ;main.c: 10: SYSTEM_Initialize();
+"10
+[e ( _SYSTEM_Initialize ..  ]
+[; ;main.c: 11: PORTBbits.RB7 = 1;
+"11
+[e = . . _PORTBbits 0 4 -> -> 1 `i `uc ]
+[; ;main.c: 12: _delay((unsigned long)((250)*(32000000/4000.0)));
+"12
+[e ( __delay (1 -> * -> -> 250 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
+[; ;main.c: 13: PORTBbits.RB7 = 0;
+"13
+[e = . . _PORTBbits 0 4 -> -> 0 `i `uc ]
+[; ;main.c: 14: EUART_GPS();
+"14
+[e ( _EUART_GPS ..  ]
+[; ;main.c: 15: InitGPS();
+"15
+[e ( _InitGPS ..  ]
+[; ;main.c: 16: GIE = 1;
+"16
+[e = _GIE -> -> 1 `i `b ]
+[; ;main.c: 17: IOCIE = 1;
+"17
+[e = _IOCIE -> -> 1 `i `b ]
+[; ;main.c: 20: INTCONbits.TMR0IE = 0;
+"20
+[e = . . _INTCONbits 0 5 -> -> 0 `i `uc ]
+[; ;main.c: 21: while (1)
+"21
+[e :U 623 ]
+[; ;main.c: 22: {
 "22
+{
+[; ;main.c: 23: asm("clrwdt");
+"23
 [; <" clrwdt ;# ">
-"27
+"24
 }
 [e :U 622 ]
-"19
+"21
 [e $U 623  ]
 [e :U 624 ]
-[; ;main.c: 27: }
-[; ;main.c: 28: }
-"28
+[; ;main.c: 24: }
+[; ;main.c: 25: }
+"25
 [e :UE 621 ]
 }
-"30
-[v _ReadUartBuffer `(*uc ~T0 @X0 1 ef ]
-"31
-{
-[; ;main.c: 30: char* ReadUartBuffer()
-[; ;main.c: 31: {
-[e :U _ReadUartBuffer ]
-[f ]
-"32
-[v _i `i ~T0 @X0 1 a ]
-[; ;main.c: 32: int i=0;
-[e = _i -> 0 `i ]
-"33
-[v _Output `*uc ~T0 @X0 1 a ]
-[; ;main.c: 33: char *Output;
-[; ;main.c: 36: while(i != 3){
-"36
-[e $U 626  ]
-[e :U 627 ]
-{
-[; ;main.c: 37: asm("clrwdt");
-"37
-[; <" clrwdt ;# ">
-[; ;main.c: 38: Output[i] = EUSART_Read();
-"38
-[e = *U + _Output * -> _i `x -> -> # *U _Output `i `x ( _EUSART_Read ..  ]
-[; ;main.c: 39: _delay((unsigned long)((100)*(32000000/4000.0)));
-"39
-[e ( __delay (1 -> * -> -> 100 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
-[; ;main.c: 40: i++;
-"40
-[e ++ _i -> 1 `i ]
-"41
-}
-[e :U 626 ]
-"36
-[e $ != _i -> 3 `i 627  ]
-[e :U 628 ]
-[; ;main.c: 41: }
-[; ;main.c: 42: SendUartCmd(Output);
-"42
-[e ( _SendUartCmd (1 _Output ]
-[; ;main.c: 43: return Output;
-"43
-[e ) _Output ]
-[e $UE 625  ]
-[; ;main.c: 44: }
-"44
-[e :UE 625 ]
-}
-"47
+"28
 [v _inter_sw1 `(i ~T0 @X0 1 ef ]
-"48
+"29
 {
-[; ;main.c: 47: inter_sw1()
-[; ;main.c: 48: {
+[; ;main.c: 28: inter_sw1()
+[; ;main.c: 29: {
 [e :U _inter_sw1 ]
 [f ]
-"49
-[v _i `i ~T0 @X0 1 a ]
-"50
-[v _res `uc ~T0 @X0 -> -> 1 `i `ux a ]
-[; ;main.c: 49: int i;
-[; ;main.c: 50: char res[1];
-[; ;main.c: 52: PORTBbits.RB7 = 1;
-"52
-[e = . . _PORTBbits 0 4 -> -> 1 `i `uc ]
-[; ;main.c: 53: _delay((unsigned long)((250)*(32000000/4000.0)));
-"53
-[e ( __delay (1 -> * -> -> 250 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
-[; ;main.c: 54: PORTBbits.RB7 = 0;
-"54
-[e = . . _PORTBbits 0 4 -> -> 0 `i `uc ]
-[; ;main.c: 57: while(PORTBbits.RB6 == 0);
-"57
-[e $U 630  ]
-[e :U 631 ]
-[e :U 630 ]
-[e $ == -> . . _PORTBbits 0 3 `i -> 0 `i 631  ]
-[e :U 632 ]
-[; ;main.c: 58: _delay((unsigned long)((250)*(32000000/4000.0)));
-"58
-[e ( __delay (1 -> * -> -> 250 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
-[; ;main.c: 63: SendUartCmd("sys reset\r\n");
-"63
-[e ( _SendUartCmd (1 -> :s 1C `*uc ]
-[; ;main.c: 64: _delay((unsigned long)((800)*(32000000/4000.0)));
-"64
-[e ( __delay (1 -> * -> -> 800 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
-[; ;main.c: 65: int i=1;
-"65
-[e = _i -> 1 `i ]
-"66
-[v _Output `*uc ~T0 @X0 1 a ]
-[; ;main.c: 66: char *Output;
-[; ;main.c: 75: while (1)
-"75
-[e :U 634 ]
-[; ;main.c: 76: {
-"76
-{
-[; ;main.c: 77: SWDTEN = 1;
-"77
-[e = _SWDTEN -> -> 1 `i `b ]
-[; ;main.c: 78: asm("clrwdt");
-"78
+[; ;main.c: 30: asm("clrwdt");
+"30
 [; <" clrwdt ;# ">
-[; ;main.c: 79: Output[0] = EUSART_Read();
-"79
-[e = *U + _Output * -> -> 0 `i `x -> -> # *U _Output `i `x ( _EUSART_Read ..  ]
-[; ;main.c: 80: _delay((unsigned long)((100)*(32000000/4000.0)));
-"80
-[e ( __delay (1 -> * -> -> 100 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
-[; ;main.c: 81: Output[1] = EUSART_Read();
-"81
-[e = *U + _Output * -> -> 1 `i `x -> -> # *U _Output `i `x ( _EUSART_Read ..  ]
-[; ;main.c: 82: SendUartCmd(Output);
-"82
-[e ( _SendUartCmd (1 _Output ]
-[; ;main.c: 83: _delay((unsigned long)((250)*(32000000/4000.0)));
-"83
-[e ( __delay (1 -> * -> -> 250 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
-"84
-}
-[e :U 633 ]
-"75
-[e $U 634  ]
-[e :U 635 ]
-[; ;main.c: 84: }
-[; ;main.c: 92: IOCBFbits.IOCBF6 = 0;
-"92
+[v F5182 `uc ~T0 @X0 -> 50 `i s ]
+[i F5182
+:U ..
+-> 0 `c
+..
+]
+"31
+[v _res `uc ~T0 @X0 -> 50 `i a ]
+[; ;main.c: 31: char res[50]= "";
+[e = _res F5182 ]
+[; ;main.c: 34: while(PORTBbits.RB6 == 0);
+"34
+[e $U 626  ]
+[e :U 627 ]
+[e :U 626 ]
+[e $ == -> . . _PORTBbits 0 3 `i -> 0 `i 627  ]
+[e :U 628 ]
+[; ;main.c: 37: EUART_GPS();
+"37
+[e ( _EUART_GPS ..  ]
+[; ;main.c: 38: SendUartCmd("$PUBX,40,GLL,1,1,0,0,0\r\n");
+"38
+[e ( _SendUartCmd (1 -> :s 1C `*uc ]
+[; ;main.c: 39: ReadUartCmd(res);
+"39
+[e ( _ReadUartCmd (1 &U _res ]
+[; ;main.c: 40: SendUartCmd(res);
+"40
+[e ( _SendUartCmd (1 &U _res ]
+[; ;main.c: 41: SendUartCmd("$PUBX,40,GLL,1,0,0,0,0\r\n");
+"41
+[e ( _SendUartCmd (1 -> :s 2C `*uc ]
+[; ;main.c: 42: asm("clrwdt");
+"42
+[; <" clrwdt ;# ">
+[; ;main.c: 45: EUART_LORA();
+"45
+[e ( _EUART_LORA ..  ]
+[; ;main.c: 46: SendUartCmd("sys reset\r\n");
+"46
+[e ( _SendUartCmd (1 -> :s 3C `*uc ]
+[; ;main.c: 47: ReadUartCmd(res);
+"47
+[e ( _ReadUartCmd (1 &U _res ]
+[; ;main.c: 48: asm("clrwdt");
+"48
+[; <" clrwdt ;# ">
+[; ;main.c: 49: SendUartCmd("mac join otaa\r\n");
+"49
+[e ( _SendUartCmd (1 -> :s 4C `*uc ]
+[; ;main.c: 50: ReadUartCmd(res);
+"50
+[e ( _ReadUartCmd (1 &U _res ]
+[; ;main.c: 51: asm("clrwdt");
+"51
+[; <" clrwdt ;# ">
+[; ;main.c: 52: if(res != "ok") return;
+"52
+[e $ ! != &U _res -> :s 5C `*uc 629  ]
+[e $UE 625  ]
+[e :U 629 ]
+[; ;main.c: 53: PORTCbits.RC7 = 1;
+"53
+[e = . . _PORTCbits 0 7 -> -> 1 `i `uc ]
+[; ;main.c: 54: _delay((unsigned long)((200)*(32000000/4000.0)));
+"54
+[e ( __delay (1 -> * -> -> 200 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
+[; ;main.c: 55: PORTCbits.RC7 = 0;
+"55
+[e = . . _PORTCbits 0 7 -> -> 0 `i `uc ]
+[; ;main.c: 56: _delay((unsigned long)((200)*(32000000/4000.0)));
+"56
+[e ( __delay (1 -> * -> -> 200 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
+[; ;main.c: 57: PORTCbits.RC7 = 1;
+"57
+[e = . . _PORTCbits 0 7 -> -> 1 `i `uc ]
+[; ;main.c: 58: _delay((unsigned long)((200)*(32000000/4000.0)));
+"58
+[e ( __delay (1 -> * -> -> 200 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
+[; ;main.c: 59: PORTCbits.RC7 = 0;
+"59
+[e = . . _PORTCbits 0 7 -> -> 0 `i `uc ]
+[; ;main.c: 60: ReadUartCmd(res);
+"60
+[e ( _ReadUartCmd (1 &U _res ]
+[; ;main.c: 61: asm("clrwdt");
+"61
+[; <" clrwdt ;# ">
+[; ;main.c: 62: if(res != "accepted") return;
+"62
+[e $ ! != &U _res -> :s 6C `*uc 630  ]
+[e $UE 625  ]
+[e :U 630 ]
+[; ;main.c: 63: SendUartCmd("mac tx uncnf 9 123456789\r\n");
+"63
+[e ( _SendUartCmd (1 -> :s 7C `*uc ]
+[; ;main.c: 64: ReadUartCmd(res);
+"64
+[e ( _ReadUartCmd (1 &U _res ]
+[; ;main.c: 65: asm("clrwdt");
+"65
+[; <" clrwdt ;# ">
+[; ;main.c: 66: if(res != "ok") return;
+"66
+[e $ ! != &U _res -> :s 8C `*uc 631  ]
+[e $UE 625  ]
+[e :U 631 ]
+[; ;main.c: 67: PORTCbits.RC7 = 1;
+"67
+[e = . . _PORTCbits 0 7 -> -> 1 `i `uc ]
+[; ;main.c: 68: _delay((unsigned long)((300)*(32000000/4000.0)));
+"68
+[e ( __delay (1 -> * -> -> 300 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
+[; ;main.c: 69: PORTCbits.RC7 = 0;
+"69
+[e = . . _PORTCbits 0 7 -> -> 0 `i `uc ]
+[; ;main.c: 70: _delay((unsigned long)((300)*(32000000/4000.0)));
+"70
+[e ( __delay (1 -> * -> -> 300 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
+[; ;main.c: 71: PORTCbits.RC7 = 1;
+"71
+[e = . . _PORTCbits 0 7 -> -> 1 `i `uc ]
+[; ;main.c: 72: _delay((unsigned long)((300)*(32000000/4000.0)));
+"72
+[e ( __delay (1 -> * -> -> 300 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
+[; ;main.c: 73: PORTCbits.RC7 = 0;
+"73
+[e = . . _PORTCbits 0 7 -> -> 0 `i `uc ]
+[; ;main.c: 74: asm("clrwdt");
+"74
+[; <" clrwdt ;# ">
+[; ;main.c: 76: IOCBFbits.IOCBF6 = 0;
+"76
 [e = . . _IOCBFbits 0 3 -> -> 0 `i `uc ]
-[; ;main.c: 94: }
-"94
-[e :UE 629 ]
+[; ;main.c: 77: }
+"77
+[e :UE 625 ]
 }
-[a 1C 115 121 115 32 114 101 115 101 116 13 10 0 ]
-
+[a 5C 111 107 0 ]
+[a 8C 111 107 0 ]
+[a 6C 97 99 99 101 112 116 101 100 0 ]
+[a 3C 115 121 115 32 114 101 115 101 116 13 10 0 ]
+[a 4C 109 97 99 32 106 111 105 110 32 111 116 97 97 13 10 0 ]
+[a 7C 109 97 99 32 116 120 32 117 110 99 110 102 32 57 32 49 50 51 52 53 54 55 56 57 13 10 0 ]
+[a 1C 36 80 85 66 88 44 52 48 44 71 76 76 44 49 44 49 44 48 44 48 44 48 13 10 0 ]
+[a 2C 36 80 85 66 88 44 52 48 44 71 76 76 44 49 44 48 44 48 44 48 44 48 13 10 0 ]

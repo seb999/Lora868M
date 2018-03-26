@@ -6593,22 +6593,22 @@ extern unsigned char __resetbits;
 extern __bit __powerdown;
 extern __bit __timeout;
 
-# 150 "mcc_generated_files/pin_manager.h"
+# 162 "mcc_generated_files/pin_manager.h"
 void PIN_MANAGER_Initialize (void);
 
-# 162
+# 174
 void PIN_MANAGER_IOC(void);
 
-# 175
+# 187
 void IOCBF6_ISR(void);
 
-# 198
+# 210
 void IOCBF6_SetInterruptHandler(void* InterruptHandler);
 
-# 222
+# 234
 extern void (*IOCBF6_InterruptHandler)(void);
 
-# 246
+# 258
 void IOCBF6_DefaultInterruptHandler(void);
 
 # 13 "/Applications/microchip/xc8/v1.35/include/stdint.h"
@@ -6707,24 +6707,14 @@ typedef unsigned char bool;
 # 110 "mcc_generated_files/interrupt_manager.h"
 void interrupt INTERRUPT_InterruptManager(void);
 
-# 76 "mcc_generated_files/eusart.h"
-extern volatile uint8_t eusartTxBufferRemaining;
-extern volatile uint8_t eusartRxCount;
-
-# 105
+# 94 "mcc_generated_files/eusart.h"
 void EUSART_Initialize(void);
 
-# 154
+# 114
 uint8_t EUSART_Read(void);
 
-# 179
+# 134
 void EUSART_Write(uint8_t txData);
-
-# 200
-void EUSART_Transmit_ISR(void);
-
-# 221
-void EUSART_Receive_ISR(void);
 
 # 97 "mcc_generated_files/tmr0.h"
 void TMR0_Initialize(void);
@@ -6760,86 +6750,84 @@ void OSCILLATOR_Initialize(void);
 void WDT_Initialize(void);
 
 # 4 "misc.h"
-void ReadUartCmd(char *Output, unsigned int length);
+void ReadUartCmd(char *Output);
 void SendUartCmd(char *cmd);
+void ReadUartCmdModified(char *Output);
+void EUART_LORA(void);
+void InitGPS(void);
 
 void __delay_sec(int);
 
-# 8 "main.c"
+# 6 "main.c"
 void main(void)
 {
+SWDTEN = 1;
 
 SYSTEM_Initialize();
+PORTBbits.RB7 = 1;
+_delay((unsigned long)((250)*(32000000/4000.0)));
+PORTBbits.RB7 = 0;
+EUART_GPS();
+InitGPS();
 GIE = 1;
 IOCIE = 1;
-
-
 
 
 INTCONbits.TMR0IE = 0;
 while (1)
 {
-SWDTEN = 1;
 asm("clrwdt");
-
-
-
-
 }
-}
-
-char* ReadUartBuffer()
-{
-int i=0;
-char *Output;
-
-
-while(i != 3){
-asm("clrwdt");
-Output[i] = EUSART_Read();
-_delay((unsigned long)((100)*(32000000/4000.0)));
-i++;
-}
-SendUartCmd(Output);
-return Output;
 }
 
 
 inter_sw1()
 {
-int i;
-char res[1];
-
-PORTBbits.RB7 = 1;
-_delay((unsigned long)((250)*(32000000/4000.0)));
-PORTBbits.RB7 = 0;
+asm("clrwdt");
+char res[50]= "";
 
 
 while(PORTBbits.RB6 == 0);
-_delay((unsigned long)((250)*(32000000/4000.0)));
 
 
-
-
-SendUartCmd("sys reset\r\n");
-_delay((unsigned long)((800)*(32000000/4000.0)));
-int i=1;
-char *Output;
-
-# 75
-while (1)
-{
-SWDTEN = 1;
+EUART_GPS();
+SendUartCmd("$PUBX,40,GLL,1,1,0,0,0\r\n");
+ReadUartCmd(res);
+SendUartCmd(res);
+SendUartCmd("$PUBX,40,GLL,1,0,0,0,0\r\n");
 asm("clrwdt");
-Output[0] = EUSART_Read();
-_delay((unsigned long)((100)*(32000000/4000.0)));
-Output[1] = EUSART_Read();
-SendUartCmd(Output);
-_delay((unsigned long)((250)*(32000000/4000.0)));
-}
 
-# 92
+
+EUART_LORA();
+SendUartCmd("sys reset\r\n");
+ReadUartCmd(res);
+asm("clrwdt");
+SendUartCmd("mac join otaa\r\n");
+ReadUartCmd(res);
+asm("clrwdt");
+if(res != "ok") return;
+PORTCbits.RC7 = 1;
+_delay((unsigned long)((200)*(32000000/4000.0)));
+PORTCbits.RC7 = 0;
+_delay((unsigned long)((200)*(32000000/4000.0)));
+PORTCbits.RC7 = 1;
+_delay((unsigned long)((200)*(32000000/4000.0)));
+PORTCbits.RC7 = 0;
+ReadUartCmd(res);
+asm("clrwdt");
+if(res != "accepted") return;
+SendUartCmd("mac tx uncnf 9 123456789\r\n");
+ReadUartCmd(res);
+asm("clrwdt");
+if(res != "ok") return;
+PORTCbits.RC7 = 1;
+_delay((unsigned long)((300)*(32000000/4000.0)));
+PORTCbits.RC7 = 0;
+_delay((unsigned long)((300)*(32000000/4000.0)));
+PORTCbits.RC7 = 1;
+_delay((unsigned long)((300)*(32000000/4000.0)));
+PORTCbits.RC7 = 0;
+asm("clrwdt");
+
 IOCBFbits.IOCBF6 = 0;
-
 }
-
