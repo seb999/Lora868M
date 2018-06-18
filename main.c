@@ -7,6 +7,7 @@
 #include <stdlib.h>
 
 bool ReadGPS();
+bool ConnectLora();
         
 char lora[40]="";
 char gps[40]="";
@@ -52,6 +53,49 @@ inter_sw1()
      
     //Look for LORA NETWORK
     EUART_LORA();
+    ConnectLora();
+    
+    IOCBFbits.IOCBF6 = 0;
+}
+
+bool ReadGPS(){  
+    SendUartCmd("$PUBX,40,GLL,1,1,0,0,0\r\n"); //GPS ON
+    ReadUartCmd(gps);
+    SendUartCmd("$PUBX,40,GLL,1,0,0,0,0\r\n");// GPS OFF
+    token = strtok (gps," ,");//READ root code
+    if(strcmp(token,"$GNGLL") != 0){ 
+        blinkRed();
+        IOCBFbits.IOCBF6 = 0;
+        return false;
+    }
+   
+    latitude = strtok (NULL,"."); //Latitude
+    latitudeDec = strtok (NULL,","); //Latitude decimal .
+    
+    token = strtok (NULL,","); //READ 'N' or exit
+    if(strcmp(token,"N") != 0){
+        blinkRed();
+        IOCBFbits.IOCBF6 = 0;
+        return false;
+    }
+    
+    longitude = strtok (NULL,"."); //Longitude 
+    longitudeDec = strtok (NULL,","); //Longitude decimal
+    
+    //Convert to hex and concatenate
+    strcpy(gpsHex,"");
+    sprintf(hex, "%X", atoi(latitude));
+    strcat(gpsHex,NormalizeHex(hex)); 
+    sprintf(hex, "%X", atoi(latitudeDec));
+    strcat(gpsHex,NormalizeHex(hex)); 
+    sprintf(hex, "%X", atoi(longitude));
+    strcat(gpsHex,NormalizeHex(hex)); 
+    sprintf(hex, "%X", atoi(longitudeDec));
+    strcat(gpsHex,NormalizeHex(hex)); 
+    return true;
+}
+
+bool ConnectLora(){
     LORA_RESET_SetLow();
     __delay_ms(200);
     LORA_RESET_SetHigh();
@@ -65,66 +109,28 @@ inter_sw1()
    
     token = strtok(lora," \r\n");
     if(strcmp(token,"accepted") != 0){
-        SendUartCmd("lora not good\n");
-        IOCBFbits.IOCBF6 = 0;
-        return;
-    }
-    CLRWDT();   
-    //send GPS position
-    SendUartCmd("mac tx uncnf 9 17206EB1070C908C\r\n");
-    
-    //and try this
-    char str1[50];
-    strcpy(str1,"mac tx uncnf 9 ");
-    strcat(str1, gpsHex);
-    strcpy(str1, "\r\n");
-    SendUartCmd(str1);
-    
-//    ReadUartCmd(lora);  //read ok 
-//    ReadUartCmd(lora);   //read mac_tx_ok or not
-//    token = strtok(lora," \r\n");
-//    if(strcmp(token,"mac_tx_ok") != 0){
-//    SendUartCmd("send data failed");
-//        IOCBFbits.IOCBF6 = 0;
-//        return;
-//    }
-//    else{
-//        SendUartCmd("GPS data sent\n");
-//    }
-
-    IOCBFbits.IOCBF6 = 0;
-}
-
-bool ReadGPS(){  
-    SendUartCmd("$PUBX,40,GLL,1,1,0,0,0\r\n"); //GPS ON
-    ReadUartCmd(gps);
-    SendUartCmd("$PUBX,40,GLL,1,0,0,0,0\r\n");// GPS OFF
-    token = strtok (gps," ,");//READ root code
-    if(strcmp(token,"$GNGLL") != 0) return false;
-   
-    latitude = strtok (NULL,"."); //Latitude
-    latitudeDec = strtok (NULL,","); //Latitude decimal .
-    
-    token = strtok (NULL,","); //READ 'N' or exit
-    if(strcmp(token,"N") != 0){ 
-        SendUartCmd("Not good");
+        blinkRed();
         IOCBFbits.IOCBF6 = 0;
         return false;
     }
+    CLRWDT();   
+    //send GPS position
+    char str[50];
+    strcpy(str,"mac tx uncnf 9 ");
+    strcat(str, gpsHex);
+    strcat(str, "\r\n");
+    SendUartCmd(str);
+    ReadUartCmd(lora);  //read ok 
+    ReadUartCmd(lora);   //read mac_tx_ok or not
     
-    longitude = strtok (NULL,"."); //Longitude 
-    longitudeDec = strtok (NULL,","); //Longitude decimal
-    
-    //Convert to hex and concatenate
-    sprintf(hex, "%X", atoi(latitude));
-    strcat(gpsHex,NormalizeHex(hex)); 
-    sprintf(hex, "%X", atoi(latitudeDec));
-    strcat(gpsHex,NormalizeHex(hex)); 
-    sprintf(hex, "%X", atoi(longitude));
-    strcat(gpsHex,NormalizeHex(hex)); 
-    sprintf(hex, "%X", atoi(longitudeDec));
-    strcat(gpsHex,NormalizeHex(hex)); 
-    SendUartCmd(gpsHex);
-    SendUartCmd("\r\n");
+    token = strtok(lora," \r\n");
+    if(strcmp(token,"mac_tx_ok") != 0){
+    SendUartCmd("send data failed");
+        blinkRed();
+        IOCBFbits.IOCBF6 = 0;
+        return false;
+    }
+    blinkGreen();
+    SendUartCmd("GPS data sent\n"); 
     return true;
 }
