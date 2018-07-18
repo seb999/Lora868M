@@ -1,9 +1,17 @@
 Version 3.2 HI-TECH Software Intermediate Code
-[v F5124 `(v ~T0 @X0 1 tf1`ul ]
+[v F5132 `(v ~T0 @X0 1 tf1`ul ]
 "150 /Applications/microchip/xc8/v1.35/include/pic.h
-[v __delay `JF5124 ~T0 @X0 0 e ]
+[v __delay `JF5132 ~T0 @X0 0 e ]
 [p i __delay ]
-"12846 /Applications/microchip/xc8/v1.35/include/pic16f1709.h
+"1969 /Applications/microchip/xc8/v1.35/include/pic16f1709.h
+[s S105 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S105 . LATA0 LATA1 LATA2 . LATA4 LATA5 ]
+"1968
+[u S104 `S105 1 ]
+[n S104 . . ]
+"1978
+[v _LATAbits `VS104 ~T0 @X0 0 e@268 ]
+"12846
 [v _GIE `Vb ~T0 @X0 0 e@95 ]
 "8319
 [v _PPSLOCK `Vuc ~T0 @X0 0 e@3599 ]
@@ -15,6 +23,14 @@ Version 3.2 HI-TECH Software Intermediate Code
 [n S407 . . ]
 "8329
 [v _PPSLOCKbits `VS407 ~T0 @X0 0 e@3599 ]
+"8895
+[s S468 :5 `uc 1 ]
+[n S468 . RC4PPS ]
+"8894
+[u S467 `S468 1 ]
+[n S467 . . ]
+"8899
+[v _RC4PPSbits `VS467 ~T0 @X0 0 e@3748 ]
 "8534
 [s S430 :5 `uc 1 ]
 [n S430 . RXPPS ]
@@ -23,36 +39,46 @@ Version 3.2 HI-TECH Software Intermediate Code
 [n S429 . . ]
 "8538
 [v _RXPPSbits `VS429 ~T0 @X0 0 e@3620 ]
-"8762
-[s S454 :5 `uc 1 ]
-[n S454 . RB5PPS ]
-"8761
-[u S453 `S454 1 ]
-[n S453 . . ]
-"8766
-[v _RB5PPSbits `VS453 ~T0 @X0 0 e@3741 ]
-"8857
-[s S464 :5 `uc 1 ]
-[n S464 . RC2PPS ]
-"8856
-[u S463 `S464 1 ]
-[n S463 . . ]
-"8861
-[v _RC2PPSbits `VS463 ~T0 @X0 0 e@3746 ]
-"3187
-[v _SP1BRGL `Vuc ~T0 @X0 0 e@411 ]
-"3256
-[v _SP1BRGH `Vuc ~T0 @X0 0 e@412 ]
+"8705
+[s S448 :5 `uc 1 ]
+[n S448 . RA4PPS ]
+"8704
+[u S447 `S448 1 ]
+[n S447 . . ]
+"8709
+[v _RA4PPSbits `VS447 ~T0 @X0 0 e@3732 ]
+"507
+[s S34 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S34 . RC0 RC1 RC2 RC3 RC4 RC5 RC6 RC7 ]
+"506
+[u S33 `S34 1 ]
+[n S33 . . ]
+"518
+[v _PORTCbits `VS33 ~T0 @X0 0 e@14 ]
+"16 /Applications/microchip/xc8/v1.35/include/string.h
+[v _memset `(*v ~T0 @X0 0 ef3`*v`i`ui ]
 "114 mcc_generated_files/eusart.h
 [v _EUSART_Read `(uc ~T0 @X0 0 ef ]
 "134
 [v _EUSART_Write `(v ~T0 @X0 0 ef1`uc ]
-[; ;misc.h: 4: void ReadUartCmd(char *Output);
-[; ;misc.h: 5: void SendUartCmd(char *cmd);
-[; ;misc.h: 6: void ReadUartCmdModified(char *Output);
-[; ;misc.h: 7: void EUART_LORA(void);
-[; ;misc.h: 8: void InitGPS(void);
-[; ;misc.h: 10: void __delay_sec(int);
+"3187 /Applications/microchip/xc8/v1.35/include/pic16f1709.h
+[v _SP1BRGL `Vuc ~T0 @X0 0 e@411 ]
+"3256
+[v _SP1BRGH `Vuc ~T0 @X0 0 e@412 ]
+"35 /Applications/microchip/xc8/v1.35/include/string.h
+[v _strcpy `(*uc ~T0 @X0 0 ef2`*uc`*Cuc ]
+"34
+[v _strcat `(*uc ~T0 @X0 0 ef2`*uc`*Cuc ]
+[; ;misc.h: 5: void __delay_sec(int);
+[; ;misc.h: 6: void blinkRed(int n);
+[; ;misc.h: 7: void blinkGreen(int n);
+[; ;misc.h: 8: void blinkOrange(int n);
+[; ;misc.h: 9: void ReadUartCmd(char *Output);
+[; ;misc.h: 10: void SendUartCmd(char *cmd);
+[; ;misc.h: 11: void InitGPS(void);
+[; ;misc.h: 12: void EUART_LORA(void);
+[; ;misc.h: 13: void EUART_GPS(void);
+[; ;misc.h: 14: char * NormalizeHex(char *hex);
 [; ;stdint.h: 13: typedef signed char int8_t;
 [; ;stdint.h: 20: typedef signed int int16_t;
 [; ;stdint.h: 28: typedef signed short long int int24_t;
@@ -5023,16 +5049,55 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;pic.h: 185: extern __bit __powerdown;
 [; ;pic.h: 186: extern __bit __timeout;
 [; ;stdbool.h: 12: typedef unsigned char bool;
+[; ;__size_t.h: 4: typedef unsigned size_t;
+[; ;string.h: 14: extern void * memcpy(void *, const void *, size_t);
+[; ;string.h: 15: extern void * memmove(void *, const void *, size_t);
+[; ;string.h: 16: extern void * memset(void *, int, size_t);
+[; ;string.h: 20: extern void * __builtin_memcpy(void *, const void *, size_t);
+[; ;string.h: 34: extern char * strcat(char *, const char *);
+[; ;string.h: 35: extern char * strcpy(char *, const char *);
+[; ;string.h: 36: extern char * strncat(char *, const char *, size_t);
+[; ;string.h: 37: extern char * strncpy(char *, const char *, size_t);
+[; ;string.h: 38: extern char * strdup(const char *);
+[; ;string.h: 39: extern char * strtok(char *, const char *);
+[; ;string.h: 42: extern int memcmp(const void *, const void *, size_t);
+[; ;string.h: 43: extern int strcmp(const char *, const char *);
+[; ;string.h: 44: extern int stricmp(const char *, const char *);
+[; ;string.h: 45: extern int strncmp(const char *, const char *, size_t);
+[; ;string.h: 46: extern int strnicmp(const char *, const char *, size_t);
+[; ;string.h: 47: extern void * memchr(const void *, int, size_t);
+[; ;string.h: 48: extern size_t strcspn(const char *, const char *);
+[; ;string.h: 49: extern char * strpbrk(const char *, const char *);
+[; ;string.h: 50: extern size_t strspn(const char *, const char *);
+[; ;string.h: 51: extern char * strstr(const char *, const char *);
+[; ;string.h: 52: extern char * stristr(const char *, const char *);
+[; ;string.h: 53: extern char * strerror(int);
+[; ;string.h: 54: extern size_t strlen(const char *);
+[; ;string.h: 55: extern char * strchr(const char *, int);
+[; ;string.h: 56: extern char * strichr(const char *, int);
+[; ;string.h: 57: extern char * strrchr(const char *, int);
+[; ;string.h: 58: extern char * strrichr(const char *, int);
 [; ;eusart.h: 94: void EUSART_Initialize(void);
 [; ;eusart.h: 114: uint8_t EUSART_Read(void);
 [; ;eusart.h: 134: void EUSART_Write(uint8_t txData);
-[; ;pin_manager.h: 162: void PIN_MANAGER_Initialize (void);
-[; ;pin_manager.h: 174: void PIN_MANAGER_IOC(void);
-[; ;pin_manager.h: 187: void IOCBF6_ISR(void);
-[; ;pin_manager.h: 210: void IOCBF6_SetInterruptHandler(void* InterruptHandler);
-[; ;pin_manager.h: 234: extern void (*IOCBF6_InterruptHandler)(void);
-[; ;pin_manager.h: 258: void IOCBF6_DefaultInterruptHandler(void);
+[; ;pin_manager.h: 275: void PIN_MANAGER_Initialize (void);
+[; ;pin_manager.h: 287: void PIN_MANAGER_IOC(void);
+[; ;pin_manager.h: 300: void IOCCF1_ISR(void);
+[; ;pin_manager.h: 323: void IOCCF1_SetInterruptHandler(void* InterruptHandler);
+[; ;pin_manager.h: 347: extern void (*IOCCF1_InterruptHandler)(void);
+[; ;pin_manager.h: 371: void IOCCF1_DefaultInterruptHandler(void);
+[; ;pin_manager.h: 384: void IOCCF7_ISR(void);
+[; ;pin_manager.h: 407: void IOCCF7_SetInterruptHandler(void* InterruptHandler);
+[; ;pin_manager.h: 431: extern void (*IOCCF7_InterruptHandler)(void);
+[; ;pin_manager.h: 455: void IOCCF7_DefaultInterruptHandler(void);
 [; ;interrupt_manager.h: 110: void interrupt INTERRUPT_InterruptManager(void);
+[; ;stddef.h: 6: typedef int ptrdiff_t;
+[; ;spi.h: 116: void SPI_Initialize(void);
+[; ;spi.h: 151: uint8_t SPI_Exchange8bit(uint8_t data);
+[; ;spi.h: 191: uint8_t SPI_Exchange8bitBuffer(uint8_t *dataIn, uint8_t bufLen, uint8_t *dataOut);
+[; ;spi.h: 214: bool SPI_IsBufferFull(void);
+[; ;spi.h: 239: bool SPI_HasWriteCollisionOccured(void);
+[; ;spi.h: 263: void SPI_ClearWriteCollisionStatus(void);
 [; ;tmr0.h: 97: void TMR0_Initialize(void);
 [; ;tmr0.h: 130: uint8_t TMR0_ReadTimer(void);
 [; ;tmr0.h: 169: void TMR0_WriteTimer(uint8_t timerVal);
@@ -5041,93 +5106,164 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;tmr0.h: 239: void TMR0_SetInterruptHandler(void (* InterruptHandler)(void));
 [; ;tmr0.h: 257: extern void (*TMR0_InterruptHandler)(void);
 [; ;tmr0.h: 275: void TMR0_DefaultInterruptHandler(void);
-[; ;mcc.h: 70: void SYSTEM_Initialize(void);
-[; ;mcc.h: 83: void OSCILLATOR_Initialize(void);
-[; ;mcc.h: 96: void WDT_Initialize(void);
-"10 misc.c
+[; ;mcc.h: 71: void SYSTEM_Initialize(void);
+[; ;mcc.h: 84: void OSCILLATOR_Initialize(void);
+[; ;mcc.h: 97: void WDT_Initialize(void);
+"11 misc.c
 [v ___delay_sec `(v ~T0 @X0 1 ef1`i ]
 {
-[; ;misc.c: 10: void __delay_sec(int n){
+[; ;misc.c: 11: void __delay_sec(int n){
 [e :U ___delay_sec ]
 [v _n `i ~T0 @X0 1 r1 ]
 [f ]
-[; ;misc.c: 11: while(n--) _delay((unsigned long)((1000)*(32000000/4000.0)));
-"11
+[; ;misc.c: 12: while(n--) _delay((unsigned long)((1000)*(32000000/4000.0)));
+"12
 [e $U 622  ]
 [e :U 623 ]
 [e ( __delay (1 -> * -> -> 1000 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
 [e :U 622 ]
 [e $ != -- _n -> 1 `i -> 0 `i 623  ]
 [e :U 624 ]
-[; ;misc.c: 12: }
-"12
+[; ;misc.c: 13: }
+"13
 [e :UE 621 ]
 }
 "15
-[v _EUART_GPS `(v ~T0 @X0 1 ef ]
-"16
+[v _blinkRed `(v ~T0 @X0 1 ef1`i ]
 {
-[; ;misc.c: 15: void EUART_GPS(void)
-[; ;misc.c: 16: {
-[e :U _EUART_GPS ]
+[; ;misc.c: 15: void blinkRed(int n){
+[e :U _blinkRed ]
+[v _n `i ~T0 @X0 1 r1 ]
 [f ]
+[; ;misc.c: 16: while(n--){
+"16
+[e $U 626  ]
+[e :U 627 ]
+{
+[; ;misc.c: 17: do { LATAbits.LATA2 = 1; } while(0);
+"17
+[e :U 631 ]
+{
+[e = . . _LATAbits 0 2 -> -> 1 `i `uc ]
+}
+[e :U 630 ]
+[; ;misc.c: 18: _delay((unsigned long)((75)*(32000000/4000.0)));
+"18
+[e ( __delay (1 -> * -> -> 75 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
+[; ;misc.c: 19: do { LATAbits.LATA2 = 0; } while(0);
 "19
-[v _state `uc ~T0 @X0 1 a ]
-[; ;misc.c: 19: bool state = (unsigned char)GIE;
-[e = _state -> -> _GIE `i `uc ]
-[; ;misc.c: 20: GIE = 0;
+[e :U 634 ]
+{
+[e = . . _LATAbits 0 2 -> -> 0 `i `uc ]
+}
+[e :U 633 ]
+[; ;misc.c: 20: _delay((unsigned long)((75)*(32000000/4000.0)));
 "20
-[e = _GIE -> -> 0 `i `b ]
-[; ;misc.c: 21: PPSLOCK = 0x55;
+[e ( __delay (1 -> * -> -> 75 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
 "21
-[e = _PPSLOCK -> -> 85 `i `uc ]
-[; ;misc.c: 22: PPSLOCK = 0xAA;
+}
+[e :U 626 ]
+"16
+[e $ != -- _n -> 1 `i -> 0 `i 627  ]
+[e :U 628 ]
+[; ;misc.c: 21: }
+[; ;misc.c: 22: }
 "22
-[e = _PPSLOCK -> -> 170 `i `uc ]
-[; ;misc.c: 23: PPSLOCKbits.PPSLOCKED = 0x00;
-"23
-[e = . . _PPSLOCKbits 0 0 -> -> 0 `i `uc ]
-[; ;misc.c: 27: RXPPSbits.RXPPS = 0x0C;
-"27
-[e = . . _RXPPSbits 0 0 -> -> 12 `i `uc ]
-[; ;misc.c: 28: RB5PPSbits.RB5PPS = 0x14;
-"28
-[e = . . _RB5PPSbits 0 0 -> -> 20 `i `uc ]
-[; ;misc.c: 29: RC2PPSbits.RC2PPS = 0x13;
-"29
-[e = . . _RC2PPSbits 0 0 -> -> 19 `i `uc ]
-[; ;misc.c: 31: PPSLOCK = 0x55;
-"31
-[e = _PPSLOCK -> -> 85 `i `uc ]
-[; ;misc.c: 32: PPSLOCK = 0xAA;
-"32
-[e = _PPSLOCK -> -> 170 `i `uc ]
-[; ;misc.c: 33: PPSLOCKbits.PPSLOCKED = 0x01;
-"33
-[e = . . _PPSLOCKbits 0 0 -> -> 1 `i `uc ]
-[; ;misc.c: 34: GIE = state;
-"34
-[e = _GIE -> _state `b ]
-[; ;misc.c: 36: SP1BRGL = 0x40;
-"36
-[e = _SP1BRGL -> -> 64 `i `uc ]
-[; ;misc.c: 37: SP1BRGH = 0x03;
-"37
-[e = _SP1BRGH -> -> 3 `i `uc ]
-[; ;misc.c: 38: _delay((unsigned long)((250)*(32000000/4000.0)));
-"38
-[e ( __delay (1 -> * -> -> 250 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
-[; ;misc.c: 39: }
-"39
 [e :UE 625 ]
 }
-"41
-[v _EUART_LORA `(v ~T0 @X0 1 ef ]
-"42
+"24
+[v _blinkGreen `(v ~T0 @X0 1 ef1`i ]
 {
-[; ;misc.c: 41: void EUART_LORA(void)
-[; ;misc.c: 42: {
-[e :U _EUART_LORA ]
+[; ;misc.c: 24: void blinkGreen(int n){
+[e :U _blinkGreen ]
+[v _n `i ~T0 @X0 1 r1 ]
+[f ]
+[; ;misc.c: 25: while(n--){
+"25
+[e $U 636  ]
+[e :U 637 ]
+{
+[; ;misc.c: 26: do { LATAbits.LATA0 = 1; } while(0);
+"26
+[e :U 641 ]
+{
+[e = . . _LATAbits 0 0 -> -> 1 `i `uc ]
+}
+[e :U 640 ]
+[; ;misc.c: 27: _delay((unsigned long)((75)*(32000000/4000.0)));
+"27
+[e ( __delay (1 -> * -> -> 75 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
+[; ;misc.c: 28: do { LATAbits.LATA0 = 0; } while(0);
+"28
+[e :U 644 ]
+{
+[e = . . _LATAbits 0 0 -> -> 0 `i `uc ]
+}
+[e :U 643 ]
+[; ;misc.c: 29: _delay((unsigned long)((75)*(32000000/4000.0)));
+"29
+[e ( __delay (1 -> * -> -> 75 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
+"30
+}
+[e :U 636 ]
+"25
+[e $ != -- _n -> 1 `i -> 0 `i 637  ]
+[e :U 638 ]
+[; ;misc.c: 30: }
+[; ;misc.c: 31: }
+"31
+[e :UE 635 ]
+}
+"33
+[v _blinkOrange `(v ~T0 @X0 1 ef1`i ]
+{
+[; ;misc.c: 33: void blinkOrange(int n){
+[e :U _blinkOrange ]
+[v _n `i ~T0 @X0 1 r1 ]
+[f ]
+[; ;misc.c: 34: while(n--){
+"34
+[e $U 646  ]
+[e :U 647 ]
+{
+[; ;misc.c: 35: do { LATAbits.LATA1 = 1; } while(0);
+"35
+[e :U 651 ]
+{
+[e = . . _LATAbits 0 1 -> -> 1 `i `uc ]
+}
+[e :U 650 ]
+[; ;misc.c: 36: _delay((unsigned long)((75)*(32000000/4000.0)));
+"36
+[e ( __delay (1 -> * -> -> 75 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
+[; ;misc.c: 37: do { LATAbits.LATA1 = 0; } while(0);
+"37
+[e :U 654 ]
+{
+[e = . . _LATAbits 0 1 -> -> 0 `i `uc ]
+}
+[e :U 653 ]
+[; ;misc.c: 38: _delay((unsigned long)((75)*(32000000/4000.0)));
+"38
+[e ( __delay (1 -> * -> -> 75 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
+"39
+}
+[e :U 646 ]
+"34
+[e $ != -- _n -> 1 `i -> 0 `i 647  ]
+[e :U 648 ]
+[; ;misc.c: 39: }
+[; ;misc.c: 40: }
+"40
+[e :UE 645 ]
+}
+"43
+[v _EUART_GPS `(v ~T0 @X0 1 ef ]
+"44
+{
+[; ;misc.c: 43: void EUART_GPS(void)
+[; ;misc.c: 44: {
+[e :U _EUART_GPS ]
 [f ]
 "45
 [v _state `uc ~T0 @X0 1 a ]
@@ -5145,153 +5281,279 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;misc.c: 49: PPSLOCKbits.PPSLOCKED = 0x00;
 "49
 [e = . . _PPSLOCKbits 0 0 -> -> 0 `i `uc ]
-[; ;misc.c: 52: RXPPSbits.RXPPS = 0x0C;
+[; ;misc.c: 51: RC4PPSbits.RC4PPS = 0x14;
+"51
+[e = . . _RC4PPSbits 0 0 -> -> 20 `i `uc ]
+[; ;misc.c: 52: RXPPSbits.RXPPS = 0x15;
 "52
-[e = . . _RXPPSbits 0 0 -> -> 12 `i `uc ]
-[; ;misc.c: 53: RC2PPSbits.RC2PPS = 0x14;
+[e = . . _RXPPSbits 0 0 -> -> 21 `i `uc ]
+[; ;misc.c: 53: RA4PPSbits.RA4PPS = 0x0;
 "53
-[e = . . _RC2PPSbits 0 0 -> -> 20 `i `uc ]
-[; ;misc.c: 54: RB5PPSbits.RB5PPS = 0x13;
-"54
-[e = . . _RB5PPSbits 0 0 -> -> 19 `i `uc ]
-[; ;misc.c: 56: PPSLOCK = 0x55;
-"56
+[e = . . _RA4PPSbits 0 0 -> -> 0 `i `uc ]
+[; ;misc.c: 55: PPSLOCK = 0x55;
+"55
 [e = _PPSLOCK -> -> 85 `i `uc ]
-[; ;misc.c: 57: PPSLOCK = 0xAA;
-"57
+[; ;misc.c: 56: PPSLOCK = 0xAA;
+"56
 [e = _PPSLOCK -> -> 170 `i `uc ]
-[; ;misc.c: 58: PPSLOCKbits.PPSLOCKED = 0x01;
-"58
+[; ;misc.c: 57: PPSLOCKbits.PPSLOCKED = 0x01;
+"57
 [e = . . _PPSLOCKbits 0 0 -> -> 1 `i `uc ]
-[; ;misc.c: 59: GIE = state;
-"59
+[; ;misc.c: 58: GIE = state;
+"58
 [e = _GIE -> _state `b ]
-[; ;misc.c: 61: SP1BRGL = 0x40;
-"61
-[e = _SP1BRGL -> -> 64 `i `uc ]
-[; ;misc.c: 62: SP1BRGH = 0x03;
+[; ;misc.c: 59: _delay((unsigned long)((100)*(32000000/4000.0)));
+"59
+[e ( __delay (1 -> * -> -> 100 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
+[; ;misc.c: 60: }
+"60
+[e :UE 655 ]
+}
 "62
-[e = _SP1BRGH -> -> 3 `i `uc ]
-[; ;misc.c: 66: _delay((unsigned long)((250)*(32000000/4000.0)));
+[v _EUART_LORA `(v ~T0 @X0 1 ef ]
+"63
+{
+[; ;misc.c: 62: void EUART_LORA(void)
+[; ;misc.c: 63: {
+[e :U _EUART_LORA ]
+[f ]
+"64
+[v _state `uc ~T0 @X0 1 a ]
+[; ;misc.c: 64: bool state = (unsigned char)GIE;
+[e = _state -> -> _GIE `i `uc ]
+[; ;misc.c: 65: GIE = 0;
+"65
+[e = _GIE -> -> 0 `i `b ]
+[; ;misc.c: 66: PPSLOCK = 0x55;
 "66
-[e ( __delay (1 -> * -> -> 250 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
-[; ;misc.c: 67: }
+[e = _PPSLOCK -> -> 85 `i `uc ]
+[; ;misc.c: 67: PPSLOCK = 0xAA;
 "67
-[e :UE 626 ]
-}
+[e = _PPSLOCK -> -> 170 `i `uc ]
+[; ;misc.c: 68: PPSLOCKbits.PPSLOCKED = 0x00;
+"68
+[e = . . _PPSLOCKbits 0 0 -> -> 0 `i `uc ]
+[; ;misc.c: 70: RA4PPSbits.RA4PPS = 0x14;
 "70
-[v _ReadUartCmd `(v ~T0 @X0 1 ef1`*uc ]
+[e = . . _RA4PPSbits 0 0 -> -> 20 `i `uc ]
+[; ;misc.c: 71: RXPPSbits.RXPPS = 0x05;
 "71
-{
-[; ;misc.c: 70: void ReadUartCmd(char *output)
-[; ;misc.c: 71: {
-[e :U _ReadUartCmd ]
-"70
-[v _output `*uc ~T0 @X0 1 r1 ]
-"71
-[f ]
-[; ;misc.c: 72: *output = "";
+[e = . . _RXPPSbits 0 0 -> -> 5 `i `uc ]
+[; ;misc.c: 72: RC4PPSbits.RC4PPS = 0x0;
 "72
-[e = *U _output -> :s 1C `uc ]
+[e = . . _RC4PPSbits 0 0 -> -> 0 `i `uc ]
+[; ;misc.c: 73: PORTCbits.RC4 = 1;
 "73
-[v _i `i ~T0 @X0 1 a ]
-[; ;misc.c: 73: int i = 0;
-[e = _i -> 0 `i ]
-"74
-[v _token `uc ~T0 @X0 1 a ]
-[; ;misc.c: 74: char token;
-[; ;misc.c: 75: token = EUSART_Read();
+[e = . . _PORTCbits 0 4 -> -> 1 `i `uc ]
+[; ;misc.c: 75: PPSLOCK = 0x55;
 "75
-[e = _token ( _EUSART_Read ..  ]
-[; ;misc.c: 76: while(token!='\n'){
+[e = _PPSLOCK -> -> 85 `i `uc ]
+[; ;misc.c: 76: PPSLOCK = 0xAA;
 "76
-[e $U 628  ]
-[e :U 629 ]
-{
-[; ;misc.c: 77: output[i] = token;
+[e = _PPSLOCK -> -> 170 `i `uc ]
+[; ;misc.c: 77: PPSLOCKbits.PPSLOCKED = 0x01;
 "77
-[e = *U + _output * -> _i `x -> -> # *U _output `i `x _token ]
-[; ;misc.c: 78: token = EUSART_Read();
+[e = . . _PPSLOCKbits 0 0 -> -> 1 `i `uc ]
+[; ;misc.c: 78: GIE = state;
 "78
-[e = _token ( _EUSART_Read ..  ]
-[; ;misc.c: 79: i++;
+[e = _GIE -> _state `b ]
+[; ;misc.c: 79: _delay((unsigned long)((100)*(32000000/4000.0)));
 "79
-[e ++ _i -> 1 `i ]
-"80
-}
-[e :U 628 ]
-"76
-[e $ != -> _token `ui -> 10 `ui 629  ]
-[e :U 630 ]
+[e ( __delay (1 -> * -> -> 100 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
 [; ;misc.c: 80: }
-[; ;misc.c: 81: }
-"81
-[e :UE 627 ]
+"80
+[e :UE 656 ]
 }
 "83
-[v _SendUartCmd `(v ~T0 @X0 1 ef1`*uc ]
+[v _ReadUartCmd `(v ~T0 @X0 1 ef1`*uc ]
 "84
 {
-[; ;misc.c: 83: void SendUartCmd(char *cmd)
+[; ;misc.c: 83: void ReadUartCmd(char *output)
 [; ;misc.c: 84: {
-[e :U _SendUartCmd ]
+[e :U _ReadUartCmd ]
 "83
-[v _cmd `*uc ~T0 @X0 1 r1 ]
+[v _output `*uc ~T0 @X0 1 r1 ]
 "84
 [f ]
-[; ;misc.c: 85: for(int i=0;cmd[i] != '\0' ;i++)
-"85
+[; ;misc.c: 86: memset(output, 0, 20);
+"86
+[e ( _memset (3 , , -> _output `*v -> 0 `i -> -> 20 `i `ui ]
+"87
+[v _i `i ~T0 @X0 1 a ]
+[; ;misc.c: 87: int i = 0;
+[e = _i -> 0 `i ]
+"88
+[v _token `uc ~T0 @X0 1 a ]
+[; ;misc.c: 88: char token;
+[; ;misc.c: 89: token = EUSART_Read();
+"89
+[e = _token ( _EUSART_Read ..  ]
+[; ;misc.c: 90: while(token!='\n'){
+"90
+[e $U 658  ]
+[e :U 659 ]
+{
+[; ;misc.c: 91: output[i] = token;
+"91
+[e = *U + _output * -> _i `x -> -> # *U _output `i `x _token ]
+[; ;misc.c: 92: token = EUSART_Read();
+"92
+[e = _token ( _EUSART_Read ..  ]
+[; ;misc.c: 93: i++;
+"93
+[e ++ _i -> 1 `i ]
+"94
+}
+[e :U 658 ]
+"90
+[e $ != -> _token `ui -> 10 `ui 659  ]
+[e :U 660 ]
+[; ;misc.c: 94: }
+[; ;misc.c: 95: }
+"95
+[e :UE 657 ]
+}
+"97
+[v _SendUartCmd `(v ~T0 @X0 1 ef1`*uc ]
+"98
+{
+[; ;misc.c: 97: void SendUartCmd(char *cmd)
+[; ;misc.c: 98: {
+[e :U _SendUartCmd ]
+"97
+[v _cmd `*uc ~T0 @X0 1 r1 ]
+"98
+[f ]
+[; ;misc.c: 99: for(int i=0;cmd[i] != '\0' ;i++)
+"99
 {
 [v _i `i ~T0 @X0 1 a ]
 [e = _i -> 0 `i ]
-[e $U 635  ]
-"86
-[e :U 632 ]
-[; ;misc.c: 86: EUSART_Write(cmd[i]);
+[e $U 665  ]
+"100
+[e :U 662 ]
+[; ;misc.c: 100: EUSART_Write(cmd[i]);
 [e ( _EUSART_Write (1 *U + _cmd * -> _i `x -> -> # *U _cmd `i `x ]
-"85
+"99
 [e ++ _i -> 1 `i ]
-[e :U 635 ]
-[e $ != -> *U + _cmd * -> _i `x -> -> # *U _cmd `i `x `ui -> 0 `ui 632  ]
-[e :U 633 ]
-"86
+[e :U 665 ]
+[e $ != -> *U + _cmd * -> _i `x -> -> # *U _cmd `i `x `ui -> 0 `ui 662  ]
+[e :U 663 ]
+"100
 }
-[; ;misc.c: 87: }
-"87
-[e :UE 631 ]
+[; ;misc.c: 101: }
+"101
+[e :UE 661 ]
 }
-"90
+"105
 [v _InitGPS `(v ~T0 @X0 1 ef ]
 {
-[; ;misc.c: 90: void InitGPS(){
+[; ;misc.c: 105: void InitGPS(){
 [e :U _InitGPS ]
 [f ]
-[; ;misc.c: 91: SendUartCmd("$PUBX,40,GSA,0,0,0,0\r\n");
-"91
+[; ;misc.c: 106: SendUartCmd("$PUBX,40,GLL,1,0,0,0,0\r\n");
+"106
+[e ( _SendUartCmd (1 -> :s 1C `*uc ]
+[; ;misc.c: 107: SendUartCmd("$PUBX,40,GSA,0,0,0,0\r\n");
+"107
 [e ( _SendUartCmd (1 -> :s 2C `*uc ]
-[; ;misc.c: 92: SendUartCmd("$PUBX,40,GSV,0,0,0,0\r\n");
-"92
+[; ;misc.c: 108: SendUartCmd("$PUBX,40,GSV,0,0,0,0\r\n");
+"108
 [e ( _SendUartCmd (1 -> :s 3C `*uc ]
-[; ;misc.c: 93: SendUartCmd("$PUBX,40,RMC,0,0,0,0\r\n");
-"93
+[; ;misc.c: 109: SendUartCmd("$PUBX,40,RMC,0,0,0,0\r\n");
+"109
 [e ( _SendUartCmd (1 -> :s 4C `*uc ]
-[; ;misc.c: 94: SendUartCmd("$PUBX,40,VTG,0,0,0,0\r\n");
-"94
+[; ;misc.c: 110: SendUartCmd("$PUBX,40,VTG,0,0,0,0\r\n");
+"110
 [e ( _SendUartCmd (1 -> :s 5C `*uc ]
-[; ;misc.c: 95: SendUartCmd("$PUBX,40,GGA,0,0,0,0\r\n");
-"95
+[; ;misc.c: 111: SendUartCmd("$PUBX,40,GGA,0,0,0,0\r\n");
+"111
 [e ( _SendUartCmd (1 -> :s 6C `*uc ]
-[; ;misc.c: 96: SendUartCmd("$PUBX,40,GLL,1,0,0,0,0\r\n");
-"96
+[; ;misc.c: 114: SendUartCmd("$PUBX,41,1,0007,0003,57600,0*2B\r\n");
+"114
 [e ( _SendUartCmd (1 -> :s 7C `*uc ]
-[; ;misc.c: 97: }
-"97
-[e :UE 636 ]
+[; ;misc.c: 115: _delay((unsigned long)((100)*(32000000/4000.0)));
+"115
+[e ( __delay (1 -> * -> -> 100 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
+[; ;misc.c: 117: SP1BRGL = 0x8A;
+"117
+[e = _SP1BRGL -> -> 138 `i `uc ]
+[; ;misc.c: 118: SP1BRGH = 0x00;
+"118
+[e = _SP1BRGH -> -> 0 `i `uc ]
+[; ;misc.c: 119: _delay((unsigned long)((100)*(32000000/4000.0)));
+"119
+[e ( __delay (1 -> * -> -> 100 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
+[; ;misc.c: 120: }
+"120
+[e :UE 666 ]
 }
+"123
+[v _NormalizeHex `(*uc ~T0 @X0 1 ef1`*uc ]
+{
+[; ;misc.c: 123: char * NormalizeHex(char *hex){
+[e :U _NormalizeHex ]
+[v _hex `*uc ~T0 @X0 1 r1 ]
+[f ]
+[v F5325 `uc ~T0 @X0 -> 20 `i s ]
+[i F5325
+:U ..
+-> 0 `c
+..
+]
+"124
+[v _norm `uc ~T0 @X0 -> 20 `i a ]
+[; ;misc.c: 124: char norm[20]="";
+[e = _norm F5325 ]
+"125
+[v _i `i ~T0 @X0 1 a ]
+[; ;misc.c: 125: int i;
+[; ;misc.c: 126: for (i = 0; i < hex[i]; i++) {};
+"126
+{
+[e = _i -> 0 `i ]
+[e $U 671  ]
+[e :U 668 ]
+{
+}
+[e ++ _i -> 1 `i ]
+[e :U 671 ]
+[e $ < _i -> *U + _hex * -> _i `x -> -> # *U _hex `i `x `i 668  ]
+[e :U 669 ]
+}
+[; ;misc.c: 127: if(i==1) strcpy(norm, "000");
+"127
+[e $ ! == _i -> 1 `i 672  ]
+[e ( _strcpy (2 , &U _norm :s 8C ]
+[e :U 672 ]
+[; ;misc.c: 128: if(i==2) strcpy(norm, "00");
+"128
+[e $ ! == _i -> 2 `i 673  ]
+[e ( _strcpy (2 , &U _norm :s 9C ]
+[e :U 673 ]
+[; ;misc.c: 129: if(i==3) strcpy(norm, "0");
+"129
+[e $ ! == _i -> 3 `i 674  ]
+[e ( _strcpy (2 , &U _norm :s 10C ]
+[e :U 674 ]
+[; ;misc.c: 130: strcat(norm, hex);
+"130
+[e ( _strcat (2 , &U _norm -> _hex `*Cuc ]
+[; ;misc.c: 131: return norm;
+"131
+[e ) &U _norm ]
+[e $UE 667  ]
+[; ;misc.c: 132: }
+"132
+[e :UE 667 ]
+}
+[a 8C 48 48 48 0 ]
+[a 9C 48 48 0 ]
+[a 10C 48 0 ]
+[a 7C 36 80 85 66 88 44 52 49 44 49 44 48 48 48 55 44 48 48 48 51 44 53 55 54 48 48 44 48 42 50 66 13 10 0 ]
 [a 3C 36 80 85 66 88 44 52 48 44 71 83 86 44 48 44 48 44 48 44 48 13 10 0 ]
 [a 5C 36 80 85 66 88 44 52 48 44 86 84 71 44 48 44 48 44 48 44 48 13 10 0 ]
 [a 4C 36 80 85 66 88 44 52 48 44 82 77 67 44 48 44 48 44 48 44 48 13 10 0 ]
 [a 2C 36 80 85 66 88 44 52 48 44 71 83 65 44 48 44 48 44 48 44 48 13 10 0 ]
 [a 6C 36 80 85 66 88 44 52 48 44 71 71 65 44 48 44 48 44 48 44 48 13 10 0 ]
-[a 7C 36 80 85 66 88 44 52 48 44 71 76 76 44 49 44 48 44 48 44 48 44 48 13 10 0 ]
-[a 1C 0 ]
+[a 1C 36 80 85 66 88 44 52 48 44 71 76 76 44 49 44 48 44 48 44 48 44 48 13 10 0 ]

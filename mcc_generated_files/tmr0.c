@@ -107,7 +107,7 @@ void TMR0_Reload(void)
 
 void TMR0_ISR(void)
 {
-    
+    inter_timer();
     // Clear the TMR0 interrupt flag
     INTCONbits.TMR0IF = 0;
 

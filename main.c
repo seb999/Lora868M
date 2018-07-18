@@ -7,31 +7,56 @@
 #include <stdlib.h>
 
 bool ReadGPS();
-bool ConnectLora();
+bool LoraSendData();
+bool LoraCheckNetwork();
+bool LoraDebug();
+
+bool isGpsAccess = false;
+bool isLoraAccess = false;
+bool isMotionStopped = false;
         
 char lora[40]="";
 char gps[40]="";
-char hex[4]="";
-char gpsHex[16]="";
+char hex[10]="";
+char gpsHex[30]="";
+
 char * token;
 char * latitude;
 char * latitudeDec;
 char * longitude;
 char * longitudeDec;
+
+int counter = 0;
+int counterMotion = 0;
+int debugger = 0;
     
 void main(void)
 {
-    SWDTEN = 1;
     SYSTEM_Initialize();
-   
-    EUART_GPS();
-    InitGPS();
+    GIE = 0;
+    
+    //__delay_sec(2);
+    SWDTEN = 1;
+    CLRWDT();  
+    
+    //debug china board -put one by one back
+    //InitADXL();
+    //EUART_GPS();
+    //__delay_ms(500);
+    //InitGPS();
+    
+    EUART_LORA(); //remove this one after debug
+     __delay_ms(100);  
+    //Change PIC Baud Rate to 57600;
+    SP1BRGL = 0x8A;
+    SP1BRGH = 0x00;
+    __delay_ms(100);  
     
     GIE = 1;
     IOCIE = 1;
 
     //TImer0 interruption Off
-    INTCONbits.TMR0IE = 0;
+    //INTCONbits.TMR0IE = 0;
     while (1)
     {    
         CLRWDT();  
@@ -49,53 +74,72 @@ inter_sw1()
     EUART_GPS();
     if(!ReadGPS()) return;
     
-    CLRWDT();
-     
     //Look for LORA NETWORK
     EUART_LORA();
-    ConnectLora();
-    
-    IOCBFbits.IOCBF6 = 0;
+    LoraSendData();
 }
 
-bool ReadGPS(){  
-    SendUartCmd("$PUBX,40,GLL,1,1,0,0,0\r\n"); //GPS ON
-    ReadUartCmd(gps);
-    SendUartCmd("$PUBX,40,GLL,1,0,0,0,0\r\n");// GPS OFF
-    token = strtok (gps," ,");//READ root code
-    if(strcmp(token,"$GNGLL") != 0){ 
-        blinkRed();
-        IOCBFbits.IOCBF6 = 0;
-        return false;
-    }
-   
-    latitude = strtok (NULL,"."); //Latitude
-    latitudeDec = strtok (NULL,","); //Latitude decimal .
+inter_adxl()
+{
+    blinkGreen(3);
     
-    token = strtok (NULL,","); //READ 'N' or exit
-    if(strcmp(token,"N") != 0){
-        blinkRed();
-        IOCBFbits.IOCBF6 = 0;
-        return false;
-    }
+    //Routine 1
+//    EUART_GPS();
+//    if(!ReadGPS()) return;
+//    
+//    //Look for LORA NETWORK
+//    EUART_LORA();
+//    LoraSendData();
     
-    longitude = strtok (NULL,"."); //Longitude 
-    longitudeDec = strtok (NULL,","); //Longitude decimal
-    
-    //Convert to hex and concatenate
-    strcpy(gpsHex,"");
-    sprintf(hex, "%X", atoi(latitude));
-    strcat(gpsHex,NormalizeHex(hex)); 
-    sprintf(hex, "%X", atoi(latitudeDec));
-    strcat(gpsHex,NormalizeHex(hex)); 
-    sprintf(hex, "%X", atoi(longitude));
-    strcat(gpsHex,NormalizeHex(hex)); 
-    sprintf(hex, "%X", atoi(longitudeDec));
-    strcat(gpsHex,NormalizeHex(hex)); 
-    return true;
+    //Routine 2
+//    if(!isMotionStopped){
+//        EUART_LORA();
+//        if(!LoraCheckNetwork()) return;
+//
+//        EUART_GPS();
+//        if(!ReadGPS()) return;
+//
+//        EUART_LORA();
+//        LoraSendData();
+//    }
 }
 
-bool ConnectLora(){
+inter_timer()
+{
+    counter++;
+    if(counter==400){
+        if(isGpsAccess) blinkOrange(1);
+        if(isLoraAccess) blinkGreen(1);
+        if(!isGpsAccess && !isLoraAccess) blinkRed(1);
+        counter = 0;
+        debugger++;
+        
+        if(debugger == 4){
+            LoraDebug();
+            debugger=0;
+        }
+        
+        if(counterMotion == 20){
+            isMotionStopped = false;
+            counterMotion = 0;
+        }
+        //remove after debug used to setup the device
+//        LORA_RESET_SetLow();
+//        __delay_ms(200);
+//        LORA_RESET_SetHigh();
+//        __delay_ms(200);
+//        SendUartCmd("mac set appeui 70B3D57ED0007651\r\n"); 
+//        ReadUartCmd(lora);
+//        SendUartCmd("mac set appkey 9FA338A47B91F3690A48DAFEC7CEF807\r\n"); 
+//        ReadUartCmd(lora);
+//        SendUartCmd("mac save\r\n"); 
+//        ReadUartCmd(lora);
+    }
+    
+    
+}
+
+bool LoraCheckNetwork(){
     LORA_RESET_SetLow();
     __delay_ms(200);
     LORA_RESET_SetHigh();
@@ -105,12 +149,82 @@ bool ConnectLora(){
     
     SendUartCmd("mac join otaa\r\n");
     ReadUartCmd(lora);  //read ok
+    ReadUartCmd(lora);  //read denied/accepted
+   
+    token = strtok(lora," \r\n");
+    if(strcmp(token,"accepted") != 0){
+        blinkOrange(1);
+        isLoraAccess = false;
+        return false;
+    }
+    return true;
+}
+
+bool ReadGPS()
+{  
+    CLRWDT();
+    //LED_ORANGE_SetHigh();
+    SendUartCmd("$PUBX,40,GLL,1,1,0,0,0\r\n"); //GPS ON
+    ReadUartCmd(gps);
+    ReadUartCmd(gps);//we read twice if empty string
+    SendUartCmd("$PUBX,40,GLL,1,0,0,0,0\r\n");// GPS OFF
+    //LED_ORANGE_SetLow();
+    
+    token = strtok (gps," ,");//READ root code
+    if(strcmp(token,"$GNGLL") != 0){ 
+        //blinkRed(1);
+        isGpsAccess = false;
+        return false;
+    }
+   
+    latitude = strtok (NULL,"."); //Latitude
+    latitudeDec = strtok (NULL,","); //Latitude decimal .
+    
+    token = strtok (NULL,","); //READ 'N' or exit
+    if(strcmp(token,"N") != 0){
+        blinkRed(1);
+        isGpsAccess = false;
+        return false;
+    }
+    
+    longitude = strtok (NULL,"."); //Longitude 
+    longitudeDec = strtok (NULL,","); //Longitude decimal
+    
+    //Convert to hex and concatenate
+    strcpy(gpsHex,"");
+      
+    sprintf(hex, "%X", atoi(latitude));
+    strcat(gpsHex,NormalizeHex(hex)); 
+    sprintf(hex, "%X", atoi(latitudeDec));
+    strcat(gpsHex,NormalizeHex(hex)); 
+    sprintf(hex, "%X", atoi(longitude));
+    strcat(gpsHex,NormalizeHex(hex)); 
+    sprintf(hex, "%X", atoi(longitudeDec));
+    strcat(gpsHex,NormalizeHex(hex)); 
+    SendUartCmd(gpsHex);
+    //blinkGreen(2);
+    isGpsAccess = true;
+    blinkOrange(1);
+    return true;
+}
+
+bool LoraSendData(){
+    LORA_RESET_SetLow();
+    __delay_ms(200);
+    LORA_RESET_SetHigh();
+     __delay_ms(200);
+    SendUartCmd("sys reset\r\n"); 
+    ReadUartCmd(lora);  //read serial number
+    
+     CLRWDT();//watch dog can reset before end of routine
+    SendUartCmd("mac join otaa\r\n");
+    ReadUartCmd(lora);  //read ok
     ReadUartCmd(lora);  //read denied or accepted
    
     token = strtok(lora," \r\n");
     if(strcmp(token,"accepted") != 0){
-        blinkRed();
-        IOCBFbits.IOCBF6 = 0;
+        blinkOrange(1);
+        isLoraAccess = false;
         return false;
     }
     CLRWDT();   
@@ -125,12 +239,50 @@ bool ConnectLora(){
     
     token = strtok(lora," \r\n");
     if(strcmp(token,"mac_tx_ok") != 0){
-    SendUartCmd("send data failed");
-        blinkRed();
-        IOCBFbits.IOCBF6 = 0;
+        SendUartCmd("send data failed");
+        blinkOrange(1);
+        isLoraAccess = false;
         return false;
     }
-    blinkGreen();
+    blinkGreen(3);
+    isLoraAccess = true;
+    isMotionStopped = true;
+    counterMotion = 0;
+    return true;
+}
+
+//to be deleted, used for debugging
+bool LoraDebug(){
+    LORA_RESET_SetLow();
+    __delay_ms(200);
+    LORA_RESET_SetHigh();
+     __delay_ms(200);
+    SendUartCmd("sys reset\r\n"); 
+    ReadUartCmd(lora);  //read serial number
+    
+    CLRWDT();//watch dog can reset before end of routine
+    SendUartCmd("mac join otaa\r\n");
+    ReadUartCmd(lora);  //read ok
+    ReadUartCmd(lora);  //read denied or accepted
+   
+    token = strtok(lora," \r\n");
+    if(strcmp(token,"accepted") != 0){
+        blinkRed(2);
+        return false;
+    }
+    CLRWDT();   
+    
+    SendUartCmd("mac tx uncnf 9 17206EB1070C01E9\r\n");
+    ReadUartCmd(lora);  //read ok 
+    ReadUartCmd(lora);   //read mac_tx_ok or not
+    
+    token = strtok(lora," \r\n");
+    if(strcmp(token,"mac_tx_ok") != 0){
+        SendUartCmd("send data failed");
+        blinkRed(2);
+        return false;
+    }
+    blinkGreen(3);
     SendUartCmd("GPS data sent\n"); 
     return true;
 }

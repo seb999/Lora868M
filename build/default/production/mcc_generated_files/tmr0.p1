@@ -20,6 +20,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _TMR0_SetInterruptHandler `(v ~T0 @X0 0 ef1`*F5129 ]
 "275
 [v _TMR0_DefaultInterruptHandler `(v ~T0 @X0 0 ef ]
+"110 mcc_generated_files/tmr0.c
+[v _inter_timer `(i ~T0 @X0 0 ef ]
 [; ;htc.h: 26: extern const char __xc8_OPTIM_SPEED;
 [; ;htc.h: 28: extern double __fpnormalize(double);
 [; ;xc8debug.h: 14: extern void __builtin_software_breakpoint(void);
@@ -5097,6 +5099,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;tmr0.c: 109: {
 [e :U _TMR0_ISR ]
 [f ]
+[; ;tmr0.c: 110: inter_timer();
+"110
+[e ( _inter_timer ..  ]
 [; ;tmr0.c: 112: INTCONbits.TMR0IF = 0;
 "112
 [e = . . _INTCONbits 0 2 -> -> 0 `i `uc ]
@@ -5125,8 +5130,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 {
 [; ;tmr0.c: 125: void TMR0_SetInterruptHandler(void (* InterruptHandler)(void)){
 [e :U _TMR0_SetInterruptHandler ]
-[v F5148 `(v ~T0 @X0 0 tf ]
-[v _InterruptHandler `*F5148 ~T0 @X0 1 r1 ]
+[v F5149 `(v ~T0 @X0 0 tf ]
+[v _InterruptHandler `*F5149 ~T0 @X0 1 r1 ]
 [f ]
 [; ;tmr0.c: 126: TMR0_InterruptHandler = InterruptHandler;
 "126

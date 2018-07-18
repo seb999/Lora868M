@@ -6593,69 +6593,86 @@ extern unsigned char __resetbits;
 extern __bit __powerdown;
 extern __bit __timeout;
 
-# 162 "mcc_generated_files/pin_manager.h"
+# 275 "mcc_generated_files/pin_manager.h"
 void PIN_MANAGER_Initialize (void);
 
-# 174
+# 287
 void PIN_MANAGER_IOC(void);
 
-# 187
-void IOCBF6_ISR(void);
+# 300
+void IOCCF1_ISR(void);
 
-# 210
-void IOCBF6_SetInterruptHandler(void* InterruptHandler);
+# 323
+void IOCCF1_SetInterruptHandler(void* InterruptHandler);
 
-# 234
-extern void (*IOCBF6_InterruptHandler)(void);
+# 347
+extern void (*IOCCF1_InterruptHandler)(void);
 
-# 258
-void IOCBF6_DefaultInterruptHandler(void);
+# 371
+void IOCCF1_DefaultInterruptHandler(void);
+
+# 384
+void IOCCF7_ISR(void);
+
+# 407
+void IOCCF7_SetInterruptHandler(void* InterruptHandler);
+
+# 431
+extern void (*IOCCF7_InterruptHandler)(void);
+
+# 455
+void IOCCF7_DefaultInterruptHandler(void);
 
 # 12 "/Applications/microchip/xc8/v1.35/include/stdbool.h"
 typedef unsigned char bool;
 
 # 51 "mcc_generated_files/pin_manager.c"
-void (*IOCBF6_InterruptHandler)(void);
+void (*IOCCF1_InterruptHandler)(void);
+void (*IOCCF7_InterruptHandler)(void);
 
 
 void PIN_MANAGER_Initialize(void)
 {
 
-# 59
+# 60
 LATA = 0x00;
-LATB = 0x00;
+LATB = 0x80;
 LATC = 0x00;
 
-# 66
-TRISA = 0x37;
-TRISB = 0x50;
-TRISC = 0x7B;
+# 67
+TRISA = 0x20;
+TRISB = 0x10;
+TRISC = 0xEB;
 
-# 73
-ANSELC = 0x4B;
+# 74
+ANSELC = 0x08;
 ANSELB = 0x00;
-ANSELA = 0x07;
+ANSELA = 0x00;
 
-# 80
-WPUB = 0x40;
-WPUA = 0x0B;
-WPUC = 0x4B;
+# 81
+WPUB = 0x00;
+WPUA = 0x08;
+WPUC = 0x88;
 OPTION_REGbits.nWPUEN = 0;
 
-# 88
+# 89
 ODCONA = 0x00;
 ODCONB = 0x00;
 ODCONC = 0x00;
 
-# 97
-IOCBFbits.IOCBF6 = 0;
+# 98
+IOCCFbits.IOCCF1 = 0;
+IOCCFbits.IOCCF7 = 0;
 
-IOCBNbits.IOCBN6 = 1;
+IOCCNbits.IOCCN1 = 0;
+IOCCNbits.IOCCN7 = 1;
 
-IOCBPbits.IOCBP6 = 0;
+IOCCPbits.IOCCP1 = 1;
+IOCCPbits.IOCCP7 = 0;
 
 
-IOCBF6_SetInterruptHandler(IOCBF6_DefaultInterruptHandler);
+IOCCF1_SetInterruptHandler(IOCCF1_DefaultInterruptHandler);
+IOCCF7_SetInterruptHandler(IOCCF7_DefaultInterruptHandler);
 
 
 INTCONbits.IOCIE = 1;
@@ -6667,7 +6684,11 @@ PPSLOCK = 0x55;
 PPSLOCK = 0xAA;
 PPSLOCKbits.PPSLOCKED = 0x00;
 
-# 120
+SSPDATPPSbits.SSPDATPPS = 0x0C;
+RB6PPSbits.RB6PPS = 0x10;
+SSPCLKPPSbits.SSPCLKPPS = 0x0E;
+RB5PPSbits.RB5PPS = 0x12;
+
 PPSLOCK = 0x55;
 PPSLOCK = 0xAA;
 PPSLOCKbits.PPSLOCKED = 0x01;
@@ -6678,35 +6699,66 @@ GIE = state;
 void PIN_MANAGER_IOC(void)
 {
 
-if(IOCBFbits.IOCBF6 == 1)
+if(IOCCFbits.IOCCF1 == 1)
 {
-IOCBF6_ISR();
+IOCCF1_ISR();
+}
+
+
+if(IOCCFbits.IOCCF7 == 1)
+{
+IOCCF7_ISR();
 }
 
 
 }
 
-# 141
-void IOCBF6_ISR(void) {
+# 153
+void IOCCF1_ISR(void) {
+
+
+inter_adxl();
+
+
+if(IOCCF1_InterruptHandler)
+{
+IOCCF1_InterruptHandler();
+}
+IOCCFbits.IOCCF1 = 0;
+}
+
+# 169
+void IOCCF1_SetInterruptHandler(void* InterruptHandler){
+IOCCF1_InterruptHandler = InterruptHandler;
+}
+
+# 176
+void IOCCF1_DefaultInterruptHandler(void){
+
+
+}
+
+# 184
+void IOCCF7_ISR(void) {
 
 
 inter_sw1();
 
 
-if(IOCBF6_InterruptHandler)
+if(IOCCF7_InterruptHandler)
 {
-IOCBF6_InterruptHandler();
+IOCCF7_InterruptHandler();
 }
-IOCBFbits.IOCBF6 = 0;
-}
-
-# 157
-void IOCBF6_SetInterruptHandler(void* InterruptHandler){
-IOCBF6_InterruptHandler = InterruptHandler;
+IOCCFbits.IOCCF7 = 0;
 }
 
-# 164
-void IOCBF6_DefaultInterruptHandler(void){
+# 200
+void IOCCF7_SetInterruptHandler(void* InterruptHandler){
+IOCCF7_InterruptHandler = InterruptHandler;
+}
+
+# 207
+void IOCCF7_DefaultInterruptHandler(void){
 
 
 }

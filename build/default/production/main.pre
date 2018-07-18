@@ -6593,23 +6593,35 @@ extern unsigned char __resetbits;
 extern __bit __powerdown;
 extern __bit __timeout;
 
-# 162 "mcc_generated_files/pin_manager.h"
+# 275 "mcc_generated_files/pin_manager.h"
 void PIN_MANAGER_Initialize (void);
 
-# 174
+# 287
 void PIN_MANAGER_IOC(void);
 
-# 187
-void IOCBF6_ISR(void);
+# 300
+void IOCCF1_ISR(void);
 
-# 210
-void IOCBF6_SetInterruptHandler(void* InterruptHandler);
+# 323
+void IOCCF1_SetInterruptHandler(void* InterruptHandler);
 
-# 234
-extern void (*IOCBF6_InterruptHandler)(void);
+# 347
+extern void (*IOCCF1_InterruptHandler)(void);
 
-# 258
-void IOCBF6_DefaultInterruptHandler(void);
+# 371
+void IOCCF1_DefaultInterruptHandler(void);
+
+# 384
+void IOCCF7_ISR(void);
+
+# 407
+void IOCCF7_SetInterruptHandler(void* InterruptHandler);
+
+# 431
+extern void (*IOCCF7_InterruptHandler)(void);
+
+# 455
+void IOCCF7_DefaultInterruptHandler(void);
 
 # 13 "/Applications/microchip/xc8/v1.35/include/stdint.h"
 typedef signed char int8_t;
@@ -6716,6 +6728,30 @@ uint8_t EUSART_Read(void);
 # 134
 void EUSART_Write(uint8_t txData);
 
+# 4 "/Applications/microchip/xc8/v1.35/include/__size_t.h"
+typedef unsigned size_t;
+
+# 6 "/Applications/microchip/xc8/v1.35/include/stddef.h"
+typedef int ptrdiff_t;
+
+# 116 "mcc_generated_files/spi.h"
+void SPI_Initialize(void);
+
+# 151
+uint8_t SPI_Exchange8bit(uint8_t data);
+
+# 191
+uint8_t SPI_Exchange8bitBuffer(uint8_t *dataIn, uint8_t bufLen, uint8_t *dataOut);
+
+# 214
+bool SPI_IsBufferFull(void);
+
+# 239
+bool SPI_HasWriteCollisionOccured(void);
+
+# 263
+void SPI_ClearWriteCollisionStatus(void);
+
 # 97 "mcc_generated_files/tmr0.h"
 void TMR0_Initialize(void);
 
@@ -6740,94 +6776,439 @@ extern void (*TMR0_InterruptHandler)(void);
 # 275
 void TMR0_DefaultInterruptHandler(void);
 
-# 70 "mcc_generated_files/mcc.h"
+# 71 "mcc_generated_files/mcc.h"
 void SYSTEM_Initialize(void);
 
-# 83
+# 84
 void OSCILLATOR_Initialize(void);
 
-# 96
+# 97
 void WDT_Initialize(void);
 
-# 4 "misc.h"
+# 5 "misc.h"
+void __delay_sec(int);
+void blinkRed(int n);
+void blinkGreen(int n);
+void blinkOrange(int n);
 void ReadUartCmd(char *Output);
 void SendUartCmd(char *cmd);
-void ReadUartCmdModified(char *Output);
-void EUART_LORA(void);
 void InitGPS(void);
+void EUART_LORA(void);
+void EUART_GPS(void);
+char * NormalizeHex(char *hex);
 
-void __delay_sec(int);
+# 14 "/Applications/microchip/xc8/v1.35/include/string.h"
+extern void * memcpy(void *, const void *, size_t);
+extern void * memmove(void *, const void *, size_t);
+extern void * memset(void *, int, size_t);
 
-# 6 "main.c"
+
+
+extern void * __builtin_memcpy(void *, const void *, size_t);
+#pragma intrinsic(__builtin_memcpy)
+
+# 34
+extern char * strcat(char *, const char *);
+extern char * strcpy(char *, const char *);
+extern char * strncat(char *, const char *, size_t);
+extern char * strncpy(char *, const char *, size_t);
+extern char * strdup(const char *);
+extern char * strtok(char *, const char *);
+
+
+extern int memcmp(const void *, const void *, size_t);
+extern int strcmp(const char *, const char *);
+extern int stricmp(const char *, const char *);
+extern int strncmp(const char *, const char *, size_t);
+extern int strnicmp(const char *, const char *, size_t);
+extern void * memchr(const void *, int, size_t);
+extern size_t strcspn(const char *, const char *);
+extern char * strpbrk(const char *, const char *);
+extern size_t strspn(const char *, const char *);
+extern char * strstr(const char *, const char *);
+extern char * stristr(const char *, const char *);
+extern char * strerror(int);
+extern size_t strlen(const char *);
+extern char * strchr(const char *, int);
+extern char * strichr(const char *, int);
+extern char * strrchr(const char *, int);
+extern char * strrichr(const char *, int);
+
+# 7 "/Applications/microchip/xc8/v1.35/include/stdarg.h"
+typedef void * va_list[1];
+
+#pragma intrinsic(__va_start)
+extern void * __va_start(void);
+
+#pragma intrinsic(__va_arg)
+extern void * __va_arg(void *, ...);
+
+# 43 "/Applications/microchip/xc8/v1.35/include/stdio.h"
+struct __prbuf
+{
+char * ptr;
+void (* func)(char);
+};
+
+# 25 "/Applications/microchip/xc8/v1.35/include/errno.h"
+extern int errno;
+
+# 12 "/Applications/microchip/xc8/v1.35/include/conio.h"
+extern void init_uart(void);
+
+extern char getch(void);
+extern char getche(void);
+extern void putch(char);
+extern void ungetch(char);
+
+extern __bit kbhit(void);
+
+# 23
+extern char * cgets(char *);
+extern void cputs(const char *);
+
+# 88 "/Applications/microchip/xc8/v1.35/include/stdio.h"
+extern int cprintf(char *, ...);
+#pragma printf_check(cprintf)
+
+
+
+extern int _doprnt(struct __prbuf *, const register char *, register va_list);
+
+
+# 180
+#pragma printf_check(vprintf) const
+#pragma printf_check(vsprintf) const
+
+extern char * gets(char *);
+extern int puts(const char *);
+extern int scanf(const char *, ...) __attribute__((unsupported("scanf() is not supported by this compiler")));
+extern int sscanf(const char *, const char *, ...) __attribute__((unsupported("sscanf() is not supported by this compiler")));
+extern int vprintf(const char *, va_list) __attribute__((unsupported("vprintf() is not supported by this compiler")));
+extern int vsprintf(char *, const char *, va_list) __attribute__((unsupported("vsprintf() is not supported by this compiler")));
+extern int vscanf(const char *, va_list ap) __attribute__((unsupported("vscanf() is not supported by this compiler")));
+extern int vsscanf(const char *, const char *, va_list) __attribute__((unsupported("vsscanf() is not supported by this compiler")));
+
+#pragma printf_check(printf) const
+#pragma printf_check(sprintf) const
+extern int sprintf(char *, const char *, ...);
+extern int printf(const char *, ...);
+
+# 7 "/Applications/microchip/xc8/v1.35/include/stdlib.h"
+typedef unsigned short wchar_t;
+
+# 15
+typedef struct {
+int rem;
+int quot;
+} div_t;
+typedef struct {
+unsigned rem;
+unsigned quot;
+} udiv_t;
+typedef struct {
+long quot;
+long rem;
+} ldiv_t;
+typedef struct {
+unsigned long quot;
+unsigned long rem;
+} uldiv_t;
+
+# 53
+extern double atof(const char *);
+extern double strtod(const char *, const char **);
+extern int atoi(const char *);
+extern unsigned xtoi(const char *);
+extern long atol(const char *);
+extern long strtol(const char *, char **, int);
+
+extern int rand(void);
+extern void srand(unsigned int);
+extern void * calloc(size_t, size_t);
+extern div_t div(int numer, int denom);
+extern udiv_t udiv(unsigned numer, unsigned denom);
+extern ldiv_t ldiv(long numer, long denom);
+extern uldiv_t uldiv(unsigned long numer,unsigned long denom);
+extern unsigned long _lrotl(unsigned long value, unsigned int shift);
+extern unsigned long _lrotr(unsigned long value, unsigned int shift);
+extern unsigned int _rotl(unsigned int value, unsigned int shift);
+extern unsigned int _rotr(unsigned int value, unsigned int shift);
+
+
+
+
+extern void * malloc(size_t);
+extern void free(void *);
+extern void * realloc(void *, size_t);
+
+# 86
+extern int atexit(void (*)(void));
+extern char * getenv(const char *);
+extern char ** environ;
+extern int system(char *);
+extern void qsort(void *, size_t, size_t, int (*)(const void *, const void *));
+extern void * bsearch(const void *, void *, size_t, size_t, int(*)(const void *, const void *));
+extern int abs(int);
+extern long labs(long);
+
+extern char * itoa(char * buf, int val, int base);
+extern char * utoa(char * buf, unsigned val, int base);
+
+
+
+
+extern char * ltoa(char * buf, long val, int base);
+extern char * ultoa(char * buf, unsigned long val, int base);
+
+extern char * ftoa(float f, int * status);
+
+# 9 "main.c"
+bool ReadGPS();
+bool LoraSendData();
+bool LoraCheckNetwork();
+bool LoraDebug();
+
+bool isGpsAccess = 0;
+bool isLoraAccess = 0;
+bool isMotionStopped = 0;
+
+char lora[40]="";
+char gps[40]="";
+char hex[10]="";
+char gpsHex[30]="";
+
+char * token;
+char * latitude;
+char * latitudeDec;
+char * longitude;
+char * longitudeDec;
+
+int counter = 0;
+int counterMotion = 0;
+int debugger = 0;
+
 void main(void)
 {
-SWDTEN = 1;
-
 SYSTEM_Initialize();
-PORTBbits.RB7 = 1;
-_delay((unsigned long)((250)*(32000000/4000.0)));
-PORTBbits.RB7 = 0;
-EUART_GPS();
-InitGPS();
+GIE = 0;
+
+
+SWDTEN = 1;
+asm("clrwdt");
+
+# 48
+EUART_LORA();
+_delay((unsigned long)((100)*(32000000/4000.0)));
+
+SP1BRGL = 0x8A;
+SP1BRGH = 0x00;
+_delay((unsigned long)((100)*(32000000/4000.0)));
+
 GIE = 1;
 IOCIE = 1;
 
 
-INTCONbits.TMR0IE = 0;
+
 while (1)
 {
 asm("clrwdt");
 }
 }
 
-
 inter_sw1()
 {
 asm("clrwdt");
-char res[50]= "";
 
 
-while(PORTBbits.RB6 == 0);
+while(PORTCbits.RC7 == 0);
 
 
 EUART_GPS();
-SendUartCmd("$PUBX,40,GLL,1,1,0,0,0\r\n");
-ReadUartCmd(res);
-SendUartCmd(res);
-SendUartCmd("$PUBX,40,GLL,1,0,0,0,0\r\n");
-asm("clrwdt");
+if(!ReadGPS()) return;
 
 
 EUART_LORA();
+LoraSendData();
+}
+
+inter_adxl()
+{
+blinkGreen(3);
+
+# 105
+}
+
+inter_timer()
+{
+counter++;
+if(counter==400){
+if(isGpsAccess) blinkOrange(1);
+if(isLoraAccess) blinkGreen(1);
+if(!isGpsAccess && !isLoraAccess) blinkRed(1);
+counter = 0;
+debugger++;
+
+if(debugger == 4){
+LoraDebug();
+debugger=0;
+}
+
+if(counterMotion == 20){
+isMotionStopped = 0;
+counterMotion = 0;
+}
+
+# 137
+}
+
+
+}
+
+bool LoraCheckNetwork(){
+do { LATBbits.LATB7 = 0; } while(0);
+_delay((unsigned long)((200)*(32000000/4000.0)));
+do { LATBbits.LATB7 = 1; } while(0);
+_delay((unsigned long)((200)*(32000000/4000.0)));
 SendUartCmd("sys reset\r\n");
-ReadUartCmd(res);
-asm("clrwdt");
+ReadUartCmd(lora);
+
 SendUartCmd("mac join otaa\r\n");
-ReadUartCmd(res);
-asm("clrwdt");
-if(res != "ok") return;
-PORTCbits.RC7 = 1;
-_delay((unsigned long)((200)*(32000000/4000.0)));
-PORTCbits.RC7 = 0;
-_delay((unsigned long)((200)*(32000000/4000.0)));
-PORTCbits.RC7 = 1;
-_delay((unsigned long)((200)*(32000000/4000.0)));
-PORTCbits.RC7 = 0;
-ReadUartCmd(res);
-asm("clrwdt");
-if(res != "accepted") return;
-SendUartCmd("mac tx uncnf 9 123456789\r\n");
-ReadUartCmd(res);
-asm("clrwdt");
-if(res != "ok") return;
-PORTCbits.RC7 = 1;
-_delay((unsigned long)((300)*(32000000/4000.0)));
-PORTCbits.RC7 = 0;
-_delay((unsigned long)((300)*(32000000/4000.0)));
-PORTCbits.RC7 = 1;
-_delay((unsigned long)((300)*(32000000/4000.0)));
-PORTCbits.RC7 = 0;
+ReadUartCmd(lora);
+ReadUartCmd(lora);
+
+token = strtok(lora," \r\n");
+if(strcmp(token,"accepted") != 0){
+blinkOrange(1);
+isLoraAccess = 0;
+return 0;
+}
+return 1;
+}
+
+bool ReadGPS()
+{
 asm("clrwdt");
 
-IOCBFbits.IOCBF6 = 0;
+SendUartCmd("$PUBX,40,GLL,1,1,0,0,0\r\n");
+ReadUartCmd(gps);
+ReadUartCmd(gps);
+SendUartCmd("$PUBX,40,GLL,1,0,0,0,0\r\n");
+
+
+token = strtok (gps," ,");
+if(strcmp(token,"$GNGLL") != 0){
+
+isGpsAccess = 0;
+return 0;
+}
+
+latitude = strtok ((0),".");
+latitudeDec = strtok ((0),",");
+
+token = strtok ((0),",");
+if(strcmp(token,"N") != 0){
+blinkRed(1);
+isGpsAccess = 0;
+return 0;
+}
+
+longitude = strtok ((0),".");
+longitudeDec = strtok ((0),",");
+
+
+strcpy(gpsHex,"");
+
+sprintf(hex, "%X", atoi(latitude));
+strcat(gpsHex,NormalizeHex(hex));
+sprintf(hex, "%X", atoi(latitudeDec));
+strcat(gpsHex,NormalizeHex(hex));
+sprintf(hex, "%X", atoi(longitude));
+strcat(gpsHex,NormalizeHex(hex));
+sprintf(hex, "%X", atoi(longitudeDec));
+strcat(gpsHex,NormalizeHex(hex));
+SendUartCmd(gpsHex);
+
+isGpsAccess = 1;
+blinkOrange(1);
+return 1;
+}
+
+bool LoraSendData(){
+do { LATBbits.LATB7 = 0; } while(0);
+_delay((unsigned long)((200)*(32000000/4000.0)));
+do { LATBbits.LATB7 = 1; } while(0);
+_delay((unsigned long)((200)*(32000000/4000.0)));
+SendUartCmd("sys reset\r\n");
+ReadUartCmd(lora);
+
+asm("clrwdt");
+SendUartCmd("mac join otaa\r\n");
+ReadUartCmd(lora);
+ReadUartCmd(lora);
+
+token = strtok(lora," \r\n");
+if(strcmp(token,"accepted") != 0){
+blinkOrange(1);
+isLoraAccess = 0;
+return 0;
+}
+asm("clrwdt");
+
+char str[50];
+strcpy(str,"mac tx uncnf 9 ");
+strcat(str, gpsHex);
+strcat(str, "\r\n");
+SendUartCmd(str);
+ReadUartCmd(lora);
+ReadUartCmd(lora);
+
+token = strtok(lora," \r\n");
+if(strcmp(token,"mac_tx_ok") != 0){
+SendUartCmd("send data failed");
+blinkOrange(1);
+isLoraAccess = 0;
+return 0;
+}
+blinkGreen(3);
+isLoraAccess = 1;
+isMotionStopped = 1;
+counterMotion = 0;
+return 1;
+}
+
+
+bool LoraDebug(){
+do { LATBbits.LATB7 = 0; } while(0);
+_delay((unsigned long)((200)*(32000000/4000.0)));
+do { LATBbits.LATB7 = 1; } while(0);
+_delay((unsigned long)((200)*(32000000/4000.0)));
+SendUartCmd("sys reset\r\n");
+ReadUartCmd(lora);
+
+asm("clrwdt");
+SendUartCmd("mac join otaa\r\n");
+ReadUartCmd(lora);
+ReadUartCmd(lora);
+
+token = strtok(lora," \r\n");
+if(strcmp(token,"accepted") != 0){
+blinkRed(2);
+return 0;
+}
+asm("clrwdt");
+
+SendUartCmd("mac tx uncnf 9 17206EB1070C01E9\r\n");
+ReadUartCmd(lora);
+ReadUartCmd(lora);
+
+token = strtok(lora," \r\n");
+if(strcmp(token,"mac_tx_ok") != 0){
+SendUartCmd("send data failed");
+blinkRed(2);
+return 0;
+}
+blinkGreen(3);
+SendUartCmd("GPS data sent\n");
+return 1;
 }

@@ -6762,7 +6762,7 @@ TMR0 = timer0ReloadVal;
 
 void TMR0_ISR(void)
 {
-
+inter_timer();
 
 INTCONbits.TMR0IF = 0;
 

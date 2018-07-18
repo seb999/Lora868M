@@ -6710,11 +6710,10 @@ RC1STA = 0x90;
 TX1STA = 0xA4;
 
 
-SP1BRGL = 0x8A;
+SP1BRGL = 0x40;
 
 
-SP1BRGH = 0x00;
-
+SP1BRGH = 0x03;
 }
 
 
