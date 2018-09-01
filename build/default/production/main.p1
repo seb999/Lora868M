@@ -6,6 +6,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _GIE `Vb ~T0 @X0 0 e@95 ]
 "13794
 [v _SWDTEN `Vb ~T0 @X0 0 e@1208 ]
+"43 main.c
+[v _InitADXL `(i ~T0 @X0 0 ef ]
 "12 misc.h
 [v _EUART_LORA `(v ~T0 @X0 0 ef ]
 [v F5084 `(v ~T0 @X0 1 tf1`ul ]
@@ -5007,16 +5009,16 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;pic.h: 184: extern unsigned char __resetbits;
 [; ;pic.h: 185: extern __bit __powerdown;
 [; ;pic.h: 186: extern __bit __timeout;
-[; ;pin_manager.h: 275: void PIN_MANAGER_Initialize (void);
-[; ;pin_manager.h: 287: void PIN_MANAGER_IOC(void);
-[; ;pin_manager.h: 300: void IOCCF1_ISR(void);
-[; ;pin_manager.h: 323: void IOCCF1_SetInterruptHandler(void* InterruptHandler);
-[; ;pin_manager.h: 347: extern void (*IOCCF1_InterruptHandler)(void);
-[; ;pin_manager.h: 371: void IOCCF1_DefaultInterruptHandler(void);
-[; ;pin_manager.h: 384: void IOCCF7_ISR(void);
-[; ;pin_manager.h: 407: void IOCCF7_SetInterruptHandler(void* InterruptHandler);
-[; ;pin_manager.h: 431: extern void (*IOCCF7_InterruptHandler)(void);
-[; ;pin_manager.h: 455: void IOCCF7_DefaultInterruptHandler(void);
+[; ;pin_manager.h: 283: void PIN_MANAGER_Initialize (void);
+[; ;pin_manager.h: 295: void PIN_MANAGER_IOC(void);
+[; ;pin_manager.h: 308: void IOCCF1_ISR(void);
+[; ;pin_manager.h: 331: void IOCCF1_SetInterruptHandler(void* InterruptHandler);
+[; ;pin_manager.h: 355: extern void (*IOCCF1_InterruptHandler)(void);
+[; ;pin_manager.h: 379: void IOCCF1_DefaultInterruptHandler(void);
+[; ;pin_manager.h: 392: void IOCCF7_ISR(void);
+[; ;pin_manager.h: 415: void IOCCF7_SetInterruptHandler(void* InterruptHandler);
+[; ;pin_manager.h: 439: extern void (*IOCCF7_InterruptHandler)(void);
+[; ;pin_manager.h: 463: void IOCCF7_DefaultInterruptHandler(void);
 [; ;stdint.h: 13: typedef signed char int8_t;
 [; ;stdint.h: 20: typedef signed int int16_t;
 [; ;stdint.h: 28: typedef signed short long int int24_t;
@@ -5047,9 +5049,6 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;stdint.h: 215: typedef uint16_t uintptr_t;
 [; ;stdbool.h: 12: typedef unsigned char bool;
 [; ;interrupt_manager.h: 110: void interrupt INTERRUPT_InterruptManager(void);
-[; ;eusart.h: 94: void EUSART_Initialize(void);
-[; ;eusart.h: 114: uint8_t EUSART_Read(void);
-[; ;eusart.h: 134: void EUSART_Write(uint8_t txData);
 [; ;__size_t.h: 4: typedef unsigned size_t;
 [; ;stddef.h: 6: typedef int ptrdiff_t;
 [; ;spi.h: 116: void SPI_Initialize(void);
@@ -5066,6 +5065,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;tmr0.h: 239: void TMR0_SetInterruptHandler(void (* InterruptHandler)(void));
 [; ;tmr0.h: 257: extern void (*TMR0_InterruptHandler)(void);
 [; ;tmr0.h: 275: void TMR0_DefaultInterruptHandler(void);
+[; ;eusart.h: 94: void EUSART_Initialize(void);
+[; ;eusart.h: 114: uint8_t EUSART_Read(void);
+[; ;eusart.h: 134: void EUSART_Write(uint8_t txData);
 [; ;mcc.h: 71: void SYSTEM_Initialize(void);
 [; ;mcc.h: 84: void OSCILLATOR_Initialize(void);
 [; ;mcc.h: 97: void WDT_Initialize(void);
@@ -5292,6 +5294,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;main.c: 40: asm("clrwdt");
 "40
 [; <" clrwdt ;# ">
+[; ;main.c: 43: InitADXL();
+"43
+[e ( _InitADXL ..  ]
 [; ;main.c: 48: EUART_LORA();
 "48
 [e ( _EUART_LORA ..  ]
@@ -5433,458 +5438,444 @@ Version 3.2 HI-TECH Software Intermediate Code
 "120
 }
 [e :U 641 ]
-[; ;main.c: 120: }
-[; ;main.c: 122: if(counterMotion == 20){
-"122
-[e $ ! == _counterMotion -> 20 `i 642  ]
-{
-[; ;main.c: 123: isMotionStopped = 0;
-"123
-[e = _isMotionStopped -> -> 0 `i `uc ]
-[; ;main.c: 124: counterMotion = 0;
-"124
-[e = _counterMotion -> 0 `i ]
-"125
-}
-[e :U 642 ]
-"137
+"138
 }
 [e :U 637 ]
-[; ;main.c: 125: }
-[; ;main.c: 137: }
-[; ;main.c: 140: }
-"140
+[; ;main.c: 120: }
+[; ;main.c: 138: }
+[; ;main.c: 139: }
+"139
 [e :UE 636 ]
 }
-"142
+"141
 [v _LoraCheckNetwork `(uc ~T0 @X0 1 ef ]
 {
-[; ;main.c: 142: bool LoraCheckNetwork(){
+[; ;main.c: 141: bool LoraCheckNetwork(){
 [e :U _LoraCheckNetwork ]
 [f ]
-[; ;main.c: 143: do { LATBbits.LATB7 = 0; } while(0);
-"143
-[e :U 646 ]
+[; ;main.c: 142: do { LATBbits.LATB7 = 0; } while(0);
+"142
+[e :U 645 ]
 {
 [e = . . _LATBbits 0 4 -> -> 0 `i `uc ]
 }
-[e :U 645 ]
-[; ;main.c: 144: _delay((unsigned long)((200)*(32000000/4000.0)));
-"144
+[e :U 644 ]
+[; ;main.c: 143: _delay((unsigned long)((200)*(32000000/4000.0)));
+"143
 [e ( __delay (1 -> * -> -> 200 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
-[; ;main.c: 145: do { LATBbits.LATB7 = 1; } while(0);
-"145
-[e :U 649 ]
+[; ;main.c: 144: do { LATBbits.LATB7 = 1; } while(0);
+"144
+[e :U 648 ]
 {
 [e = . . _LATBbits 0 4 -> -> 1 `i `uc ]
 }
-[e :U 648 ]
-[; ;main.c: 146: _delay((unsigned long)((200)*(32000000/4000.0)));
-"146
+[e :U 647 ]
+[; ;main.c: 145: _delay((unsigned long)((200)*(32000000/4000.0)));
+"145
 [e ( __delay (1 -> * -> -> 200 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
-[; ;main.c: 147: SendUartCmd("sys reset\r\n");
-"147
+[; ;main.c: 146: SendUartCmd("sys reset\r\n");
+"146
 [e ( _SendUartCmd (1 -> :s 1C `*uc ]
-[; ;main.c: 148: ReadUartCmd(lora);
-"148
+[; ;main.c: 147: ReadUartCmd(lora);
+"147
 [e ( _ReadUartCmd (1 &U _lora ]
-[; ;main.c: 150: SendUartCmd("mac join otaa\r\n");
-"150
+[; ;main.c: 149: SendUartCmd("mac join otaa\r\n");
+"149
 [e ( _SendUartCmd (1 -> :s 2C `*uc ]
+[; ;main.c: 150: ReadUartCmd(lora);
+"150
+[e ( _ReadUartCmd (1 &U _lora ]
 [; ;main.c: 151: ReadUartCmd(lora);
 "151
 [e ( _ReadUartCmd (1 &U _lora ]
-[; ;main.c: 152: ReadUartCmd(lora);
-"152
-[e ( _ReadUartCmd (1 &U _lora ]
-[; ;main.c: 154: token = strtok(lora," \r\n");
-"154
+[; ;main.c: 153: token = strtok(lora," \r\n");
+"153
 [e = _token ( _strtok (2 , &U _lora :s 3C ]
-[; ;main.c: 155: if(strcmp(token,"accepted") != 0){
+[; ;main.c: 154: if(strcmp(token,"accepted") != 0){
+"154
+[e $ ! != ( _strcmp (2 , -> _token `*Cuc :s 4C -> 0 `i 649  ]
+{
+[; ;main.c: 155: blinkOrange(1);
 "155
-[e $ ! != ( _strcmp (2 , -> _token `*Cuc :s 4C -> 0 `i 650  ]
-{
-[; ;main.c: 156: blinkOrange(1);
-"156
 [e ( _blinkOrange (1 -> 1 `i ]
-[; ;main.c: 157: isLoraAccess = 0;
-"157
+[; ;main.c: 156: isLoraAccess = 0;
+"156
 [e = _isLoraAccess -> -> 0 `i `uc ]
-[; ;main.c: 158: return 0;
-"158
+[; ;main.c: 157: return 0;
+"157
 [e ) -> -> 0 `i `uc ]
-[e $UE 643  ]
+[e $UE 642  ]
+"158
+}
+[e :U 649 ]
+[; ;main.c: 158: }
+[; ;main.c: 159: return 1;
 "159
-}
-[e :U 650 ]
-[; ;main.c: 159: }
-[; ;main.c: 160: return 1;
-"160
 [e ) -> -> 1 `i `uc ]
-[e $UE 643  ]
-[; ;main.c: 161: }
-"161
-[e :UE 643 ]
+[e $UE 642  ]
+[; ;main.c: 160: }
+"160
+[e :UE 642 ]
 }
-"163
+"162
 [v _ReadGPS `(uc ~T0 @X0 1 ef ]
-"164
+"163
 {
-[; ;main.c: 163: bool ReadGPS()
-[; ;main.c: 164: {
+[; ;main.c: 162: bool ReadGPS()
+[; ;main.c: 163: {
 [e :U _ReadGPS ]
 [f ]
-[; ;main.c: 165: asm("clrwdt");
-"165
+[; ;main.c: 164: asm("clrwdt");
+"164
 [; <" clrwdt ;# ">
-[; ;main.c: 167: SendUartCmd("$PUBX,40,GLL,1,1,0,0,0\r\n");
-"167
+[; ;main.c: 166: SendUartCmd("$PUBX,40,GLL,1,1,0,0,0\r\n");
+"166
 [e ( _SendUartCmd (1 -> :s 5C `*uc ]
+[; ;main.c: 167: ReadUartCmd(gps);
+"167
+[e ( _ReadUartCmd (1 &U _gps ]
 [; ;main.c: 168: ReadUartCmd(gps);
 "168
 [e ( _ReadUartCmd (1 &U _gps ]
-[; ;main.c: 169: ReadUartCmd(gps);
+[; ;main.c: 169: SendUartCmd("$PUBX,40,GLL,1,0,0,0,0\r\n");
 "169
-[e ( _ReadUartCmd (1 &U _gps ]
-[; ;main.c: 170: SendUartCmd("$PUBX,40,GLL,1,0,0,0,0\r\n");
-"170
 [e ( _SendUartCmd (1 -> :s 6C `*uc ]
-[; ;main.c: 173: token = strtok (gps," ,");
-"173
+[; ;main.c: 172: token = strtok (gps," ,");
+"172
 [e = _token ( _strtok (2 , &U _gps :s 7C ]
-[; ;main.c: 174: if(strcmp(token,"$GNGLL") != 0){
-"174
-[e $ ! != ( _strcmp (2 , -> _token `*Cuc :s 8C -> 0 `i 652  ]
+[; ;main.c: 173: if(strcmp(token,"$GNGLL") != 0){
+"173
+[e $ ! != ( _strcmp (2 , -> _token `*Cuc :s 8C -> 0 `i 651  ]
 {
-[; ;main.c: 176: isGpsAccess = 0;
-"176
+[; ;main.c: 175: isGpsAccess = 0;
+"175
 [e = _isGpsAccess -> -> 0 `i `uc ]
-[; ;main.c: 177: return 0;
-"177
+[; ;main.c: 176: return 0;
+"176
 [e ) -> -> 0 `i `uc ]
-[e $UE 651  ]
-"178
+[e $UE 650  ]
+"177
+}
+[e :U 651 ]
+[; ;main.c: 177: }
+[; ;main.c: 179: latitude = strtok ((0),".");
+"179
+[e = _latitude ( _strtok (2 , -> -> 0 `i `*uc :s 9C ]
+[; ;main.c: 180: latitudeDec = strtok ((0),",");
+"180
+[e = _latitudeDec ( _strtok (2 , -> -> 0 `i `*uc :s 10C ]
+[; ;main.c: 182: token = strtok ((0),",");
+"182
+[e = _token ( _strtok (2 , -> -> 0 `i `*uc :s 11C ]
+[; ;main.c: 183: if(strcmp(token,"N") != 0){
+"183
+[e $ ! != ( _strcmp (2 , -> _token `*Cuc :s 12C -> 0 `i 652  ]
+{
+[; ;main.c: 184: blinkRed(1);
+"184
+[e ( _blinkRed (1 -> 1 `i ]
+[; ;main.c: 185: isGpsAccess = 0;
+"185
+[e = _isGpsAccess -> -> 0 `i `uc ]
+[; ;main.c: 186: return 0;
+"186
+[e ) -> -> 0 `i `uc ]
+[e $UE 650  ]
+"187
 }
 [e :U 652 ]
-[; ;main.c: 178: }
-[; ;main.c: 180: latitude = strtok ((0),".");
-"180
-[e = _latitude ( _strtok (2 , -> -> 0 `i `*uc :s 9C ]
-[; ;main.c: 181: latitudeDec = strtok ((0),",");
-"181
-[e = _latitudeDec ( _strtok (2 , -> -> 0 `i `*uc :s 10C ]
-[; ;main.c: 183: token = strtok ((0),",");
-"183
-[e = _token ( _strtok (2 , -> -> 0 `i `*uc :s 11C ]
-[; ;main.c: 184: if(strcmp(token,"N") != 0){
-"184
-[e $ ! != ( _strcmp (2 , -> _token `*Cuc :s 12C -> 0 `i 653  ]
-{
-[; ;main.c: 185: blinkRed(1);
-"185
-[e ( _blinkRed (1 -> 1 `i ]
-[; ;main.c: 186: isGpsAccess = 0;
-"186
-[e = _isGpsAccess -> -> 0 `i `uc ]
-[; ;main.c: 187: return 0;
-"187
-[e ) -> -> 0 `i `uc ]
-[e $UE 651  ]
-"188
-}
-[e :U 653 ]
-[; ;main.c: 188: }
-[; ;main.c: 190: longitude = strtok ((0),".");
-"190
+[; ;main.c: 187: }
+[; ;main.c: 189: longitude = strtok ((0),".");
+"189
 [e = _longitude ( _strtok (2 , -> -> 0 `i `*uc :s 13C ]
-[; ;main.c: 191: longitudeDec = strtok ((0),",");
-"191
+[; ;main.c: 190: longitudeDec = strtok ((0),",");
+"190
 [e = _longitudeDec ( _strtok (2 , -> -> 0 `i `*uc :s 14C ]
-[; ;main.c: 194: strcpy(gpsHex,"");
-"194
+[; ;main.c: 193: strcpy(gpsHex,"");
+"193
 [e ( _strcpy (2 , &U _gpsHex :s 15C ]
-[; ;main.c: 196: sprintf(hex, "%X", atoi(latitude));
-"196
+[; ;main.c: 195: sprintf(hex, "%X", atoi(latitude));
+"195
 [e ( _sprintf (1 , (. , &U _hex :s 16C ( _atoi (1 -> _latitude `*Cuc ]
-[; ;main.c: 197: strcat(gpsHex,NormalizeHex(hex));
+[; ;main.c: 196: strcat(gpsHex,NormalizeHex(hex));
+"196
+[e ( _strcat (2 , &U _gpsHex -> ( _NormalizeHex (1 &U _hex `*Cuc ]
+[; ;main.c: 197: sprintf(hex, "%X", atoi(latitudeDec));
 "197
-[e ( _strcat (2 , &U _gpsHex -> ( _NormalizeHex (1 &U _hex `*Cuc ]
-[; ;main.c: 198: sprintf(hex, "%X", atoi(latitudeDec));
-"198
 [e ( _sprintf (1 , (. , &U _hex :s 17C ( _atoi (1 -> _latitudeDec `*Cuc ]
-[; ;main.c: 199: strcat(gpsHex,NormalizeHex(hex));
+[; ;main.c: 198: strcat(gpsHex,NormalizeHex(hex));
+"198
+[e ( _strcat (2 , &U _gpsHex -> ( _NormalizeHex (1 &U _hex `*Cuc ]
+[; ;main.c: 199: sprintf(hex, "%X", atoi(longitude));
 "199
-[e ( _strcat (2 , &U _gpsHex -> ( _NormalizeHex (1 &U _hex `*Cuc ]
-[; ;main.c: 200: sprintf(hex, "%X", atoi(longitude));
-"200
 [e ( _sprintf (1 , (. , &U _hex :s 18C ( _atoi (1 -> _longitude `*Cuc ]
-[; ;main.c: 201: strcat(gpsHex,NormalizeHex(hex));
+[; ;main.c: 200: strcat(gpsHex,NormalizeHex(hex));
+"200
+[e ( _strcat (2 , &U _gpsHex -> ( _NormalizeHex (1 &U _hex `*Cuc ]
+[; ;main.c: 201: sprintf(hex, "%X", atoi(longitudeDec));
 "201
-[e ( _strcat (2 , &U _gpsHex -> ( _NormalizeHex (1 &U _hex `*Cuc ]
-[; ;main.c: 202: sprintf(hex, "%X", atoi(longitudeDec));
-"202
 [e ( _sprintf (1 , (. , &U _hex :s 19C ( _atoi (1 -> _longitudeDec `*Cuc ]
-[; ;main.c: 203: strcat(gpsHex,NormalizeHex(hex));
-"203
+[; ;main.c: 202: strcat(gpsHex,NormalizeHex(hex));
+"202
 [e ( _strcat (2 , &U _gpsHex -> ( _NormalizeHex (1 &U _hex `*Cuc ]
-[; ;main.c: 204: SendUartCmd(gpsHex);
-"204
+[; ;main.c: 203: SendUartCmd(gpsHex);
+"203
 [e ( _SendUartCmd (1 &U _gpsHex ]
-[; ;main.c: 206: isGpsAccess = 1;
-"206
+[; ;main.c: 205: isGpsAccess = 1;
+"205
 [e = _isGpsAccess -> -> 1 `i `uc ]
-[; ;main.c: 207: blinkOrange(1);
-"207
+[; ;main.c: 206: blinkOrange(1);
+"206
 [e ( _blinkOrange (1 -> 1 `i ]
-[; ;main.c: 208: return 1;
-"208
+[; ;main.c: 207: return 1;
+"207
 [e ) -> -> 1 `i `uc ]
-[e $UE 651  ]
-[; ;main.c: 209: }
-"209
-[e :UE 651 ]
+[e $UE 650  ]
+[; ;main.c: 208: }
+"208
+[e :UE 650 ]
 }
-"211
+"210
 [v _LoraSendData `(uc ~T0 @X0 1 ef ]
 {
-[; ;main.c: 211: bool LoraSendData(){
+[; ;main.c: 210: bool LoraSendData(){
 [e :U _LoraSendData ]
 [f ]
-[; ;main.c: 212: do { LATBbits.LATB7 = 0; } while(0);
-"212
-[e :U 657 ]
+[; ;main.c: 211: do { LATBbits.LATB7 = 0; } while(0);
+"211
+[e :U 656 ]
 {
 [e = . . _LATBbits 0 4 -> -> 0 `i `uc ]
 }
-[e :U 656 ]
-[; ;main.c: 213: _delay((unsigned long)((200)*(32000000/4000.0)));
-"213
+[e :U 655 ]
+[; ;main.c: 212: _delay((unsigned long)((200)*(32000000/4000.0)));
+"212
 [e ( __delay (1 -> * -> -> 200 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
-[; ;main.c: 214: do { LATBbits.LATB7 = 1; } while(0);
-"214
-[e :U 660 ]
+[; ;main.c: 213: do { LATBbits.LATB7 = 1; } while(0);
+"213
+[e :U 659 ]
 {
 [e = . . _LATBbits 0 4 -> -> 1 `i `uc ]
 }
-[e :U 659 ]
-[; ;main.c: 215: _delay((unsigned long)((200)*(32000000/4000.0)));
-"215
+[e :U 658 ]
+[; ;main.c: 214: _delay((unsigned long)((200)*(32000000/4000.0)));
+"214
 [e ( __delay (1 -> * -> -> 200 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
-[; ;main.c: 216: SendUartCmd("sys reset\r\n");
-"216
+[; ;main.c: 215: SendUartCmd("sys reset\r\n");
+"215
 [e ( _SendUartCmd (1 -> :s 20C `*uc ]
-[; ;main.c: 217: ReadUartCmd(lora);
-"217
+[; ;main.c: 216: ReadUartCmd(lora);
+"216
 [e ( _ReadUartCmd (1 &U _lora ]
-[; ;main.c: 219: asm("clrwdt");
-"219
+[; ;main.c: 218: asm("clrwdt");
+"218
 [; <" clrwdt ;# ">
-[; ;main.c: 220: SendUartCmd("mac join otaa\r\n");
-"220
+[; ;main.c: 219: SendUartCmd("mac join otaa\r\n");
+"219
 [e ( _SendUartCmd (1 -> :s 21C `*uc ]
+[; ;main.c: 220: ReadUartCmd(lora);
+"220
+[e ( _ReadUartCmd (1 &U _lora ]
 [; ;main.c: 221: ReadUartCmd(lora);
 "221
 [e ( _ReadUartCmd (1 &U _lora ]
-[; ;main.c: 222: ReadUartCmd(lora);
-"222
-[e ( _ReadUartCmd (1 &U _lora ]
-[; ;main.c: 224: token = strtok(lora," \r\n");
-"224
+[; ;main.c: 223: token = strtok(lora," \r\n");
+"223
 [e = _token ( _strtok (2 , &U _lora :s 22C ]
-[; ;main.c: 225: if(strcmp(token,"accepted") != 0){
-"225
-[e $ ! != ( _strcmp (2 , -> _token `*Cuc :s 23C -> 0 `i 661  ]
+[; ;main.c: 224: if(strcmp(token,"accepted") != 0){
+"224
+[e $ ! != ( _strcmp (2 , -> _token `*Cuc :s 23C -> 0 `i 660  ]
 {
-[; ;main.c: 226: blinkOrange(1);
-"226
+[; ;main.c: 225: blinkOrange(1);
+"225
 [e ( _blinkOrange (1 -> 1 `i ]
-[; ;main.c: 227: isLoraAccess = 0;
-"227
+[; ;main.c: 226: isLoraAccess = 0;
+"226
 [e = _isLoraAccess -> -> 0 `i `uc ]
-[; ;main.c: 228: return 0;
-"228
+[; ;main.c: 227: return 0;
+"227
 [e ) -> -> 0 `i `uc ]
-[e $UE 654  ]
-"229
+[e $UE 653  ]
+"228
 }
-[e :U 661 ]
-[; ;main.c: 229: }
-[; ;main.c: 230: asm("clrwdt");
-"230
+[e :U 660 ]
+[; ;main.c: 228: }
+[; ;main.c: 229: asm("clrwdt");
+"229
 [; <" clrwdt ;# ">
-"232
+"231
 [v _str `uc ~T0 @X0 -> 50 `i a ]
-[; ;main.c: 232: char str[50];
-[; ;main.c: 233: strcpy(str,"mac tx uncnf 9 ");
-"233
+[; ;main.c: 231: char str[50];
+[; ;main.c: 232: strcpy(str,"mac tx uncnf 9 ");
+"232
 [e ( _strcpy (2 , &U _str :s 24C ]
-[; ;main.c: 234: strcat(str, gpsHex);
-"234
+[; ;main.c: 233: strcat(str, gpsHex);
+"233
 [e ( _strcat (2 , &U _str -> &U _gpsHex `*Cuc ]
-[; ;main.c: 235: strcat(str, "\r\n");
-"235
+[; ;main.c: 234: strcat(str, "\r\n");
+"234
 [e ( _strcat (2 , &U _str :s 25C ]
-[; ;main.c: 236: SendUartCmd(str);
-"236
+[; ;main.c: 235: SendUartCmd(str);
+"235
 [e ( _SendUartCmd (1 &U _str ]
+[; ;main.c: 236: ReadUartCmd(lora);
+"236
+[e ( _ReadUartCmd (1 &U _lora ]
 [; ;main.c: 237: ReadUartCmd(lora);
 "237
 [e ( _ReadUartCmd (1 &U _lora ]
-[; ;main.c: 238: ReadUartCmd(lora);
-"238
-[e ( _ReadUartCmd (1 &U _lora ]
-[; ;main.c: 240: token = strtok(lora," \r\n");
-"240
+[; ;main.c: 239: token = strtok(lora," \r\n");
+"239
 [e = _token ( _strtok (2 , &U _lora :s 26C ]
-[; ;main.c: 241: if(strcmp(token,"mac_tx_ok") != 0){
-"241
-[e $ ! != ( _strcmp (2 , -> _token `*Cuc :s 27C -> 0 `i 662  ]
+[; ;main.c: 240: if(strcmp(token,"mac_tx_ok") != 0){
+"240
+[e $ ! != ( _strcmp (2 , -> _token `*Cuc :s 27C -> 0 `i 661  ]
 {
-[; ;main.c: 242: SendUartCmd("send data failed");
-"242
+[; ;main.c: 241: SendUartCmd("send data failed");
+"241
 [e ( _SendUartCmd (1 -> :s 28C `*uc ]
-[; ;main.c: 243: blinkOrange(1);
-"243
+[; ;main.c: 242: blinkOrange(1);
+"242
 [e ( _blinkOrange (1 -> 1 `i ]
-[; ;main.c: 244: isLoraAccess = 0;
-"244
+[; ;main.c: 243: isLoraAccess = 0;
+"243
 [e = _isLoraAccess -> -> 0 `i `uc ]
-[; ;main.c: 245: return 0;
-"245
+[; ;main.c: 244: return 0;
+"244
 [e ) -> -> 0 `i `uc ]
-[e $UE 654  ]
+[e $UE 653  ]
+"245
+}
+[e :U 661 ]
+[; ;main.c: 245: }
+[; ;main.c: 246: blinkGreen(3);
 "246
-}
-[e :U 662 ]
-[; ;main.c: 246: }
-[; ;main.c: 247: blinkGreen(3);
-"247
 [e ( _blinkGreen (1 -> 3 `i ]
-[; ;main.c: 248: isLoraAccess = 1;
-"248
+[; ;main.c: 247: isLoraAccess = 1;
+"247
 [e = _isLoraAccess -> -> 1 `i `uc ]
-[; ;main.c: 249: isMotionStopped = 1;
-"249
+[; ;main.c: 248: isMotionStopped = 1;
+"248
 [e = _isMotionStopped -> -> 1 `i `uc ]
-[; ;main.c: 250: counterMotion = 0;
-"250
+[; ;main.c: 249: counterMotion = 0;
+"249
 [e = _counterMotion -> 0 `i ]
-[; ;main.c: 251: return 1;
-"251
+[; ;main.c: 250: return 1;
+"250
 [e ) -> -> 1 `i `uc ]
-[e $UE 654  ]
-[; ;main.c: 252: }
-"252
-[e :UE 654 ]
+[e $UE 653  ]
+[; ;main.c: 251: }
+"251
+[e :UE 653 ]
 }
-"255
+"254
 [v _LoraDebug `(uc ~T0 @X0 1 ef ]
 {
-[; ;main.c: 255: bool LoraDebug(){
+[; ;main.c: 254: bool LoraDebug(){
 [e :U _LoraDebug ]
 [f ]
-[; ;main.c: 256: do { LATBbits.LATB7 = 0; } while(0);
-"256
-[e :U 666 ]
+[; ;main.c: 255: do { LATBbits.LATB7 = 0; } while(0);
+"255
+[e :U 665 ]
 {
 [e = . . _LATBbits 0 4 -> -> 0 `i `uc ]
 }
-[e :U 665 ]
-[; ;main.c: 257: _delay((unsigned long)((200)*(32000000/4000.0)));
-"257
+[e :U 664 ]
+[; ;main.c: 256: _delay((unsigned long)((200)*(32000000/4000.0)));
+"256
 [e ( __delay (1 -> * -> -> 200 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
-[; ;main.c: 258: do { LATBbits.LATB7 = 1; } while(0);
-"258
-[e :U 669 ]
+[; ;main.c: 257: do { LATBbits.LATB7 = 1; } while(0);
+"257
+[e :U 668 ]
 {
 [e = . . _LATBbits 0 4 -> -> 1 `i `uc ]
 }
-[e :U 668 ]
-[; ;main.c: 259: _delay((unsigned long)((200)*(32000000/4000.0)));
-"259
+[e :U 667 ]
+[; ;main.c: 258: _delay((unsigned long)((200)*(32000000/4000.0)));
+"258
 [e ( __delay (1 -> * -> -> 200 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
-[; ;main.c: 260: SendUartCmd("sys reset\r\n");
-"260
+[; ;main.c: 259: SendUartCmd("sys reset\r\n");
+"259
 [e ( _SendUartCmd (1 -> :s 29C `*uc ]
-[; ;main.c: 261: ReadUartCmd(lora);
-"261
+[; ;main.c: 260: ReadUartCmd(lora);
+"260
 [e ( _ReadUartCmd (1 &U _lora ]
-[; ;main.c: 263: asm("clrwdt");
-"263
+[; ;main.c: 262: asm("clrwdt");
+"262
 [; <" clrwdt ;# ">
-[; ;main.c: 264: SendUartCmd("mac join otaa\r\n");
-"264
+[; ;main.c: 263: SendUartCmd("mac join otaa\r\n");
+"263
 [e ( _SendUartCmd (1 -> :s 30C `*uc ]
+[; ;main.c: 264: ReadUartCmd(lora);
+"264
+[e ( _ReadUartCmd (1 &U _lora ]
 [; ;main.c: 265: ReadUartCmd(lora);
 "265
 [e ( _ReadUartCmd (1 &U _lora ]
-[; ;main.c: 266: ReadUartCmd(lora);
-"266
-[e ( _ReadUartCmd (1 &U _lora ]
-[; ;main.c: 268: token = strtok(lora," \r\n");
-"268
+[; ;main.c: 267: token = strtok(lora," \r\n");
+"267
 [e = _token ( _strtok (2 , &U _lora :s 31C ]
-[; ;main.c: 269: if(strcmp(token,"accepted") != 0){
-"269
-[e $ ! != ( _strcmp (2 , -> _token `*Cuc :s 32C -> 0 `i 670  ]
+[; ;main.c: 268: if(strcmp(token,"accepted") != 0){
+"268
+[e $ ! != ( _strcmp (2 , -> _token `*Cuc :s 32C -> 0 `i 669  ]
 {
-[; ;main.c: 270: blinkRed(2);
-"270
+[; ;main.c: 269: blinkRed(2);
+"269
 [e ( _blinkRed (1 -> 2 `i ]
-[; ;main.c: 271: return 0;
-"271
+[; ;main.c: 270: return 0;
+"270
 [e ) -> -> 0 `i `uc ]
-[e $UE 663  ]
-"272
+[e $UE 662  ]
+"271
 }
-[e :U 670 ]
-[; ;main.c: 272: }
-[; ;main.c: 273: asm("clrwdt");
-"273
+[e :U 669 ]
+[; ;main.c: 271: }
+[; ;main.c: 272: asm("clrwdt");
+"272
 [; <" clrwdt ;# ">
-[; ;main.c: 275: SendUartCmd("mac tx uncnf 9 17206EB1070C01E9\r\n");
-"275
+[; ;main.c: 274: SendUartCmd("mac tx uncnf 9 17206EB1070C01E9\r\n");
+"274
 [e ( _SendUartCmd (1 -> :s 33C `*uc ]
+[; ;main.c: 275: ReadUartCmd(lora);
+"275
+[e ( _ReadUartCmd (1 &U _lora ]
 [; ;main.c: 276: ReadUartCmd(lora);
 "276
 [e ( _ReadUartCmd (1 &U _lora ]
-[; ;main.c: 277: ReadUartCmd(lora);
-"277
-[e ( _ReadUartCmd (1 &U _lora ]
-[; ;main.c: 279: token = strtok(lora," \r\n");
-"279
+[; ;main.c: 278: token = strtok(lora," \r\n");
+"278
 [e = _token ( _strtok (2 , &U _lora :s 34C ]
-[; ;main.c: 280: if(strcmp(token,"mac_tx_ok") != 0){
-"280
-[e $ ! != ( _strcmp (2 , -> _token `*Cuc :s 35C -> 0 `i 671  ]
+[; ;main.c: 279: if(strcmp(token,"mac_tx_ok") != 0){
+"279
+[e $ ! != ( _strcmp (2 , -> _token `*Cuc :s 35C -> 0 `i 670  ]
 {
-[; ;main.c: 281: SendUartCmd("send data failed");
-"281
+[; ;main.c: 280: SendUartCmd("send data failed");
+"280
 [e ( _SendUartCmd (1 -> :s 36C `*uc ]
-[; ;main.c: 282: blinkRed(2);
-"282
+[; ;main.c: 281: blinkRed(2);
+"281
 [e ( _blinkRed (1 -> 2 `i ]
-[; ;main.c: 283: return 0;
-"283
+[; ;main.c: 282: return 0;
+"282
 [e ) -> -> 0 `i `uc ]
-[e $UE 663  ]
-"284
+[e $UE 662  ]
+"283
 }
-[e :U 671 ]
-[; ;main.c: 284: }
-[; ;main.c: 285: blinkGreen(3);
-"285
+[e :U 670 ]
+[; ;main.c: 283: }
+[; ;main.c: 284: blinkGreen(3);
+"284
 [e ( _blinkGreen (1 -> 3 `i ]
-[; ;main.c: 286: SendUartCmd("GPS data sent\n");
-"286
+[; ;main.c: 285: SendUartCmd("GPS data sent\n");
+"285
 [e ( _SendUartCmd (1 -> :s 37C `*uc ]
-[; ;main.c: 287: return 1;
-"287
+[; ;main.c: 286: return 1;
+"286
 [e ) -> -> 1 `i `uc ]
-[e $UE 663  ]
-[; ;main.c: 288: }
-"288
-[e :UE 663 ]
+[e $UE 662  ]
+[; ;main.c: 287: }
+"287
+[e :UE 662 ]
 }
 [p f _sprintf 10485760 ]
 [a 27C 109 97 99 95 116 120 95 111 107 0 ]

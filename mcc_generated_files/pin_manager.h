@@ -119,17 +119,25 @@
 #define LED_RED_SetAnalogMode()  do { ANSELAbits.ANSA2 = 1; } while(0)
 #define LED_RED_SetDigitalMode() do { ANSELAbits.ANSA2 = 0; } while(0)
 
-// get/set RA4 procedures
-#define RA4_SetHigh()    do { LATAbits.LATA4 = 1; } while(0)
-#define RA4_SetLow()   do { LATAbits.LATA4 = 0; } while(0)
-#define RA4_Toggle()   do { LATAbits.LATA4 = ~LATAbits.LATA4; } while(0)
-#define RA4_GetValue()         PORTAbits.RA4
-#define RA4_SetDigitalInput()   do { TRISAbits.TRISA4 = 1; } while(0)
-#define RA4_SetDigitalOutput()  do { TRISAbits.TRISA4 = 0; } while(0)
-#define RA4_SetPullup()     do { WPUAbits.WPUA4 = 1; } while(0)
-#define RA4_ResetPullup()   do { WPUAbits.WPUA4 = 0; } while(0)
-#define RA4_SetAnalogMode() do { ANSELAbits.ANSA4 = 1; } while(0)
-#define RA4_SetDigitalMode()do { ANSELAbits.ANSA4 = 0; } while(0)
+// get/set TX aliases
+#define TX_TRIS               TRISAbits.TRISA4
+#define TX_LAT                LATAbits.LATA4
+#define TX_PORT               PORTAbits.RA4
+#define TX_WPU                WPUAbits.WPUA4
+#define TX_OD                ODCONAbits.ODA4
+#define TX_ANS                ANSELAbits.ANSA4
+#define TX_SetHigh()            do { LATAbits.LATA4 = 1; } while(0)
+#define TX_SetLow()             do { LATAbits.LATA4 = 0; } while(0)
+#define TX_Toggle()             do { LATAbits.LATA4 = ~LATAbits.LATA4; } while(0)
+#define TX_GetValue()           PORTAbits.RA4
+#define TX_SetDigitalInput()    do { TRISAbits.TRISA4 = 1; } while(0)
+#define TX_SetDigitalOutput()   do { TRISAbits.TRISA4 = 0; } while(0)
+#define TX_SetPullup()      do { WPUAbits.WPUA4 = 1; } while(0)
+#define TX_ResetPullup()    do { WPUAbits.WPUA4 = 0; } while(0)
+#define TX_SetPushPull()    do { ODCONAbits.ODA4 = 1; } while(0)
+#define TX_SetOpenDrain()   do { ODCONAbits.ODA4 = 0; } while(0)
+#define TX_SetAnalogMode()  do { ANSELAbits.ANSA4 = 1; } while(0)
+#define TX_SetDigitalMode() do { ANSELAbits.ANSA4 = 0; } while(0)
 
 // get/set RB4 procedures
 #define RB4_SetHigh()    do { LATBbits.LATB4 = 1; } while(0)

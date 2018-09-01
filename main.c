@@ -40,7 +40,7 @@ void main(void)
     CLRWDT();  
     
     //debug china board -put one by one back
-    //InitADXL();
+    InitADXL();
     //EUART_GPS();
     //__delay_ms(500);
     //InitGPS();
@@ -64,7 +64,7 @@ void main(void)
 }
 //----INTERRUPTON METHOD-----
 inter_sw1()
-{        
+{       
     CLRWDT();
     
     //wait that user release button
@@ -119,10 +119,11 @@ inter_timer()
             debugger=0;
         }
         
-        if(counterMotion == 20){
-            isMotionStopped = false;
-            counterMotion = 0;
-        }
+        //Future
+//        if(counterMotion == 20){
+//            isMotionStopped = false;
+//            counterMotion = 0;
+//        }
         //remove after debug used to setup the device
 //        LORA_RESET_SetLow();
 //        __delay_ms(200);
@@ -134,9 +135,7 @@ inter_timer()
 //        ReadUartCmd(lora);
 //        SendUartCmd("mac save\r\n"); 
 //        ReadUartCmd(lora);
-    }
-    
-    
+    } 
 }
 
 bool LoraCheckNetwork(){

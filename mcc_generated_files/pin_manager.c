@@ -118,6 +118,7 @@ void PIN_MANAGER_Initialize(void)
     PPSLOCK = 0xAA;
     PPSLOCKbits.PPSLOCKED = 0x00; // unlock PPS
     
+  
     SSPDATPPSbits.SSPDATPPS = 0x0C;   //RB4->MSSP:SDI;
     RB6PPSbits.RB6PPS = 0x10;   //RB6->MSSP:SCK;
     SSPCLKPPSbits.SSPCLKPPS = 0x0E;   //RB6->MSSP:SCK;
@@ -152,8 +153,7 @@ void PIN_MANAGER_IOC(void)
 */
 void IOCCF1_ISR(void) {
 
-    // Add custom IOCCF1 code
-    inter_adxl(); //define this method in main
+    inter_adxl();
 
     // Call the interrupt handler for the callback registered at runtime
     if(IOCCF1_InterruptHandler)
