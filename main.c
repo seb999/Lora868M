@@ -1,5 +1,6 @@
 #include "mcc_generated_files/mcc.h"
 #include "misc.h"
+#include "adxl.h"
 #include <stdbool.h>
 #include <__null.h>
 #include <string.h>
@@ -40,7 +41,7 @@ void main(void)
     CLRWDT();  
     
     //debug china board -put one by one back
-    InitADXL();
+    ADXL_Init();
     //EUART_GPS();
     //__delay_ms(500);
     //InitGPS();

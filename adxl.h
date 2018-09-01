@@ -1,7 +1,7 @@
 #ifndef ADXL_H
 #define	ADXL_H
 
-#include <xc.h> // include processor files - each processor file is guarded.  
+//#include <xc.h> // include processor files - each processor file is guarded.  
 
 // ADLX Registers
 #define ADXL_RESET 0x1f
@@ -14,7 +14,7 @@
 //#define ADXL_CS PORTCbits.RC2
 //#define ADXL_INT2 PORTCbits.RC1
 
-void InitADXL(void);
+void ADXL_Init(void);
 void ADXL_WriteReg( char reg, char cmd );
 char ADXL_ReadReg( char reg );
 
