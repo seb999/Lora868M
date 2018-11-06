@@ -36,15 +36,12 @@ void main(void)
     SYSTEM_Initialize();
     GIE = 0;
     
-    //__delay_sec(2);
     SWDTEN = 1;
     CLRWDT();  
     
-    //debug china board -put one by one back
     ADXL_Init();
-    //EUART_GPS();
-    //__delay_ms(500);
-    //InitGPS();
+    EUART_GPS();
+    InitGPS();
     
     EUART_LORA(); //remove this one after debug
      __delay_ms(100);  
@@ -82,7 +79,7 @@ inter_sw1()
 
 inter_adxl()
 {
-    blinkGreen(3);
+    blinkRed(1);
     
     //Routine 1
 //    EUART_GPS();
@@ -109,15 +106,25 @@ inter_timer()
 {
     counter++;
     if(counter==400){
-        if(isGpsAccess) blinkOrange(1);
-        if(isLoraAccess) blinkGreen(1);
-        if(!isGpsAccess && !isLoraAccess) blinkRed(1);
+        blinkRed(1);
         counter = 0;
         debugger++;
         
-        if(debugger == 4){
-            LoraDebug();
+        if(debugger == 3){
             debugger=0;
+            
+            EUART_GPS();
+            if(!ReadGPS()) return;
+            
+            EUART_LORA();
+            for(int i=0;i<=5;i++)
+            {
+                //LoraDebug();
+                if(LoraSendData()) break;
+            }
+            
+            //LoraDebug();
+            
         }
         
         //Future
@@ -171,8 +178,7 @@ bool ReadGPS()
     //LED_ORANGE_SetLow();
     
     token = strtok (gps," ,");//READ root code
-    if(strcmp(token,"$GNGLL") != 0){ 
-        //blinkRed(1);
+    if(strcmp(token,"$GPGLL") != 0){ 
         isGpsAccess = false;
         return false;
     }
@@ -182,7 +188,6 @@ bool ReadGPS()
     
     token = strtok (NULL,","); //READ 'N' or exit
     if(strcmp(token,"N") != 0){
-        blinkRed(1);
         isGpsAccess = false;
         return false;
     }
@@ -204,7 +209,6 @@ bool ReadGPS()
     SendUartCmd(gpsHex);
     //blinkGreen(2);
     isGpsAccess = true;
-    blinkOrange(1);
     return true;
 }
 
@@ -216,14 +220,17 @@ bool LoraSendData(){
     SendUartCmd("sys reset\r\n"); 
     ReadUartCmd(lora);  //read serial number
     
-     CLRWDT();//watch dog can reset before end of routine
+    CLRWDT();//watch dog can reset before end of routine
+    SendUartCmd("mac set pwridx 1\r\n"); //Set power
+    ReadUartCmd(lora);  //read ok
+    
     SendUartCmd("mac join otaa\r\n");
     ReadUartCmd(lora);  //read ok
     ReadUartCmd(lora);  //read denied or accepted
    
     token = strtok(lora," \r\n");
     if(strcmp(token,"accepted") != 0){
-        blinkOrange(1);
+        blinkRed(2);
         isLoraAccess = false;
         return false;
     }
@@ -240,7 +247,7 @@ bool LoraSendData(){
     token = strtok(lora," \r\n");
     if(strcmp(token,"mac_tx_ok") != 0){
         SendUartCmd("send data failed");
-        blinkOrange(1);
+        blinkRed(2);
         isLoraAccess = false;
         return false;
     }
