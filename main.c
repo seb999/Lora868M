@@ -79,27 +79,7 @@ inter_sw1()
 
 inter_adxl()
 {
-    blinkRed(1);
-    
-    //Routine 1
-//    EUART_GPS();
-//    if(!ReadGPS()) return;
-//    
-//    //Look for LORA NETWORK
-//    EUART_LORA();
-//    LoraSendData();
-    
-    //Routine 2
-//    if(!isMotionStopped){
-//        EUART_LORA();
-//        if(!LoraCheckNetwork()) return;
-//
-//        EUART_GPS();
-//        if(!ReadGPS()) return;
-//
-//        EUART_LORA();
-//        LoraSendData();
-//    }
+    blinkRed(3);
 }
 
 inter_timer()
@@ -108,10 +88,11 @@ inter_timer()
     if(counter==400){
         blinkRed(1);
         counter = 0;
-        debugger++;
+        //debugger++;
         
-        if(debugger == 3){
-            debugger=0;
+        //if(debugger == 3){
+        if(!isMotionStopped){
+            //debugger=0;
             
             EUART_GPS();
             if(!ReadGPS()) return;
@@ -120,18 +101,30 @@ inter_timer()
             for(int i=0;i<=5;i++)
             {
                 //LoraDebug();
-                if(LoraSendData()) break;
+                if(LoraSendData())
+                {
+                    counterMotion = 0; //If data sent with success we idle 20" and go in sleep
+                    isMotionStopped = true;
+                    break;                  
+                }
             }
-            
-            //LoraDebug();
-            
+            //LoraDebug();  
         }
         
-        //Future
-//        if(counterMotion == 20){
-//            isMotionStopped = false;
-//            counterMotion = 0;
-//        }
+
+        if(isMotionStopped){
+            counterMotion++;
+        }
+        
+        if(counterMotion == 20)
+        {
+            isMotionStopped = false;
+            INTCONbits.TMR0IE = 0; // Timer off
+            SWDTEN = 0;            // WatchDog Off
+            SLEEP();               // Sleep mode 
+            INTCONbits.TMR0IE = 1;
+        }
+        
         //remove after debug used to setup the device
 //        LORA_RESET_SetLow();
 //        __delay_ms(200);
