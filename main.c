@@ -79,35 +79,32 @@ inter_sw1()
 
 inter_adxl()
 {
-    blinkRed(3);
+    //wake up pic from sleep mode by generating interruption
 }
 
 inter_timer()
 {
     counter++;
-    if(counter==400){
+    if(counter==300){
         blinkRed(1);
         counter = 0;
-        //debugger++;
         
-        //if(debugger == 3){
         if(!isMotionStopped){
-            //debugger=0;
             
             EUART_GPS();
             if(!ReadGPS()) return;
             
             EUART_LORA();
-            for(int i=0;i<=5;i++)
+            for(int i=0;i<=4;i++)
             {
                 //LoraDebug();
                 if(LoraSendData())
                 {
-                    counterMotion = 0; //If data sent with success we idle 20" and go in sleep
-                    isMotionStopped = true;
                     break;                  
                 }
             }
+            counterMotion = 0; //If data sent with success we idle 20" and go in sleep
+            isMotionStopped = true;
             //LoraDebug();  
         }
         
@@ -123,6 +120,7 @@ inter_timer()
             SWDTEN = 0;            // WatchDog Off
             SLEEP();               // Sleep mode 
             INTCONbits.TMR0IE = 1;
+            SWDTEN = 1; 
         }
         
         //remove after debug used to setup the device
